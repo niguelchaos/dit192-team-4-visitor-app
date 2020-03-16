@@ -1,26 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
 var camelsController = require('./controllers/camels');
-
-// Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
 var port = process.env.PORT || 3000;
-
-// Connect to MongoDB
-mongoose.connect(mongoURI, { useNewUrlParser: true }, function(err) {
-    if (err) {
-        console.error(`Failed to connect to MongoDB with URI: ${mongoURI}`);
-        console.error(err.stack);
-        process.exit(1);
-    }
-    console.log(`Connected to MongoDB with URI: ${mongoURI}`);
-});
 
 // Create Express app
 var app = express();
@@ -34,7 +20,7 @@ app.use(cors());
 
 // Define routes
 app.get('/api', function(req, res) {
-    res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
+    res.json({'message': 'Welcome to the EDA397/DIT191 backend ExpressJS project!'});
 });
 app.use('/api/camels', camelsController);
 
