@@ -1,6 +1,6 @@
 # Backend and Frontend Template
 
-Latest version: https://git.chalmers.se/courses/eda397/demo
+Latest version: https://git.chalmers.se/courses/eda397/1920/platform
 
 Adapted from https://git.chalmers.se/courses/dit341/group-00-web, big thanks to Joel Scheuner
 
@@ -25,7 +25,7 @@ You can also use alternative tools if you know how to configure them (e.g., Fire
     * Create an SSH key pair `ssh-keygen -t ed25519 -C "email@example.com"` (skip if you already have one)
     * Add your public SSH key to your Gitlab profile under https://git.chalmers.se/profile/keys
     * Make sure the email you use to commit is registered under https://git.chalmers.se/profile/emails
-  * Checkout the [Backend-Frontend](https://git.chalmers.se/courses/eda397/demo) template `git clone git@git.chalmers.se:courses/eda397/demo.git`
+  * Checkout the [Backend-Frontend](https://git.chalmers.se/courses/eda397/1920/platform) template `git clone git@git.chalmers.se:courses/eda397/1920/platform.git`
 * [Backend Requirements](./backend/README.md#Requirements)
 * [Frontend Requirements](./frontend/README.md#Requirements)
 
@@ -33,10 +33,10 @@ You can also use alternative tools if you know how to configure them (e.g., Fire
 
 ```bash
 # Clone repository
-git clone git@git.chalmers.se:courses/eda397/demo.git
+git clone git@git.chalmers.se:courses/eda397/1920/platform.git
 
 # Change into the directory
-cd demo
+cd platform
 
 # Setup backend
 cd backend && npm install
