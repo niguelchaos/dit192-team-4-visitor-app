@@ -1,13 +1,13 @@
 # Backend and Frontend Template
 
-Latest version: https://git.ita.chalmers.se/courses/dit341/group-00-web (public Github [mirror](https://github.com/dit341/group-00-web))
+Latest version: https://git.chalmers.se/courses/eda397/demo
+
+Adapted from https://git.chalmers.se/courses/dit341/group-00-web, big thanks to Joel Scheuner
 
 * [Server](./server/README.md) backend
   * [FAQ](./server/docs/FAQ.md)
   * [Troubleshooting](./server/docs/TROUBLESHOOTING.md)
 * [Client](./client/README.md) frontend
-* [Deployment](./docs/DEPLOYMENT.md)
-* [Local Deployment](./docs/LOCAL_DEPLOYMENT.md)
 
 ## Requirements
 
@@ -19,13 +19,13 @@ You can also use alternative tools if you know how to configure them (e.g., Fire
     * `git config --global user.name "YOUR_USERNAME"` => check `git config --global user.name`
     * `git config --global user.email "email@example.com"` => check `git config --global user.email`
   * > **Windows users**: We recommend to use the [Git Bash](https://www.atlassian.com/git/tutorials/git-bash) shell from your Git installation or the Bash shell from the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to run all shell commands for this project.
-* [Chalmers GitLab](https://git.ita.chalmers.se/) => Login with your **Chalmers CID** choosing "Sign in with" **Chalmers Login**. (contact [support@chalmers.se](mailto:support@chalmers.se) if you don't have one)
-  * DIT341 course group: https://git.ita.chalmers.se/courses/dit341
+* [Chalmers GitLab](https://git.chalmers.se/) => Login with your **Chalmers CID** choosing "Sign in with" **Chalmers Login**. (contact [support@chalmers.se](mailto:support@chalmers.se) if you don't have one)
+  * EDA397/DIT191 course group: https://git.chalmers.se/courses/eda397
   * [Setup SSH key with Gitlab](https://docs.gitlab.com/ee/ssh/)
     * Create an SSH key pair `ssh-keygen -t ed25519 -C "email@example.com"` (skip if you already have one)
-    * Add your public SSH key to your Gitlab profile under https://git.ita.chalmers.se/profile/keys
-    * Make sure the email you use to commit is registered under https://git.ita.chalmers.se/profile/emails
-  * Checkout the [Backend-Frontend](https://git.ita.chalmers.se/courses/dit341/group-00-web) template `git clone git@git.ita.chalmers.se:courses/dit341/group-00-web.git`
+    * Add your public SSH key to your Gitlab profile under https://git.chalmers.se/profile/keys
+    * Make sure the email you use to commit is registered under https://git.chalmers.se/profile/emails
+  * Checkout the [Backend-Frontend](https://git.chalmers.se/courses/eda397/demo) template `git clone git@git.chalmers.se:courses/eda397/demo.git`
 * [Server Requirements](./server/README.md#Requirements)
 * [Client Requirements](./client/README.md#Requirements)
 
@@ -33,10 +33,10 @@ You can also use alternative tools if you know how to configure them (e.g., Fire
 
 ```bash
 # Clone repository
-git clone git@git.ita.chalmers.se:courses/dit341/group-00-web.git
+git clone git@git.chalmers.se:courses/eda397/demo.git
 
 # Change into the directory
-cd group-00-web
+cd demo
 
 # Setup backend
 cd server && npm install
