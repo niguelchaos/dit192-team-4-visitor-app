@@ -4,10 +4,10 @@ Latest version: https://git.chalmers.se/courses/eda397/demo
 
 Adapted from https://git.chalmers.se/courses/dit341/group-00-web, big thanks to Joel Scheuner
 
-* [Server](./server/README.md) backend
-  * [FAQ](./server/docs/FAQ.md)
-  * [Troubleshooting](./server/docs/TROUBLESHOOTING.md)
-* [Client](./client/README.md) frontend
+* [Backend](./backend/README.md)
+  * [FAQ](./backend/docs/FAQ.md)
+  * [Troubleshooting](./backend/docs/TROUBLESHOOTING.md)
+* [Frontend](./frontend/README.md) frontend
 
 ## Requirements
 
@@ -26,8 +26,8 @@ You can also use alternative tools if you know how to configure them (e.g., Fire
     * Add your public SSH key to your Gitlab profile under https://git.chalmers.se/profile/keys
     * Make sure the email you use to commit is registered under https://git.chalmers.se/profile/emails
   * Checkout the [Backend-Frontend](https://git.chalmers.se/courses/eda397/demo) template `git clone git@git.chalmers.se:courses/eda397/demo.git`
-* [Server Requirements](./server/README.md#Requirements)
-* [Client Requirements](./client/README.md#Requirements)
+* [Backend Requirements](./backend/README.md#Requirements)
+* [Frontend Requirements](./frontend/README.md#Requirements)
 
 ## Getting started
 
@@ -39,14 +39,14 @@ git clone git@git.chalmers.se:courses/eda397/demo.git
 cd demo
 
 # Setup backend
-cd server && npm install
+cd backend && npm install
 npm run dev
 
 # Setup frontend
-cd client && npm install
+cd frontend && npm install
 npm run serve
 ```
 
 ## Visual Studio Code (VSCode)
 
-Open the `server` and `client` in separate VSCode workspaces or open the combined [backend-frontend.code-workspace](./backend-frontend.code-workspace). Otherwise, workspace-specific settings don't work properly.
+Open the `backend` and `frontend` in separate VSCode workspaces or open the combined [backend-frontend.code-workspace](./backend-frontend.code-workspace). Otherwise, workspace-specific settings don't work properly.

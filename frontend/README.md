@@ -1,10 +1,10 @@
-# Client – Vue.js Frontend
+# Frontend – Vue.js based
 
 This [Vue.js](https://vuejs.org/) template provides sample code how to connect to the ExpressJS backend.
 
 ## Requirements
 
-* [Server](../server/README.md) backend running on `http://localhost:3000`
+* [Backend](../backend/README.md) backend running on `http://localhost:3000`
 * [Node.js](https://nodejs.org/en/download/) (v10) => installation instructions for [Linux](https://github.com/nodesource/distributions)
 * [Visual Studio Code (VSCode)](https://code.visualstudio.com/) as IDE
   * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) plugin for Vue tooling
@@ -15,7 +15,7 @@ This [Vue.js](https://vuejs.org/) template provides sample code how to connect t
 
 ## Project setup
 
-Make sure, you are in the client directory `cd client`
+Make sure, you are in the frontend directory `cd frontend`
 
 Installs all project dependencies specified in [package.json](./package.json).
 
@@ -68,7 +68,7 @@ npm run lint
 ## Debug in VSCode with Chrome
 
 1. **[VSCode]** Set a breakpoint in your Javascript code
-2. **[Terminal]** Run `npm run serve` to serve the client
+2. **[Terminal]** Run `npm run serve` to serve the frontend
 3. **[VSCode]** Select *Debug > Start Debugging (F5)* to automatically start a debug session in Chrome[<sup>1</sup>](#1)
 4. **[Chrome]** Browse in Chrome to trigger your breakpoint and the focus will jump back to VSCode
 

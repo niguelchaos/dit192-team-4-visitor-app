@@ -42,7 +42,7 @@ When trying to `npm start`
 
 ```none
 > express-template@0.1.0 start /Users/joe/Projects/Web/express-template
-> node ./server/app.js
+> node ./backend/app.js
 
 events.js:167
       throw er; // Unhandled 'error' event
@@ -53,7 +53,7 @@ Error: listen EADDRINUSE :::3000
     at listenInCluster (net.js:1384:12)
     at Server.listen (net.js:1471:7)
     at Function.listen (/Users/joe/Projects/Web/express-template/node_modules/express/lib/application.js:618:24)
-    at Object.<anonymous> (/Users/joe/Projects/Web/express-template/server/app.js:42:5)
+    at Object.<anonymous> (/Users/joe/Projects/Web/express-template/backend/app.js:42:5)
     at Module._compile (internal/modules/cjs/loader.js:689:30)
     at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
     at Module.load (internal/modules/cjs/loader.js:599:32)
@@ -70,7 +70,7 @@ Emitted 'error' event at:
     at bootstrapNodeJSCore (internal/bootstrap/node.js:596:3)
 npm ERR! code ELIFECYCLE
 npm ERR! errno 1
-npm ERR! express-template@0.1.0 start: `node ./server/app.js`
+npm ERR! express-template@0.1.0 start: `node ./backend/app.js`
 npm ERR! Exit status 1
 npm ERR!
 npm ERR! Failed at the express-template@0.1.0 start script.
@@ -80,35 +80,7 @@ npm ERR! A complete log of this run can be found in:
 npm ERR!     /Users/joe/.npm/_logs/2018-09-04T17_34_11_215Z-debug.log
 ```
 
-> **Solution:** You are most likely already running another instance of the server. Stop the other instance or application that uses port 3000 and try again.
-
-## MongoNetworkError: failed to connect to server [localhost:27017]
-
-When trying to `npm start`
-
-```none
-> express-template@0.1.0 start /Users/joe/Projects/Web/express-template
-> node ./server/app.js
-
-Express server listening on port 3000, in development mode
-(node:42678) UnhandledPromiseRejectionWarning: MongoNetworkError: failed to connect to server [localhost:27017] on first connect [MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017]
-    at Pool.<anonymous> (/Users/joe/Projects/Web/express-template/node_modules/mongodb-core/lib/topologies/server.js:564:11)
-    at Pool.emit (events.js:182:13)
-    at Connection.<anonymous> (/Users/joe/Projects/Web/express-template/node_modules/mongodb-core/lib/connection/pool.js:317:12)
-    at Object.onceWrapper (events.js:273:13)
-    at Connection.emit (events.js:182:13)
-    at Socket.<anonymous> (/Users/joe/Projects/Web/express-template/node_modules/mongodb-core/lib/connection/connection.js:246:50)
-    at Object.onceWrapper (events.js:273:13)
-    at Socket.emit (events.js:182:13)
-    at emitErrorNT (internal/streams/destroy.js:82:8)
-    at emitErrorAndCloseNT (internal/streams/destroy.js:50:3)
-    at process._tickCallback (internal/process/next_tick.js:63:19)
-(node:42678) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
-(node:42678) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-```
-
-> **Solution:** Your MongoDB server is not up and running. Start `mongod` and try again. You can go back to the Data Managment course and check your [dit032-setup](https://github.com/joe4dev/dit032-setup).
-
+> **Solution:** You are most likely already running another instance of the backend. Stop the other instance or application that uses port 3000 and try again.
 
 ## GET http://localhost:3000/api [errored] connect ECONNREFUSED 127.0.0.1:3000
 

@@ -12,7 +12,7 @@ This [ExpressJS](https://expressjs.com/) template provides the basic infrastruct
 
 ## Project setup
 
-Make sure, you are in the server directory `cd server`
+Make sure, you are in the backend directory `cd backend`
 
 Installs all project dependencies specified in [package.json](./package.json).
 
@@ -20,15 +20,15 @@ Installs all project dependencies specified in [package.json](./package.json).
 npm install
 ```
 
-## Start the server with auto-restarts for development
+## Start the backend with auto-restarts for development
 
-Automatically restarts your server if you save any changes to local files.
+Automatically restarts your backend if you save any changes to local files.
 
 ```bash
 npm run dev
 ```
 
-## Start the server
+## Start the backend
 
 ```bash
 npm start

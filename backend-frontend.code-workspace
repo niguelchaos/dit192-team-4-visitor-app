@@ -4,10 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "client"
+			"path": "frontend"
 		},
 		{
-			"path": "server"
+			"path": "backend"
 		}
 	],
 	"settings": {}
