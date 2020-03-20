@@ -5,7 +5,7 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
-var camelsController = require('./controllers/camels');
+var camelsController = require('./controller');
 var port = process.env.PORT || 3000;
 
 // Create Express app
