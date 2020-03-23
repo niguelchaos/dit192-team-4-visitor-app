@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://git.chalmers.se/courses/EDA397/demo.git"
+    "url": "git+https://git.chalmers.se/courses/EDA397/1920/platform.git"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
