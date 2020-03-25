@@ -5,7 +5,7 @@
     "node": "10.x"
   },
   "private": true,
-  "description": "Template for ExpressJS API for Agile Development Processes (EDA397/DIT191)",
+  "description": "Template for ExpressJS API for Agile Development Processes (EDA397/DIT192)",
   "main": "./app.js",
   "scripts": {
     "start": "node ./app.js",

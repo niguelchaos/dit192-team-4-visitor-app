@@ -20,7 +20,7 @@ app.use(cors());
 
 // Define routes
 app.get('/api', function(req, res) {
-    res.json({'message': 'Welcome to the EDA397/DIT191 backend ExpressJS project!'});
+    res.json({'message': 'Welcome to the EDA397/DIT192 backend ExpressJS project!'});
 });
 app.use('/api/camels', camelsController);
 
