@@ -25,7 +25,7 @@ You can also use alternative tools if you know how to configure them (e.g., Fire
     * Create an SSH key pair `ssh-keygen -t ed25519 -C "email@example.com"` (skip if you already have one)
     * Add your public SSH key to your Gitlab profile under https://git.chalmers.se/profile/keys
     * Make sure the email you use to commit is registered under https://git.chalmers.se/profile/emails
-  * Checkout the [Backend-Frontend](https://git.chalmers.se/courses/eda397/1920/platform) template `git clone git@git.chalmers.se:courses/eda397/1920/platform.git`
+  * Checkout the [Backend-Frontend](https://git.chalmers.se/courses/eda397/2021/platform) template `git clone git@git.chalmers.se:courses/eda397/2021/platform.git`
 * [Backend Requirements](./backend/README.md#Requirements)
 * [Frontend Requirements](./frontend/README.md#Requirements)
 
@@ -33,7 +33,7 @@ You can also use alternative tools if you know how to configure them (e.g., Fire
 
 ```bash
 # Clone repository
-git clone git@git.chalmers.se:courses/eda397/1920/platform.git
+git clone git@git.chalmers.se:courses/eda397/2021/platform.git
 
 # Change into the directory
 cd platform
