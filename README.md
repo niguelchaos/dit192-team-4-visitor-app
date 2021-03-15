@@ -1,6 +1,6 @@
 # Backend and Frontend Template
 
-Latest version: https://git.chalmers.se/courses/eda397/1920/platform
+Latest version: https://git.chalmers.se/courses/eda397/2021/platform
 
 Adapted from https://git.chalmers.se/courses/dit341/group-00-web, big thanks to Joel Scheuner
 
