@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-jumbotron header="Agile Development Processes Frontend" lead="Welcome to Your Frontend Vue.js App">
+    <b-jumbotron header="Hello World" lead="Welcome to Your Frontend Vue.js App">
       <p>Message from the server: {{ message }}</p>
       <b-button variant="primary" href="/camels">List Camels</b-button>
     </b-jumbotron>
