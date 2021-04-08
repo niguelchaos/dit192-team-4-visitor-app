@@ -22,6 +22,11 @@ test:
   stage: test
   tags:
     - docker
+  services:
+    - name: mongo:4.4.4-bionic
+      alias: mongo
+  variables:
+    MONGODB_URI: "mongodb://mongo:27017/serverTestDB"
   script:
     - cd backend
     - npm run ci-test
