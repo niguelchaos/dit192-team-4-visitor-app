@@ -10,7 +10,7 @@ Docker Compose simplifies container management by separating the information den
 ##### Run the container
 > docker-compose up
 
-This command runs the docker container with the container’s inner console (in our case, MongoDB's daemon terminal) attached to the terminal. The command uses `docker-compose.yml` to instantiate the database, users, ports, volumes, and other configurations if container have not been instantiated before. Otherwise, the container reuses configurations, logs annd data stored in the hidden folder `.docker`, under `./team-4-visitor-app/db/.docker/mongodb`. The storage folders contain .gitignore files that are configured to exclude all data from repository pushes, so everyone can instantiate and use their version of the local database without introducing merge issues in the repository.
+This command runs the docker container with the container’s inner console (in our case, MongoDB's daemon terminal) attached to the terminal. The command uses `docker-compose.yml` to instantiate the database, users, ports, volumes, and other configurations if container have not been instantiated before. Otherwise, the container reuses configurations, logs annd data stored in the volume managed by docker called `db_dit192_data`.
 
 ##### Run the container in the background
 > docker-compose up -d
@@ -26,20 +26,21 @@ The addition of the `-d` or `--detach` flags allows to run the container in the 
 
 This command shuts down the container that runs in the background. Alternativly, if you have the container running attached to your terminal, you can use `Control-C` to safely stop the container.
 
-### Database credentials
-The default credentials for MongoDB are initialized via the `mongodb.env` file. Currently, the database initializes the default databases, the development database, and two users.
+##### Stop and reset container data
+> docker-compose down -v
 
-- Project username: `team4usr`
-- Project password: `team4pwd`
-- Project database: `team4db`
-- Root username: `root`
-- Root password: `root`
-- Root database: `admin`
+This command not only shuts down the container that runs in the background, but also removes the managed volume that contains container's data. This command can be executed even if container is not running. The effects of this command are irreverisble as the volume is completely destroyed in the process. Next time the container is turned on via `docker-compose up`, the script will instantiate a new, clean version of the container and the volume.
+
+### Database credentials
+The development database by default uses no authentication credentials, making it easier for the local instance of the backend to interface and maninpulate the data. That said, `db/` folder contains a hidden `.env` file used by the backend application. The file contains two variables:
+
+- MONGO_DATABASE: `"team4db"` - specifies the default database name to use for the project
+- MONGO_PORT: `37017` - specifies the default port used by the container. The port is deliberately changed to `37017` (from MongoDB's default `27017`) in order to prevent potential collissions with the native MongoDB server.
 
 ### How to connect
 - Hostname: `localhost`
 - Database: `team4db`
-- Username: `team4usr`
-- Password: `team4pwd`
-- Port: `27017`
-- URI: `mongodb://localhost:27017/team4db`
+- Username: not needed
+- Password: not needed
+- Port: `37017`
+- URI: `mongodb://localhost:37017/team4db`
