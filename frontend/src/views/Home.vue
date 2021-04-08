@@ -14,16 +14,10 @@
       <!-- Mobile (< 768px): stack columns by making one half-width and one full-width
       Desktop (>= 768px): keep both columns in same row in 4:8 ratio-->
       <b-row>
-        <b-col>In this app you can book tickets, find our rides and see your reservations. Welcome!</b-col>
-      </b-row>
-       <b-row>
-         <b-col xs="12" align-self="center" class="mt-5">
-          <b-button-group vertical size="lg">
-            <b-button href="/activities">Go to Activities</b-button>
-            <b-button href="/reservations">Go to Reservations</b-button>
-            <b-button href="/ticketprices">Go to TicketPrices</b-button>
-        </b-button-group>
-         </b-col>
+        <b-col
+          >In this app you can book tickets, find our rides and see your
+          reservations. Welcome!</b-col
+        >
       </b-row>
       <b-row class="footer">
         <b-col>
@@ -38,30 +32,30 @@
 
 <script>
 // @ is an alias to /src
-import { Api } from '@/Api'
+import { Api } from "@/Api";
 
 export default {
-  name: 'home',
+  name: "home",
   data() {
     return {
-      message: ''
-    }
+      message: ""
+    };
   },
   mounted() {
-    this.getMessage()
+    this.getMessage();
   },
   methods: {
     getMessage() {
-      Api.get('/')
+      Api.get("/")
         .then(response => {
-          this.message = response.data.message
+          this.message = response.data.message;
         })
         .catch(error => {
-          this.message = error
-        })
+          this.message = error;
+        });
     }
   }
-}
+};
 </script>
 
 <style>
