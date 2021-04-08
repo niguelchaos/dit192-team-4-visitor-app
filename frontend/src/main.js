@@ -5,6 +5,8 @@ import BootstrapVue from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import './styles/main.css'
+import './styles/variables.css'
 
 Vue.use(BootstrapVue)
 
@@ -12,5 +14,7 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  render: function (h) { return h(App) }
+  render: function (h) {
+    return h(App)
+  }
 }).$mount('#app')
