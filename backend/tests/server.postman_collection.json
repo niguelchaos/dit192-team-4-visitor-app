@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "f1f0dc69-72ef-44ee-9bda-dfac8a907469",
-		"name": "server",
+		"_postman_id": "510bde5e-287b-4ebf-b519-c5584ae1d959",
+		"name": "DIT192",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -11,7 +11,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "c67a5d47-3a70-45b0-8001-b37eb933382f",
 						"exec": [
 							""
 						],
@@ -46,7 +45,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "927025af-5584-4888-a286-730662635095",
 						"exec": [
 							"// Save and read environment variables",
 							"",
@@ -56,7 +54,7 @@
 							"// 2) Save reponse data in environment variable",
 							"var jsonData = pm.response.json();",
 							"var camelId = jsonData._id",
-							"pm.environment.set(\"camel_id\", camelId);",
+							"pm.collectionVariables.set(\"camel_id\", camelId);",
 							"",
 							"// 3) Use variable in later requests via {{variable}}",
 							"// GET {{host}}/api/camels/{{camel_id}}",
@@ -102,7 +100,7 @@
 					"raw": "{\n\t\"color\": \"orange\",\n\t\"position\": 7\n}\n"
 				},
 				"url": {
-					"raw": "{{host}}/api/camels",
+					"raw": "{{host}}/api/camels?=",
 					"host": [
 						"{{host}}"
 					],
@@ -126,7 +124,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "927025af-5584-4888-a286-730662635095",
 						"exec": [
 							""
 						],
@@ -144,7 +141,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/camels",
+					"raw": "{{host}}/api/camels?=",
 					"host": [
 						"{{host}}"
 					],
@@ -168,7 +165,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "927025af-5584-4888-a286-730662635095",
 						"exec": [
 							""
 						],
@@ -198,13 +194,350 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "POST /api/attractions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertion examples",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});",
+							"",
+							"pm.test(\"Data has correct attraction name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.name).to.eql(\"The Loophole Plunge\");",
+							"});",
+							"",
+							"pm.test(\"Data has _id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data._id).to.be.a('String')",
+							"    pm.collectionVariables.set(\"attraction_id\", jsonData.data._id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"The Loophole Plunge\",\n    \"description\": \"The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!\",\n    \"price\": 45,\n    \"status\": \"open\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/attractions",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"attractions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/attractions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/attractions",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"attractions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/attractions/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"attractions",
+						"{{attraction_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /api/attractions/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"attractions",
+						"{{attraction_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /api/attractions/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"attractions",
+						"{{attraction_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/attractions/:wrongId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"attractions",
+						"{{attraction_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /api/attractions/:wrongId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"attractions",
+						"{{attraction_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /api/attractions/:wrongId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"attractions",
+						"{{attraction_id}}"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "7e800163-8a55-4e5e-9612-c424073c185b",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -214,7 +547,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "ee0c97da-ae53-475a-9016-45bcfd424105",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -224,10 +556,19 @@
 	],
 	"variable": [
 		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
+			"id": "83d2f333-b8ad-4d34-928f-d50a96ca34cb",
 			"key": "host",
-			"value": "http://localhost:3000",
-			"type": "string"
+			"value": "http://localhost:3000"
+		},
+		{
+			"id": "8203e947-9df7-4a8b-9215-bb4a66d968b2",
+			"key": "attraction_id",
+			"value": ""
+		},
+		{
+			"id": "0089e0bf-a35e-46dc-b408-96543008757a",
+			"key": "camel_id",
+			"value": ""
 		}
 	]
 }
