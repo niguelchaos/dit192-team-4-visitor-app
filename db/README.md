@@ -47,12 +47,10 @@ This command shuts down the container that runs in the background. Alternativly,
 
 This command not only shuts down the container that runs in the background, but also removes the managed volume that contains container's data. This command can be executed even if container is not running. The effects of this command are irreverisble as the volume is completely destroyed in the process. Next time the container is turned on via `docker-compose up`, the script will instantiate a new, clean version of the container and the volume.
 
-
-
-### How to connect
+### Connection credentials for external DB visualizers
 - Hostname: `localhost`
-- Database: `team4db`
-- Username: not needed
-- Password: not needed
-- Port: `37017`
-- URI: `mongodb://localhost:37017/team4db`
+- Database: `your MONGO_DATABASE value from .env file`
+- Username: leave this blank
+- Password: leave this blank
+- Port: `<your MONGO_PORT value from .env file>`
+- URI: `mongodb://localhost:Port_value_above/Database_value_above`
