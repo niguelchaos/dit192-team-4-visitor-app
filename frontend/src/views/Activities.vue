@@ -3,7 +3,9 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">LOGO</div>
+          <div class="logo">
+            <img class="logo_img" src="../assets/logo.png" alt="logo" />
+          </div>
         </b-col>
       </b-row>
       <b-row>
@@ -17,11 +19,8 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>
