@@ -15,8 +15,7 @@ var mongoURI = process.env.MONGODB_URI ||
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
-
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, function(err) {
     if (err) {
         console.error(`Failed to connect to MongoDB with URI: ${mongoURI}`);
         console.error(err.stack);
