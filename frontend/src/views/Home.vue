@@ -32,30 +32,30 @@
 
 <script>
 // @ is an alias to /src
-import { Api } from "@/Api";
+import { Api } from '@/Api'
 
 export default {
-  name: "home",
+  name: 'home',
   data() {
     return {
-      message: ""
-    };
+      message: ''
+    }
   },
   mounted() {
-    this.getMessage();
+    this.getMessage()
   },
   methods: {
     getMessage() {
-      Api.get("/")
+      Api.get('/')
         .then(response => {
-          this.message = response.data.message;
+          this.message = response.data.message
         })
         .catch(error => {
-          this.message = error;
-        });
+          this.message = error
+        })
     }
   }
-};
+}
 </script>
 
 <style>

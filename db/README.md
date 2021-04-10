@@ -21,12 +21,12 @@ MONGO_PORT=37017
 Make sure that this file is saved in the `./team-4-visitor-app/db` folder, e.g. with the final path to the file (from repository's POV) being `./team-4-visitor-app/db/.env`. After this is done, you can proceed with actually running the container and executing the commands below.
 
 ### Common Commands
-Docker Compose simplifies container management by separating the information dense parameters away from the commands. Parameters that would otherwise need to be manually provided in the regular Docker commands via input flags, are instead kept in the YAML configuration file. Given this dependency, Docker Compose requires to either execute the commands in the terminal while beinng inn the same folder as the configuration file, or use an [alternative syntax](https://docs.docker.com/compose/cli-command/) (experimental and not recommended). With this in mind, the common ways of managing the containers are listed below, while further overview can be found in the [online documentation](https://docs.docker.com/compose/reference/overview/).
+Docker Compose simplifies container management by separating the information dense parameters away from the commands. Parameters that would otherwise need to be manually provided in the regular Docker commands via input flags, are instead kept in the YAML configuration file. Given this dependency, Docker Compose requires to either execute the commands in the terminal while being in the same folder as the configuration file, or use an [alternative syntax](https://docs.docker.com/compose/cli-command/) (experimental and not recommended). With this in mind, the common ways of managing the containers are listed below, while further overview can be found in the [online documentation](https://docs.docker.com/compose/reference/overview/).
 
 ##### Run the container
 > docker-compose up
 
-This command runs the docker container with the container’s inner console (in our case, MongoDB's daemon terminal) attached to the terminal. The command uses `docker-compose.yml` to instantiate the database, users, ports, volumes, and other configurations if container have not been instantiated before. Otherwise, the container reuses configurations, logs annd data stored in the volume managed by docker called `db_dit192_data`.
+This command runs the docker container with the container’s inner console (in our case, MongoDB's daemon terminal) attached to the terminal. The command uses `docker-compose.yml` to instantiate the database, users, ports, volumes, and other configurations if container have not been instantiated before. Otherwise, the container reuses configurations, logs and data stored in the volume managed by docker called `db_dit192_data`.
 
 ##### Run the container in the background
 > docker-compose up -d
@@ -40,12 +40,25 @@ The addition of the `-d` or `--detach` flags allows to run the container in the 
 ##### Stop the container
 > docker-compose down
 
-This command shuts down the container that runs in the background. Alternativly, if you have the container running attached to your terminal, you can use `Control-C` to safely stop the container.
+This command shuts down the container that runs in the background. Alternatively, if you have the container running attached to your terminal, you can use `Control-C` to safely stop the container.
 
 ##### Stop and reset container data
 > docker-compose down -v
 
-This command not only shuts down the container that runs in the background, but also removes the managed volume that contains container's data. This command can be executed even if container is not running. The effects of this command are irreverisble as the volume is completely destroyed in the process. Next time the container is turned on via `docker-compose up`, the script will instantiate a new, clean version of the container and the volume.
+This command not only shuts down the container that runs in the background, but also removes the managed volume that contains container's data. This command can be executed even if container is not running. The effects of this command are irreversible as the volume is completely destroyed in the process. Next time the container is turned on via `docker-compose up`, the script will instantiate a new, clean version of the container and the volume.
+
+##### Initialize the database with data
+> docker-compose --profile init up
+
+This command allows you to start the container and seed the database with the test data from `init` folder. The profile option directs the docker compose script to build an additional container called `dit192-seed`, using `Dockerfile` template, which copies files from `init` into this new container. This container starts up after `dit192-db` and uses a `mongoimport` command to connect to `dit192-db` and import the MongoDB documents. As long as the number of test files in `init` and contents of `Dockerfile` remain the same, you should run this command only once. 
+
+As project will continue to evolve, so will the number of files in `init/`, configurations in the `Dockerfile` which direct which files should be compiled into the build, and `docker-compose.yml` which specifies which files should be imported in `dit192-seed`. If you receive a new batch of files or wish to add more test files, you will need to change these files, reset the main database container (see above), and update the image of `dit192-seed` before re-initialization of the main database. To do this, execute the command below,
+
+> docker-compose --profile init build
+
+This will rebuild the `dit192-seed` container image with the new data, after which you initialize the main database with,
+
+> docker-compose --profile init up
 
 ### Connection credentials for external DB visualizers
 - Hostname: `localhost`

@@ -1,6 +1,26 @@
-[{
+[
+  {
     "name": "The Loophole Plunge",
     "description": "The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!",
     "price": 45,
     "status": "open"
-}]
+  },
+  {
+    "name": "Ride of Doom",
+    "description": "A dark ride for those who dare! The ride starts out slow, but it gets faster as it goes on. There will be plenty of people around you so don't worry about being alone…or scared!",
+    "price": 60,
+    "status": "open"
+  },
+  {
+    "name": "Happily Ever After",
+    "description": "This is the most exciting ride ever! It goes up and down at incredible speeds, then it flips upside-down and comes back around again! Don't miss out on this one of a kind experience! The ride will be over before you know it.",
+    "price": 50,
+    "status": "open"
+  },
+  {
+    "name": "The Sky Screamer",
+    "description": "The Sky Screamer is a high speed thrill ride with some pretty intense twists and turns. It's designed for all ages, but we recommend at least 6 years old.",
+    "price": 40,
+    "status": "open"
+  }
+]

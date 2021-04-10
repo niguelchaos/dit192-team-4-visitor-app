@@ -11,9 +11,9 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   props: []
-};
+}
 </script>
 
 <style scoped>
