@@ -3,7 +3,9 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">LOGO</div>
+          <div class="logo">
+            <img class="logo_img" src="../assets/logo.png" alt="logo" />
+          </div>
         </b-col>
       </b-row>
       <b-row>
@@ -23,7 +25,7 @@
 </template>
 
 <script>
-import { Api } from '../Api'
+import { Api } from '@/Api'
 export default {
   data() {
     return {
@@ -49,5 +51,4 @@ export default {
 </script>
 
 <style>
-
 </style>
