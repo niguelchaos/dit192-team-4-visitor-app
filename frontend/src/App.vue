@@ -1,9 +1,20 @@
 <template>
   <div id="app">
-    <router-view />
+    <div class="content">
+      <router-view />
+    </div>
+    <Navbar />
   </div>
 </template>
 
+<script>
+import Navbar from './components/Navbar'
+export default {
+  components: {
+    Navbar
+  }
+}
+</script>
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -11,10 +22,12 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.content {
   background-color: #c7efcf;
   border: 15px solid white;
   overflow: auto;
-  height: 100vh;
+  height: calc(100vh - 70px); /* 70px is height of navbar */
 }
 #nav {
   padding: 30px;
