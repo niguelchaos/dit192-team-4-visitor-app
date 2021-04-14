@@ -26,7 +26,8 @@
         <b-col>
           <div class="map">
             <h4>Map over the park</h4>
-            <img class="map_img" src="../assets/Map.jpeg" alt="map" />
+            <!-- <img class="map_img" src="../assets/Map.jpeg" alt="map" /> -->
+            <map-component></map-component>
           </div>
         </b-col>
       </b-row>
@@ -45,9 +46,10 @@
 // @ is an alias to /src
 import { Api } from '@/Api'
 import Logo from '../components/Logo.vue'
+import MapComponent from '../components/Map.vue'
 
 export default {
-  components: { Logo },
+  components: { Logo, MapComponent },
   name: 'home',
   data() {
     return {
