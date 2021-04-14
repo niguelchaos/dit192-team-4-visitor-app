@@ -3,9 +3,10 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">
+          <logo></logo>
+          <!-- <div class="logo">
             <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div>
+          </div> -->
         </b-col>
       </b-row>
       <b-row>
@@ -19,7 +20,10 @@
 </template>
 
 <script>
-export default {}
+import Logo from '../components/Logo.vue'
+export default {
+  components: { Logo }, 
+  }
 </script>
 
 <style>

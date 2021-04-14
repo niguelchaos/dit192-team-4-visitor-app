@@ -3,9 +3,10 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">
+          <logo></logo>
+          <!-- <div class="logo">
             <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div>
+          </div> -->
         </b-col>
       </b-row>
       <b-row>
@@ -19,6 +20,14 @@
         <b-col>
           In this app you can book tickets, find our rides and see your
           reservations. Welcome!
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <div class="map">
+            <h4>Map over the park</h4>
+            <img class="map_img" src="../assets/Map.jpeg" alt="map" />
+          </div>
         </b-col>
       </b-row>
       <b-row class="footer">
@@ -35,8 +44,10 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import Logo from '../components/Logo.vue'
 
 export default {
+  components: { Logo },
   name: 'home',
   data() {
     return {
@@ -61,19 +72,31 @@ export default {
 </script>
 
 <style>
-.logo {
-  height: 100px;
-  margin-bottom: 50px;
-  margin-top: 20px;
-}
-.title {
-  margin-bottom: 20px;
-}
-.footer {
-  background: var(--color-green);
-  color: white;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  margin-top: 200px;
-}
+  .logo {
+    height: 100px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .footer {
+    background: var(--color-green);
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-top: 100px;
+  }
+
+  .map {
+    margin-top: 50px;
+  }
+
+  .map_img {
+    height: 500px;
+    margin-top: 10px;
+  }
+
 </style>
