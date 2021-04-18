@@ -8,22 +8,28 @@
           </div>
         </b-col>
       </b-row>
+
       <b-row>
         <b-col>
           <h2 class="title">Activities</h2>
           <!-- Load attractions via API -->
-          <b-card class="act-card overflow-hidden rounded" img-right no-body>
-            <b-row>
-              <b-col xs="7" no-gutters class="card-col">
-                <div class="card-title"><span>Super Ride</span></div>
-                <!-- <b-card-body title="Super Ride"></b-card-body> -->
-                <b-link href="#" class="card-link">Read More</b-link>
-              </b-col>
-              <b-col xs="5">
-                <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="card-image rounded-3"></b-card-img>
-              </b-col>
-            </b-row>
-          </b-card>
+          <!-- <b-row> -->
+          <b-row style="margin:0%; padding:0%;">
+            <b-col class="card-main-col" v-for="a in attractions" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters style="padding:0%; margin:0%;">
+              <b-card class="act-card overflow-hidden rounded text-left" img-right no-body>
+                <b-col class="card-img-col">
+                  <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="card-image rounded-3"></b-card-img>
+                </b-col>
+                <b-col cols="8" no-gutters class="card-text-col">
+                <b-card-title class="card-title">
+                  <span class="align-middle">{{a.name}}</span>
+                </b-card-title>
+                  <b-link href="#" class="card-link">Read More</b-link>
+                </b-col>
+              </b-card>
+            </b-col>
+          </b-row>
+          <!-- </b-row> -->
 
           <ul>
             <li v-for="a in attractions" v-bind:key="a.id">
@@ -66,14 +72,19 @@ export default {
 <style>
 .act-card {
   padding: 5%;
+  margin: 5%;
 }
-.card-col {
-  align-content: center;
+.card-main-col {
+  margin: 0%;
   padding: 0%;
-  margin: 0% ;
+}
+.card-text-col {
+  padding: 0%;
+  margin: 0%;
 }
 .card-title {
-  padding: 5%;
+  padding-top: 10%;
+  padding-bottom: 5%;
   align-content: center;
 }
 /* .act-card-body {
