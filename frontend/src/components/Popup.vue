@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container fluid>
       <b-row class="title">
         <h4>{{title}}</h4>
       </b-row>
@@ -8,21 +8,22 @@
         {{description}}
       </b-row>
       <b-row class="status">
-        <b-col>
-          <b-row>
-            Status:
-          </b-row>
-          <b-row>
-            <span :class="{green: status === 'Open', red: status === 'Closed'}">{{status}}</span>
-          </b-row>
+        <!-- Status col -->
+        <b-col class="statusCol" cols=4>
+          <b-col>Status:</b-col>
+          <b-col><span :class="{green: status === 'Open', red: status === 'Closed'}">{{status}}</span></b-col>
         </b-col>
-        <b-col>
-          <b-row>
+        <!-- Queue col -->
+        <b-col class="queueCol" cols=6>
+          <b-col>
             Queue Time:
-          </b-row>
-          <b-row>
+          </b-col>
+          <b-col>
             {{queueTime}}
-          </b-row>
+          </b-col>
+        </b-col>
+        <b-col class="linkCol" cols=6>
+          <a href="/activities">Go to this activity</a>
         </b-col>
       </b-row>
     </b-container>
@@ -50,5 +51,14 @@ export default {
 }
 .red {
     color: red;
+}
+.statusCol {
+  margin-left:-1.5em;
+}
+.queueCol {
+  margin-right:-3em;
+}
+.linkCol {
+  margin-right: -10em;
 }
 </style>
