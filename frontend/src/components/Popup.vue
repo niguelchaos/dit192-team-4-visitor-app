@@ -23,7 +23,7 @@
           </b-col>
         </b-col>
         <b-col class="linkCol" cols=6>
-          <a href="/activities">Go to this activity</a>
+          <a href="/activities" id="goToActivity">Go to this activity</a>
         </b-col>
       </b-row>
     </b-container>
@@ -60,5 +60,8 @@ export default {
 }
 .linkCol {
   margin-right: -10em;
+}
+#goToActivity {
+  color: var(--color-green);
 }
 </style>
