@@ -32,13 +32,11 @@
 <script>
 export default {
   name: 'PopupComponent',
-  data() {
-    return {
-      title: 'The Loophole Plunge',
-      description: 'The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won\'t believe your eyes when you reach the top!',
-      status: 'Closed',
-      queueTime: '10 minutes'
-    }
+  props: {
+    title: String,
+    description: String,
+    status: String,
+    queueTime: String
   }
 }
 </script>
