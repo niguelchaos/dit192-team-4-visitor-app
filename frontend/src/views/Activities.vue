@@ -3,9 +3,10 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">
+          <Logo></Logo>
+          <!-- <div class="logo">
             <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div>
+          </div> -->
         </b-col>
       </b-row>
       <b-row>
@@ -13,7 +14,7 @@
           <h2 class="title">Activities</h2>
           <!-- Load attractions via API -->
           <ul>
-            <li v-for="a in attractions" v-bind:key="a">
+            <li v-for="a in attractions" v-bind:key="a.id">
               {{ a.name + ": " + a.description }}
             </li>
           </ul>
@@ -26,7 +27,10 @@
 
 <script>
 import { Api } from '@/Api'
+import Logo from '../components/Logo.vue'
+
 export default {
+  components: { Logo },
   data() {
     return {
       attractions: []
@@ -40,7 +44,8 @@ export default {
       Api.get('/attractions')
         .then(res => {
           this.attractions = res.data.data || []
-        }).bind(this)
+        })
+        // .bind(this)
         .catch(err => {
           console.log(err)
         })

@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <logo></logo>
+          <Logo></Logo>
           <!-- <div class="logo">
             <img class="logo_img" src="../assets/logo.png" alt="logo" />
           </div> -->
@@ -22,8 +22,9 @@
 <script>
 import Logo from '../components/Logo.vue'
 export default {
-  components: { Logo }, 
-  }
+  components: { Logo },
+  name: 'TicketPrices'
+}
 </script>
 
 <style>
