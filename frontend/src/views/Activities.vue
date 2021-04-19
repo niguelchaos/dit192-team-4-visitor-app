@@ -10,28 +10,17 @@
       </b-row>
 
       <b-row class="list-row">
-        <b-col class="list-col">
+        <b-col class="list-col" md="12">
           <h2 class="title">Activities</h2>
           <!-- Load attractions via API -->
             <!-- drop box -->
             <!-- filter container -->
             <!-- scrollable container -->
-            <b-container class="card-main-div">
+            <b-container class="card-main-div" fluid>
               <b-row class="card-main-row">
                 <b-col class="card-main-col" v-for="a in attractions" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
-                  <div>
-                  <b-card class="act-card overflow-hidden rounded text-left" img-right no-body>
-                    <b-col class="card-img-col" style="margin:0%; padding:0%;">
-                      <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="card-image rounded-3"></b-card-img>
-                    </b-col>
-                    <b-col style="font-size: 0.75rem;" cols="7" no-gutters class="card-text-col">
-                    <b-card-title style="font-size: 1rem;" class="card-title">
-                      <span class="align-middle font-weight-bolder" >{{a.name}}</span>
-                    </b-card-title>
-                      <b-link href="#" class="card-link">Read More</b-link>
-                    </b-col>
-                  </b-card>
-                  </div>
+                  <activity-card :attraction-name="a.name"></activity-card>
+                  <!-- idk why this works -->
                 </b-col>
               </b-row>
             </b-container>
@@ -49,7 +38,9 @@
 
 <script>
 import { Api } from '@/Api'
+import ActivityCard from '@/components/ActivityCard.vue'
 export default {
+  components: { ActivityCard },
   data() {
     return {
       attractions: []
@@ -97,29 +88,13 @@ export default {
   padding:0%;
   position: relative;
   overflow-y: scroll;
-  height:55vh;
-  /* max-height: 75vh; */
+  height: 55vh;
+  min-height:15vh;
+  max-height:65vh;
 }
-.act-card {
-  padding: 5%;
-  margin: 3%;
-}
+
 .card-main-col {
   margin: 0%;
   padding: 0%;
 }
-.card-text-col {
-  color: #2D3E4F;
-  padding: 0%;
-  margin: 0%;
-}
-.card-title {
-  padding-top: 15%;
-  padding-bottom: 5%;
-  align-content: center;
-}
-.card-link {
-  color: #E28DAF;
-}
-
 </style>
