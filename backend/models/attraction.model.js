@@ -6,7 +6,10 @@ const AttractionSchema = new Schema({
     description: { type: String },
     price: { type: Number },
     status: { type: String },
-    image: { data: Buffer, contentType: String }
+    image: { data: Buffer, contentType: String },
+    latitude: { type: Number },
+    longitude: { type: Number },
+    queueTime: { type: String }
 });
 
 const Attraction = mongoose.model('attractions', AttractionSchema);

@@ -6,13 +6,14 @@
       :center="center"
       @update:zoom="zoomUpdated"
       @update:center="centerUpdated"
-      @update:bounds="boundsUpdated">
+      @update:bounds="boundsUpdated"
+      v-for="a in attractions" v-bind:key="a.id" >
         <!-- Tile layer which is the actual map -->
         <l-tile-layer :url="url"></l-tile-layer>
         <!-- Polygon is the border around the park -->
         <l-polygon :lat-lngs="polygon.LatLngs" :color="polygon.color" ></l-polygon>
         <!-- Marker with popup for the activities -->
-        <l-marker :lat-lng="markerLatLng" >
+        <l-marker :lat-lng="[a.lat, a.lng]" >
           <l-popup>
             <!-- Popup component -->
             <Popup :title="popup.title" :description="popup.description" :status="popup.status" :queueTime="popup.queueTime"></Popup>
@@ -28,6 +29,7 @@
 import { LMap, LTileLayer, LMarker, LPolygon, LPopup } from 'vue2-leaflet'
 import L from 'leaflet'
 import Popup from '@/components/Popup.vue'
+import { Api } from '@/Api'
 
 // Thing to get the markers to work
 delete L.Icon.Default.prototype._getIconUrl
@@ -87,7 +89,8 @@ export default {
         description: 'The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won\'t believe your eyes when you reach the top!',
         status: 'Closed',
         queueTime: '10 minutes'
-      }
+      },
+      attractions: []
     }
   },
   methods: {
@@ -99,7 +102,20 @@ export default {
     },
     boundsUpdated(bounds) {
       this.bounds = bounds
+    },
+    getAttractions() {
+      Api.get('/attractions')
+        .then(res => {
+          this.attractions = res.data.data || []
+        })
+        // .bind(this)
+        .catch(err => {
+          console.log(err)
+        })
     }
+  },
+  mounted() {
+    this.getAttractions()
   }
 }
 
