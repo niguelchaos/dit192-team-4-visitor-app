@@ -29,7 +29,7 @@
       <!-- Pagination -->
       <div class="page-bar-div overflow-auto rounded mt-3">
         <!-- on change updates when user clicks, linkgen updates path -->
-        <b-pagination-nav v-model="currentPage" v-on:change="updatePageNum($event)" :link-gen="linkGen" :number-of-pages="3" align="fill" use-router></b-pagination-nav>
+        <b-pagination-nav v-model="currentPage" v-on:change="updatePageNum($event)" :link-gen="linkGen" :number-of-pages="3" align="fill" use-router size="md"></b-pagination-nav>
       </div>
 
     </b-container>
@@ -60,7 +60,6 @@ export default {
   },
   methods: {
     getAttractions() {
-      // console.log(this.$router.currentRoute.query.currentPage)
       Api.get('attractions', {
         params: {
           page: this.currentPage
@@ -79,7 +78,6 @@ export default {
     // updates page number, calls attractions every time page is changed
     updatePageNum(pageNum) {
       this.currentPage = pageNum
-      // console.log(this.currentPage)
       this.getAttractions()
     },
 
@@ -90,7 +88,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 
