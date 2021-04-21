@@ -26,9 +26,10 @@
             </b-container>
         </b-col>
       </b-row>
-
+      <!-- Pagination -->
       <div class="page-bar-div overflow-auto rounded mt-3">
-        <b-pagination-nav  v-on:change="updatePageNum($event)" :link-gen="linkGen" :number-of-pages="10" align="fill" use-router></b-pagination-nav>
+        <!-- on change updates when user clicks, linkgen updates path -->
+        <b-pagination-nav v-model="currentPage" v-on:change="updatePageNum($event)" :link-gen="linkGen" :number-of-pages="3" align="fill" use-router></b-pagination-nav>
       </div>
 
     </b-container>
@@ -43,25 +44,28 @@ export default {
   data() {
     return {
       attractions: [],
-      page: 1
+      // when activities is clicked, currentroute is empty -> default to page 1
+      // takes page directly from url
+      currentPage: this.$router.currentRoute.query.currentPage === undefined ? 1 : this.$router.currentRoute.query.currentPage
     }
   },
   mounted() { // happens only once
-    this.getAttractions()
+  // updatePageNum already executes getAttractions
+    this.linkGen(this.currentPage)
+    this.updatePageNum(this.currentPage)
   },
   beforeUpdate() {
-    // this.getAttractions()
   },
   updated() {
-    // this.getAttractions()
   },
   methods: {
     getAttractions() {
+      // console.log(this.$router.currentRoute.query.currentPage)
       Api.get('attractions', {
         params: {
-          page: this.page
+          page: this.currentPage
         }
-      }) // add axios params here
+      })
         .then(res => {
           this.attractions = res.data.data
         })
@@ -72,16 +76,17 @@ export default {
         })
     },
 
+    // updates page number, calls attractions every time page is changed
     updatePageNum(pageNum) {
-      this.page = pageNum
-      console.log(this.page)
+      this.currentPage = pageNum
+      // console.log(this.currentPage)
       this.getAttractions()
     },
 
     linkGen(pageNum) {
       return {
-        path: this.page === 1 ? '?' : `?page=${this.page}`,
-        query: { page: pageNum }
+        // vmodel already takes care of path additions, but this needed for correct path
+        query: { currentPage: pageNum }
       }
     }
   }

@@ -1,6 +1,4 @@
 var mongoose = require('mongoose');
-const mongoosePaginate = require("mongoose-paginate-v2");
-
 var Schema = mongoose.Schema;
 
 
@@ -12,17 +10,6 @@ const AttractionSchema = new Schema({
     image: { data: Buffer, contentType: String }
 });
 
-// AttractionSchema.plugin(mongoosePaginate);
-
 const Attraction = mongoose.model('attractions', AttractionSchema);
-
-// const options = {
-//     page: 1,
-//     limit: 2
-// };
-
-// Attraction.paginate({}, options)
-//     .then(result => {})
-//     .catch(error => {});
 
 module.exports = Attraction;
