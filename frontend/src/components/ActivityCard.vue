@@ -1,5 +1,6 @@
 <template>
    <div>
+      <b-link href="/">
       <b-card class="act-card overflow-hidden rounded text-left" img-right no-body>
          <b-col class="card-img-col" style="margin:0%; padding:0%;">
             <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="card-image rounded-3"></b-card-img>
@@ -9,9 +10,10 @@
          <b-card-title style="font-size: 1rem;" class="card-title">
             <span class="align-middle font-weight-bolder" >{{attractionName}}</span>
          </b-card-title>
-            <b-link href="#" class="card-link">Read More</b-link>
+            <b-link href="/" class="card-link">Read More</b-link>
          </b-col>
       </b-card>
+      </b-link>
    </div>
 </template>
 
@@ -30,7 +32,8 @@ export default {
 }
 .card-text-col {
   color: #2D3E4F;
-  padding: 0%;
+  padding: 1%;
+  padding-right: 3%;
   margin: 0%;
 }
 .card-title {

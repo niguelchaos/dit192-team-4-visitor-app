@@ -3,12 +3,20 @@ var Attraction = require('../models/attraction.model')
 // GET method
 exports.getAttractions = async function (req, res, next) {
     var query = req.params.query ? req.params.query : {};
-    //var page = req.params.page ? req.params.page : 1;
-    //var limit = req.params.limit ? req.params.limit : 10;
+    var page =  (req.query.page ? req.query.page : 1) - 1;
+    var limit = req.params.limit ? req.params.limit : 5;
+    // var totalAttractions = Attraction.count();
+
+    console.log(page * limit);
+    console.log(req.params);
+    console.log(req.query);
+    
     Attraction.find(query, function(err, attractions) {
         if (err) { return next(err); }
         res.status(200).json({ status: 200, data: attractions, message: 'Successfully retrieved the attractions.' });
-    });
+    })
+    .skip(page * limit)
+    .limit(limit);
 }
 
 // GET method

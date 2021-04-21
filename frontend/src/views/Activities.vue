@@ -1,6 +1,6 @@
 <template>
   <div id="attractions">
-    <b-container class="attraction-container" fluid>
+    <b-container class="attraction-container">
       <b-row class="logo-row">
         <b-col xs="12" align-self="center">
           <div class="logo">
@@ -24,14 +24,13 @@
                 </b-col>
               </b-row>
             </b-container>
-          <!-- <ul>
-            <li v-for="a in attractions" v-bind:key="a.id">
-              {{ a.name + ": " + a.description }}
-            </li>
-          </ul> -->
-          <b-button href="/">Go to frontpage</b-button>
         </b-col>
       </b-row>
+
+      <div class="page-bar-div overflow-auto rounded mt-3">
+        <b-pagination-nav  v-on:change="updatePageNum($event)" :link-gen="linkGen" :number-of-pages="10" align="fill" use-router></b-pagination-nav>
+      </div>
+
     </b-container>
   </div>
 </template>
@@ -43,15 +42,26 @@ export default {
   components: { ActivityCard },
   data() {
     return {
-      attractions: []
+      attractions: [],
+      page: 1
     }
   },
-  mounted() {
+  mounted() { // happens only once
     this.getAttractions()
+  },
+  beforeUpdate() {
+    // this.getAttractions()
+  },
+  updated() {
+    // this.getAttractions()
   },
   methods: {
     getAttractions() {
-      Api.get('attractions')
+      Api.get('attractions', {
+        params: {
+          page: this.page
+        }
+      }) // add axios params here
         .then(res => {
           this.attractions = res.data.data
         })
@@ -60,6 +70,19 @@ export default {
           this.attractions = []
           console.log(err)
         })
+    },
+
+    updatePageNum(pageNum) {
+      this.page = pageNum
+      console.log(this.page)
+      this.getAttractions()
+    },
+
+    linkGen(pageNum) {
+      return {
+        path: this.page === 1 ? '?' : `?page=${this.page}`,
+        query: { page: pageNum }
+      }
     }
   }
 
@@ -88,11 +111,10 @@ export default {
   padding:0%;
   position: relative;
   overflow-y: scroll;
-  height: 55vh;
+  height: 50vh;
   min-height:15vh;
   max-height:65vh;
 }
-
 .card-main-col {
   margin: 0%;
   padding: 0%;
