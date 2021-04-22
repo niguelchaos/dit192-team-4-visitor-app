@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+
 const AttractionSchema = new Schema({
     name: { type: String, required: true },
     description: { type: String },
