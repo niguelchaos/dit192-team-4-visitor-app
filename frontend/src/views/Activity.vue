@@ -26,14 +26,14 @@
 
 <script>
 export default {
-  name: "Activity",
+  name: 'Activity',
   props: {
     activity: {
       type: Object,
       required: false // User can accept a userData object on params, or not. It's totally optional.
     }
   }
-};
+}
 </script>
 
 <style>

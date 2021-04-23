@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import { Api } from "@/Api";
-import ActivityCard from "@/components/ActivityCard.vue";
+import { Api } from '@/Api'
+import ActivityCard from '@/components/ActivityCard.vue'
 export default {
   components: { ActivityCard },
   data() {
@@ -44,47 +44,47 @@ export default {
         this.$router.currentRoute.query.currentPage === undefined
           ? 1
           : this.$router.currentRoute.query.currentPage
-    };
+    }
   },
   mounted() {
     // happens only once
     // updatePageNum already executes getAttractions
-    this.linkGen(this.currentPage);
-    this.updatePageNum(this.currentPage);
+    this.linkGen(this.currentPage)
+    this.updatePageNum(this.currentPage)
   },
   beforeUpdate() {},
   updated() {},
   methods: {
     getAttractions() {
-      Api.get("attractions", {
+      Api.get('attractions', {
         params: {
           page: this.currentPage
         }
       })
         .then(res => {
-          this.attractions = res.data.data;
+          this.attractions = res.data.data
         })
         // || [] }).bind(this)
         .catch(err => {
-          this.attractions = [];
-          console.log(err);
-        });
+          this.attractions = []
+          console.log(err)
+        })
     },
 
     // updates page number, calls attractions every time page is changed
     updatePageNum(pageNum) {
-      this.currentPage = pageNum;
-      this.getAttractions();
+      this.currentPage = pageNum
+      this.getAttractions()
     },
 
     linkGen(pageNum) {
       return {
         // vmodel already takes care of path additions, but this needed for correct path
         query: { currentPage: pageNum }
-      };
+      }
     }
   }
-};
+}
 </script>
 
 <style>

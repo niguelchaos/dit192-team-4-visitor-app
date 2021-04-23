@@ -41,9 +41,9 @@
 <script>
 // this stupid camel case props thing i dont get it
 export default {
-  name: "activity-card-item",
-  props: ["activity"]
-};
+  name: 'activity-card-item',
+  props: ['activity']
+}
 </script>
 
 <style scoped>
