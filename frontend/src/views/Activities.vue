@@ -17,7 +17,7 @@
       </b-row>
     </b-container>
     <!-- Pagination -->
-    <div class="page-bar-div overflow-auto rounded mt-3">
+    <div class="page-bar-div overflow-auto mt-3">
       <!-- on change updates when user clicks, linkgen updates path -->
       <b-pagination-nav
         v-model="currentPage"
