@@ -25,12 +25,26 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
 export default {
   name: 'Activity',
   props: {
     activity: {
       type: Object,
       required: false // User can accept a userData object on params, or not. It's totally optional.
+    }
+  },
+  created() {
+    const id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
+    if (!this.activity) {
+      Api.get('attractions/' + id)
+        .then(res => {
+          this.activity = res.data.data
+        })
+        .catch(err => {
+          this.attractionBackup = {}
+          console.log(err)
+        })
     }
   }
 }
