@@ -1,15 +1,15 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-
 const AttractionSchema = new Schema({
-    name: { type: String, required: true },
-    description: { type: String },
-    price: { type: Number },
-    status: { type: String },
-    image: { data: Buffer, contentType: String }
+  name: { type: String, required: true },
+  description: { type: String },
+  price: { type: Number },
+  status: { type: String },
+  img: { type: String },
+  image: { data: Buffer, contentType: String }
 });
 
-const Attraction = mongoose.model('attractions', AttractionSchema);
+const Attraction = mongoose.model("attractions", AttractionSchema);
 
 module.exports = Attraction;
