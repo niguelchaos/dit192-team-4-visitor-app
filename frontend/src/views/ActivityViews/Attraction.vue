@@ -28,7 +28,7 @@
 <script>
 import { Api } from '@/Api'
 export default {
-  name: 'Ride',
+  name: 'Attraction',
   props: {
     activity: {
       type: Object,
