@@ -2,9 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Camels from './views/Camels.vue'
-import Activity from './views/Activities.vue'
+import Activities from './views/Activities.vue'
 import Reservation from './views/Reservations.vue'
 import TicketPrice from './views/TicketPrices.vue'
+import Attraction from './views/ActivityViews/Attraction.vue'
+import Restaurant from './views/ActivityViews/Restaurant.vue'
+import Game from './views/ActivityViews/Game.vue'
 
 Vue.use(Router)
 
@@ -25,7 +28,25 @@ export default new Router({
     {
       path: '/activities',
       name: 'activities',
-      component: Activity
+      component: Activities
+    },
+    {
+      path: '/activities/attractions/:id',
+      name: 'attractions',
+      component: Attraction,
+      props: true
+    },
+    {
+      path: '/activities/restaurants/:id',
+      name: 'restaurants',
+      component: Restaurant,
+      props: true
+    },
+    {
+      path: '/activities/games/:id',
+      name: 'games',
+      component: Game,
+      props: true
     },
     {
       path: '/reservations',
