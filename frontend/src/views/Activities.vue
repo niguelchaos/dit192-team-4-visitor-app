@@ -23,7 +23,7 @@
         v-model="currentPage"
         v-on:change="updatePageNum($event)"
         :link-gen="linkGen"
-        :number-of-pages="3"
+        :number-of-pages="totalPages"
         align="fill"
         use-router
         size="md"
@@ -45,7 +45,11 @@ export default {
       currentPage:
         this.$router.currentRoute.query.currentPage === undefined
           ? 1
-          : this.$router.currentRoute.query.currentPage
+          : this.$router.currentRoute.query.currentPage,
+
+      totalAttractions: 0,
+      pageSize: 1,
+      totalPages: 1
     }
   },
   mounted() {
@@ -64,7 +68,15 @@ export default {
         }
       })
         .then(res => {
-          this.attractions = res.data.data
+          this.attractions = res.data.attractions
+
+          // only update number of pages in the beginning
+          // if commented out, will update every time page is clicked but maybe more expensive
+          // if (this.totalAttractions === 0) {
+          this.totalAttractions = res.data.totalAttractions
+          this.pageSize = res.data.pageSize
+          this.totalPages = Math.ceil(this.totalAttractions / this.pageSize)
+          // }
         })
         // || [] }).bind(this)
         .catch(err => {
