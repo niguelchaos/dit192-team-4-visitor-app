@@ -32,13 +32,13 @@ export default new Router({
     },
     {
       path: '/activities/attractions/:id',
-      name: 'attraction',
+      name: 'attractions',
       component: Attraction,
       props: true
     },
     {
       path: '/activities/restaurants/:id',
-      name: 'restaurant',
+      name: 'restaurants',
       component: Restaurant,
       props: true
     },

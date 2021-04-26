@@ -2,7 +2,7 @@
   <div>
     <b-link
       :to="{
-        name: 'activity',
+        name: type,
         params: { id: activity._id, activity: activity }
       }"
     >
@@ -42,7 +42,7 @@
 // this stupid camel case props thing i dont get it
 export default {
   name: 'activity-card-item',
-  props: ['activity']
+  props: ['activity', 'type']
 }
 </script>
 

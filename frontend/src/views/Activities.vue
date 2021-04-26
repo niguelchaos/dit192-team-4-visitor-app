@@ -11,7 +11,7 @@
     <b-container class="card-main-div">
       <b-row>
         <b-col class="card-main-col" v-for="a in attractions" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
-          <activity-card :activity="a"></activity-card>
+          <activity-card :activity="a" :type="'attractions'"></activity-card>
           <!-- idk why this works -->
         </b-col>
       </b-row>
