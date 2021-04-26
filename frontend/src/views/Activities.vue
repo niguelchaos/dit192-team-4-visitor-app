@@ -8,14 +8,16 @@
     <!-- drop box -->
     <!-- filter container -->
     <!-- scrollable container -->
-    <div class="card-main-div">
-      <div class="card-main-col" v-for="a in attractions" v-bind:key="a.id">
-        <activity-card :activity="a"></activity-card>
-        <!-- idk why this works -->
-      </div>
-    </div>
+    <b-container class="card-main-div">
+      <b-row>
+        <b-col class="card-main-col" v-for="a in attractions" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
+          <activity-card :activity="a"></activity-card>
+          <!-- idk why this works -->
+        </b-col>
+      </b-row>
+    </b-container>
     <!-- Pagination -->
-    <div class="page-bar-div overflow-auto rounded mt-3">
+    <div class="page-bar-div overflow-auto mt-3">
       <!-- on change updates when user clicks, linkgen updates path -->
       <b-pagination-nav
         v-model="currentPage"
@@ -96,8 +98,8 @@ export default {
 .card-main-div {
   margin: 0%;
   padding: 0%;
-  position: relative;
   overflow-y: scroll;
+  position: relative;
   flex: 1;
 }
 .card-main-col {

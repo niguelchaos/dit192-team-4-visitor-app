@@ -7,7 +7,7 @@
       }"
     >
       <b-card
-        class="act-card overflow-hidden rounded text-left"
+        class="act-card overflow-hidden text-left"
         img-right
         no-body
       >
@@ -16,7 +16,7 @@
             :src="activity.img"
             alt="Image"
             height="90"
-            class="card-image rounded-3"
+            class="card-image"
           ></b-card-img>
         </b-col>
 
@@ -48,14 +48,18 @@ export default {
 
 <style scoped>
 .act-card {
-  padding: 5%;
-  margin: 3%;
+   padding: 5%;
+   margin: 3%;
+   border-radius: 15px;
 }
 .card-text-col {
   color: #2d3e4f;
   padding: 1%;
   padding-right: 3%;
   margin: 0%;
+}
+.card-image {
+   border-radius: 15px;
 }
 .card-title {
   padding-top: 15%;
