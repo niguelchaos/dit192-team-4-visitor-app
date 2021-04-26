@@ -6,7 +6,9 @@
     "status": "Open",
     "latitude": 57.695886,
     "longitude": 11.991146,
-    "queueTime": "10 minutes"
+    "queueTime": "10 minutes",
+    "type": "fast",
+    "img": "https://www.verywellfamily.com/thmb/8QHDzEB3vTVO93LfH009qQASU5Y=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/roller-coaster-149508746-57ac7eb45f9b58974ace1b67.jpg"
   },
   {
     "name": "Ride of Doom",
@@ -15,7 +17,9 @@
     "status": "Open",
     "latitude": 57.693369,
     "longitude": 11.992690,
-    "queueTime": "1 minute"
+    "queueTime": "1 minute",
+    "type": "family",
+    "img": "https://steamuserimages-a.akamaihd.net/ugc/245839072336144814/A9876FE9F87EF510212C370BE7CFBC4951A484B0/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
   },
   {
     "name": "Happily Ever After",
@@ -24,7 +28,9 @@
     "status": "Open",
     "latitude": 57.694745,
     "longitude": 11.994666,
-    "queueTime": "30 seconds"
+    "queueTime": "30 seconds",
+    "type": "fast",
+    "img": "https://www.itskona.com/wp-content/uploads/rollercoaster.jpg"
   },
   {
     "name": "The Sky Screamer",
@@ -33,6 +39,8 @@
     "status": "Open",
     "latitude": 57.695273,
     "longitude": 11.990801,
-    "queueTime": "5 minutes"
+    "queueTime": "5 minutes",
+    "type": "fast",
+    "img": "https://i2.wp.com/dahlstroms.com/wp-content/uploads/2013/12/rollercoaster-ride.jpg?fit=770%2C513&ssl=1"
   }
 ]

@@ -1,8 +1,8 @@
 <template>
   <div class="nav-wrapper">
-    <b-button to="/" class="nav-btn shadow-none">Home </b-button>
-    <b-button to="/activities" class="nav-btn shadow-none">Activities</b-button>
-    <b-button to="/reservations" class="nav-btn shadow-none"
+    <b-button :to="{path: '/'}" exact class="nav-btn shadow-none">Home </b-button>
+    <b-button :to="{path: '/activities'}" class="nav-btn shadow-none">Activities</b-button>
+    <b-button :to="{path: '/reservations'}" class="nav-btn shadow-none"
       >Reservations</b-button
     >
     <b-button to="/ticketprices" class="nav-btn shadow-none">Tickets</b-button>
@@ -37,7 +37,7 @@ export default {
 .nav-btn:hover,
 .nav-btn:focus,
 .nav-btn:active,
-a.router-link-exact-active {
+a.router-link-active {
   background: var(--color-pink-dark) !important;
 }
 </style>
