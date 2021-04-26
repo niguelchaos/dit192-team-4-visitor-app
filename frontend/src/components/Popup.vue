@@ -23,7 +23,7 @@
           </b-col>
         </b-col>
         <b-col class="linkCol" cols=6>
-          <a href="/activities" id="goToActivity">Go to this activity</a>
+          <a href="activities/" id="goToActivity">Go to this activity</a>
         </b-col>
       </b-row>
     </b-container>
@@ -37,7 +37,8 @@ export default {
     title: String,
     description: String,
     status: String,
-    queueTime: String
+    queueTime: String,
+    id: String
   }
 }
 </script>

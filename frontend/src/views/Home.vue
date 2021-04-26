@@ -24,10 +24,10 @@
       </b-row>
       <b-row>
         <b-col>
-          <div class="map">
+          <div class="map" v-for="a in attractions" :key="a.id">
             <h4>Map over the park</h4>
             <!-- <img class="map_img" src="../assets/Map.jpeg" alt="map" /> -->
-            <map-component></map-component>
+            <map-component :content="attractions" />
           </div>
         </b-col>
       </b-row>
@@ -53,11 +53,13 @@ export default {
   name: 'home',
   data() {
     return {
-      message: ''
+      message: '',
+      attractions: []
     }
   },
   mounted() {
     this.getMessage()
+    this.getAttractions()
   },
   methods: {
     getMessage() {
@@ -67,6 +69,16 @@ export default {
         })
         .catch(error => {
           this.message = error
+        })
+    },
+    getAttractions() {
+      Api.get('/attractions')
+        .then(res => {
+          this.attractions = res.data.data || []
+        })
+        // .bind(this)
+        .catch(err => {
+          console.log(err)
         })
     }
   }
