@@ -1,16 +1,15 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-const AttractionSchema = new Schema({
+const GameSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String },
   price: { type: Number },
   status: { type: String },
-  type: { type: String, enum: ["fast", "family", "water"] },
   img: { type: String },
   image: { data: Buffer, contentType: String }
 });
 
-const Attraction = mongoose.model("attractions", AttractionSchema);
+const Game = mongoose.model("games", GameSchema);
 
-module.exports = Attraction;
+module.exports = Game;
