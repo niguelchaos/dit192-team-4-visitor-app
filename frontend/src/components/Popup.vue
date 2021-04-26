@@ -1,15 +1,15 @@
 <template>
   <div>
-    <b-container fluid>
+    <b-container fluid class="m-auto">
       <b-row class="title">
-        <h4>{{title}}</h4>
+        <h5>{{title}}</h5>
       </b-row>
       <b-row class="description">
         {{description}}
       </b-row>
       <b-row class="status">
         <!-- Status col -->
-        <b-col class="statusCol" cols=4>
+        <b-col class="statusCol" cols=3>
           <b-col>Status:</b-col>
           <b-col><span :class="{green: status === 'Open', red: status === 'Closed'}">{{status}}</span></b-col>
         </b-col>
@@ -23,7 +23,12 @@
           </b-col>
         </b-col>
         <b-col class="linkCol" cols=6>
-          <a href="activities/" id="goToActivity">Go to this activity</a>
+          <b-link :to="{
+              name: type,
+              params: { id: activity._id, activity: activity }
+            }"
+            id="goToActivity"
+          >Go to this activity</b-link>
         </b-col>
       </b-row>
     </b-container>
@@ -33,13 +38,7 @@
 <script>
 export default {
   name: 'PopupComponent',
-  props: {
-    title: String,
-    description: String,
-    status: String,
-    queueTime: String,
-    id: String
-  }
+  props: ['title', 'description', 'status', 'queueTime', 'type', 'activity']
 }
 </script>
 
@@ -60,9 +59,18 @@ export default {
   margin-right:-3em;
 }
 .linkCol {
-  margin-right: -10em;
+  margin-right: -12em;
 }
 #goToActivity {
   color: var(--color-green);
+}
+.title {
+  margin-bottom: 0em;
+  margin-right: 0em;
+  margin-left: 0em;
+}
+.description {
+  margin-right: 0em;
+  margin-left: 0em;
 }
 </style>

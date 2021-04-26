@@ -1,10 +1,3 @@
-<!--
-  * Make two different components
-    - One for the actual map
-    - One for the markers and popup
-  So v-for can work as expected
--->
-
 <template>
   <div class="map">
     <!-- Map part with a map around everything -->
@@ -24,7 +17,7 @@
         <l-marker :lat-lng="[c.latitude, c.longitude]" >
         <l-popup>
           <!-- Popup component -->
-          <Popup :title="c.name" :description="c.description" :status="c.status" :queueTime="c.queueTime" :id="c.id"></Popup>
+          <Popup :title="c.name" :description="c.description" :status="c.status" :queueTime="c.queueTime" :id="c.id" :activity="c" :type="'attractions'"></Popup>
         </l-popup>
       </l-marker>
       </div>
@@ -49,9 +42,7 @@ L.Icon.Default.mergeOptions({
 export default {
   components: { LMap, LTileLayer, LPolygon, LMarker, LPopup, Popup },
   name: 'MapComponent',
-  props: {
-    content: Array
-  },
+  props: ['content'],
   data() {
     return {
       // Url for the map API
