@@ -11,6 +11,9 @@ const db_env = require('dotenv').config({ path: '../db/.env'});
 
 var camelsController = require('./controllers/controller');
 var attractionsRoutes = require('./routes/attraction.route');
+var restaurantsRoutes = require('./routes/restaurant.route');
+var gamesRoutes = require('./routes/game.route');
+
 
 var mongoURI = process.env.MONGODB_URI || 
     `mongodb://localhost:${db_env.parsed.MONGO_PORT}/${db_env.parsed.MONGO_DATABASE}`;
@@ -42,6 +45,9 @@ app.get('/api', function(req, res) {
 });
 app.use('/api/camels', camelsController);
 app.use('/api', attractionsRoutes);
+app.use('/api', restaurantsRoutes);
+app.use('/api', gamesRoutes);
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
