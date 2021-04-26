@@ -74,6 +74,6 @@ export default {
   color: white;
   padding-top: 30px;
   padding-bottom: 20px;
-  margin-top: 200px;
+  margin-top: 100px;
 }
 </style>
