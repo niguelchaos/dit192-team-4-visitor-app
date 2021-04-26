@@ -24,22 +24,22 @@
           <b-col>
              <ul class="filter-group__list"></ul>
              <b-button pill to= "/ticketsprices/entrance" class="btnentrance">Entrance</b-button>
-             <b-button pill to="/ticketprices/singleticket" class="btnST">Single Ticket</b-button>
+             <b-button pill to="/ticketsprices/singleticket" class="btnST">Single Ticket</b-button>
              <br>
-             <b-button pill to="/ticketprices/Bundle Ticket" class="btnBT">Bundle Ticket</b-button>
-             <b-button pill to="/ticketprices/Full Package" class="btnFP">Full Package</b-button>
+             <b-button pill to="/ticketsprices/BundleTicket" class="btnBT">Bundle Ticket</b-button>
+             <b-button pill to="/ticketsprices/FullPackage" class="btnFP">Full Package</b-button>
           </b-col>
         </b-row>
         <b-row class="footer">
         <b-col>
-              <h2 class="footer-container__heading">BEFORE YOUR VISIT</h2>
-				         <p>Opening hours</p>
-                 <p>Activities in Dummy park</p>
-                 <p>Find us</p>
-                 <p>Food & Beverages</p>
-                 <p>Accomodation</p>
-      </b-col>
-      </b-row>
+          <h2 class="footer-container__heading">BEFORE YOUR VISIT</h2>
+				  <p>Opening hours</p>
+          <p>Activities in Dummy park</p>
+          <p>Find us</p>
+          <p>Food & Beverages</p>
+          <p>Accomodation</p>
+        </b-col>
+        </b-row>
   </div>
 </template>
 
