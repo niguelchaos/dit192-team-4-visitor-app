@@ -24,7 +24,7 @@
           <b-col>
              <ul class="filter-group__list"></ul>
              <b-button pill to= "/ticketsprices/entrance" class="btnentrance">Entrance</b-button>
-             <b-button pill to="/ticketprices/Single Ticket" class="btnST">Single Ticket</b-button>
+             <b-button pill to="/ticketprices/singleticket" class="btnST">Single Ticket</b-button>
              <br>
              <b-button pill to="/ticketprices/Bundle Ticket" class="btnBT">Bundle Ticket</b-button>
              <b-button pill to="/ticketprices/Full Package" class="btnFP">Full Package</b-button>
