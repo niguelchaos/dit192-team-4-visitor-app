@@ -24,7 +24,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <div class="map" v-for="a in attractions" :key="a.id">
+          <div class="map">
             <h4>Map over the park</h4>
             <!-- <img class="map_img" src="../assets/Map.jpeg" alt="map" /> -->
             <map-component :content="attractions" />
