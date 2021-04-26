@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var RestaurantController = require('../controllers/Restaurant.controller');
+var RestaurantController = require('../controllers/restaurant.controller');
 
 router.post('/restaurants', RestaurantController.saveRestaurant);
 router.get('/restaurants', RestaurantController.getRestaurants);
