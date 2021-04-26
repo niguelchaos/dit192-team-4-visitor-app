@@ -10,7 +10,7 @@
           <div class="activity_card">
             <h5 class="title">{{ activity.name }}</h5>
             <p><strong>Status: </strong>{{ activity.status }}</p>
-            <p><strong>Price: </strong>{{ activity.price }} kr</p>
+            <p><strong>Price: </strong>{{ activity.price }} kr to play.</p>
           </div>
           <div class="activity_card">
             <p>{{ activity.description }}</p>
@@ -25,12 +25,27 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
 export default {
-  name: 'Activity',
+  name: 'Game',
   props: {
     activity: {
       type: Object,
-      required: false // User can accept a userData object on params, or not. It's totally optional.
+      required: false
+    }
+  },
+  created() {
+    // get the id from the url path
+    const id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
+    // activity object is not passed with props (i.e page is reloaded) => fetch the activity again
+    if (!this.activity) {
+      Api.get('games/' + id)
+        .then(res => {
+          this.activity = res.data.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
