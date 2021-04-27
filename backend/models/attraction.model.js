@@ -8,7 +8,11 @@ const AttractionSchema = new Schema({
   status: { type: String },
   type: { type: String, enum: ["fast", "family", "water"] },
   img: { type: String },
-  image: { data: Buffer, contentType: String }
+  image: { data: Buffer, contentType: String },
+  latitude: { type: Number },
+  longitude: { type: Number },
+  queueTime: { type: String }
+  
 });
 
 const Attraction = mongoose.model("attractions", AttractionSchema);
