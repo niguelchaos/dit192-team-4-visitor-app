@@ -213,6 +213,7 @@ export default {
   height: 49px;
   padding-left: 20px;
   padding-right: 20px;
+  color: black;
 }
 
 .msc-filter {
