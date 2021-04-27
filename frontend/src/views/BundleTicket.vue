@@ -13,23 +13,22 @@
             <p><strong>Small bundle:</strong> 1 large ride, 1 family ride, 1 water ride, 2 arcade games</p>
             <p><strong>Arcade bundle:</strong> 10 arcade games</p>
 
-
           <div>
-            <b-dropdown id="dropdown-1" text="Bundle type" class="btnBundle">
-            <b-dropdown-item>Big bundle</b-dropdown-item>
-            <b-dropdown-item>Small bundle</b-dropdown-item>
-            <b-dropdown-item>Arcade bundle</b-dropdown-item>
-            </b-dropdown>
+            <select> id="dropdown-1"
+              <option>Bundle type</option>
+              <option>Big Bundle</option>
+              <option>Small Bundle</option>
+              <option>Arcade Bundle</option>
+            </select>
+            <br />
+            <select> id="dropdown-2"
+              <option>-Age-</option>
+              <option>0-2 years, Free</option>
+              <option>2-7 years, 180 SEK</option>
+              <option>8 years+ 220 SEK</option>
+            </select>
           </div>
-          <br />
-          <div>
-            <b-dropdown id="dropdown-2" text="Age" class="btnAge">
-            <b-dropdown-item>0-2 years, Free</b-dropdown-item>
-            <b-dropdown-item>2-7 years, 180 SEK</b-dropdown-item>
-            <b-dropdown-item>8 years+, 220 SEK</b-dropdown-item>
-            </b-dropdown>
-          </div>
-          <b-button pill to="/Bundle Ticket/Book" class="btnBK">Book</b-button>
+          <b-button pill to="/bundleticket/book" class="btnBK">Book</b-button>
         </b-col>
       </b-row>
     </b-container>
@@ -37,15 +36,6 @@
 </template>
 
 <style>
-.btnbundle {
-  background-color: white !important;
-  border: 10px;
-  border: #edadc7 !important;
-  color: #004e64 !important;
-  width: 93px;
-  height: 24px;
-  left: 119px;
-}
 .btnBK {
   background-color: #388659 !important;
   color: #004e64;

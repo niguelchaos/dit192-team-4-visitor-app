@@ -43,7 +43,7 @@ form {
 
 /* Full-width inputs */
 input[type=text], input[type=password] {
-  width: 30%;
+  width: 55%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -59,7 +59,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 45%;
+  width: 80%;
 }
 
 /* Add a hover effect for buttons */

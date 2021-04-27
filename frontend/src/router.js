@@ -37,6 +37,16 @@ export default new Router({
       component: Book
     },
     {
+      path: '/singleticket/book',
+      name: 'book',
+      component: Book
+    },
+    {
+      path: '/bundleticket/book',
+      name: 'book',
+      component: Book
+    },
+    {
       path: '/fullpackage/registerandbook',
       name: 'registerandbook',
       component: Signin
