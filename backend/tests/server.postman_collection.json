@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "510bde5e-287b-4ebf-b519-c5584ae1d959",
+		"_postman_id": "882ab74f-390b-43c3-a635-146c8a638fcf",
 		"name": "DIT192",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -245,7 +245,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"The Loophole Plunge\",\n    \"description\": \"The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!\",\n    \"price\": 45,\n    \"status\": \"open\"\n}",
+					"raw": "{\n    \"name\": \"The Loophole Plunge\",\n    \"description\": \"The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!\",\n    \"price\": 45,\n    \"status\": \"open\",\n    \"latitude\": 57.695886,\n    \"logitude\": 11.991146,\n    \"queueTime\": \"10 minutes\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -366,7 +366,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\"\n}",
+					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\",\n    \"latitude\": \"Updated latitude\",\n    \"longitude\": \"Updated longitude\",\n    \"queueTime\": \"Updated queueTime\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -556,17 +556,17 @@
 	],
 	"variable": [
 		{
-			"id": "83d2f333-b8ad-4d34-928f-d50a96ca34cb",
+			"id": "9b994a8f-dc75-4a03-b078-91ff08b94c8a",
 			"key": "host",
 			"value": "http://localhost:3000"
 		},
 		{
-			"id": "8203e947-9df7-4a8b-9215-bb4a66d968b2",
+			"id": "12255588-c9f6-4468-80ff-a2479653d5df",
 			"key": "attraction_id",
 			"value": ""
 		},
 		{
-			"id": "0089e0bf-a35e-46dc-b408-96543008757a",
+			"id": "8ffe9bc9-638b-4f67-857e-6dacdd48bced",
 			"key": "camel_id",
 			"value": ""
 		}
