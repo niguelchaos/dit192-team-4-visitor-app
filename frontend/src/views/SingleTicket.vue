@@ -27,8 +27,8 @@
             <b-dropdown-item>2-7 years, 100 SEK</b-dropdown-item>
             <b-dropdown-item>8 years+, 180 SEK</b-dropdown-item>
             </b-dropdown>
+            <b-button pill to="/singleticket/Book" class="btnBK">Book</b-button>
           </div>
-          <b-button pill to="/Single Ticket/Book" class="btnBK">Book</b-button>
         </b-col>
       </b-row>
     </b-container>
@@ -37,7 +37,7 @@
 
 <style>
 .btnactivity {
-  background-color: white !important;
+  background-color: white;
   border: 10px;
   border: #edadc7 !important;
   color: #004e64 !important;
@@ -49,7 +49,7 @@
   background-color: #388659 !important;
   color: #004e64;
   border: 10px;
-  padding: 80px;
+  padding: 50px;
   margin: 50px;
   width: 120px;
   height: 45px;
