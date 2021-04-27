@@ -7,6 +7,7 @@ import Reservation from './views/Reservations.vue'
 import TicketPrice from './views/TicketPrices.vue'
 import Entrance from './views/Entrance.vue'
 import SingleTicket from './views/SingleTicket.vue'
+import BundleTicket from './views/BundleTicket.vue'
 import Book from './views/Book.vue'
 import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
@@ -70,6 +71,11 @@ export default new Router({
       path: '/ticketsprices/singleticket',
       name: 'singleticket',
       component: SingleTicket
+    },
+    {
+      path: '/ticketsprices/bundleticket',
+      name: 'bundleticket',
+      component: BundleTicket
     },
     {
       path: '/ticketprices',
