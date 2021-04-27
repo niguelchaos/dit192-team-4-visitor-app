@@ -10,6 +10,7 @@ import SingleTicket from './views/SingleTicket.vue'
 import BundleTicket from './views/BundleTicket.vue'
 import FullPackage from './views/FullPackage.vue'
 import Book from './views/Book.vue'
+import Signin from './views/Signin.vue'
 import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
@@ -34,6 +35,11 @@ export default new Router({
       path: '/entrance/book',
       name: 'book',
       component: Book
+    },
+    {
+      path: '/fullpackage/registerandbook',
+      name: 'registerandbook',
+      component: Signin
     },
     {
       path: '/ticketprices/entrance',

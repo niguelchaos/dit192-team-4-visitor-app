@@ -22,11 +22,11 @@
     <b-row>
       <b-col>
         <ul class="filter-group__list"></ul>
-        <b-button pill to= "/ticketsprices/entrance" class="btnentrance">Entrance</b-button>
-        <b-button pill to="/ticketsprices/singleticket" class="btnST">Single Ticket</b-button>
+        <b-button pill to= "/ticketprices/entrance" class="btnentrance">Entrance</b-button>
+        <b-button pill to="/ticketprices/singleticket" class="btnST">Single Ticket</b-button>
         <br />
-        <b-button pill to="/ticketsprices/BundleTicket" class="btnBT">Bundle Ticket</b-button>
-        <b-button pill to="/ticketsprices/FullPackage" class="btnFP">Full Package</b-button>
+        <b-button pill to="/ticketprices/bundleticket" class="btnBT">Bundle Ticket</b-button>
+        <b-button pill to="/ticketprices/fullpackage" class="btnFP">Full Package</b-button>
       </b-col>
     </b-row>
     <b-row class="footer">
