@@ -4,17 +4,17 @@ var Attraction = require('../models/attraction.model')
 exports.getAttractions = async function (req, res, next) {
     var query = req.params.query ? req.params.query : {};
     var pageskip =  (req.query.page ? req.query.page : 1) - 1;
-    var limit = req.params.limit ? req.params.limit : 5;
+    var limit = req.query.limit ? req.query.limit : 2;
     var totalAttractions = 0;
 
     Attraction.count({}, function(err, numOfAttractions) {
         if (err) { return next(err); }
         totalAttractions = numOfAttractions;
-
+        // console.log(totalAttractions);
         // putting find in count ensures count() is executed first before find
         Attraction.find(query, function(err, attractions) {
             if (err) { return next(err); }
-            res.status(200).json({ status: 200, attractions: attractions, totalAttractions: totalAttractions, pageSize: limit, message: 'Successfully retrieved the attractions.' });
+            res.status(200).json({ status: 200, data: attractions, totalAttractions: totalAttractions, message: 'Successfully retrieved the attractions.' });
         })
         .skip(pageskip * limit)
         .limit(limit);
@@ -62,7 +62,10 @@ exports.updateAttraction = async function (req, res, next) {
         description: req.body.description, 
         price: req.body.price,
         status: req.body.status,
-        image: req.body.image
+        image: req.body.image,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        queueTime: req.body.queueTime
     };
     var unsetParams = [];
     Object.keys(params).forEach(p => { if(params[p] === undefined) unsetParams.push(p)});

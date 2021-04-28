@@ -6,7 +6,7 @@
       >Reservations</b-button
     >
     <b-button to="/ticketprices" class="nav-btn shadow-none">Tickets</b-button>
-  </div>
+   </div>
 </template>
 
 <script>

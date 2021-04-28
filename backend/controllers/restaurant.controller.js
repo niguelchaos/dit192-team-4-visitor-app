@@ -4,17 +4,20 @@ var Restaurant = require('../models/restaurant.model')
 exports.getRestaurants = async function (req, res, next) {
     var query = req.params.query ? req.params.query : {};
     var pageskip =  (req.query.page ? req.query.page : 1) - 1;
-    var limit = req.params.limit ? req.params.limit : 4;
-    var restaurantCount = Restaurant.count();
-
-    console.log(pageskip * limit);
+    var limit = req.params.limit ? req.params.limit : 2;
+    var totalRestaurants = 0;
     
-    Restaurant.find(query, function(err, restaurants) {
+    Restaurant.count({}, function(err, numOfRestaurants) {
         if (err) { return next(err); }
-        res.status(200).json({ status: 200, data: restaurants, message: 'Successfully retrieved the restaurants.' });
+        totalRestaurants = numOfRestaurants;
+
+        Restaurant.find(query, function(err, restaurants) {
+            if (err) { return next(err); }
+            res.status(200).json({ status: 200, data: restaurants, totalRestaurants: totalRestaurants, message: 'Successfully retrieved the restaurants.' });
+        })
+        .skip(pageskip * limit)
+        .limit(limit);
     })
-    .skip(pageskip * limit)
-    .limit(limit);
 }
 
 // GET method
