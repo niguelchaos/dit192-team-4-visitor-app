@@ -58,7 +58,10 @@ exports.updateAttraction = async function (req, res, next) {
         description: req.body.description, 
         price: req.body.price,
         status: req.body.status,
-        image: req.body.image
+        image: req.body.image,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        queueTime: req.body.queueTime
     };
     var unsetParams = [];
     Object.keys(params).forEach(p => { if(params[p] === undefined) unsetParams.push(p)});

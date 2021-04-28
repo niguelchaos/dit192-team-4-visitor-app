@@ -3,9 +3,10 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">
+          <Logo></Logo>
+          <!-- <div class="logo">
             <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div>
+          </div> -->
         </b-col>
       </b-row>
       <b-row>
@@ -19,6 +20,15 @@
         <b-col>
           In this app you can book tickets, find our rides and see your
           reservations. Welcome!
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <div class="map">
+            <h4>Map over the park</h4>
+            <!-- <img class="map_img" src="../assets/Map.jpeg" alt="map" /> -->
+            <map-component :content="attractions" />
+          </div>
         </b-col>
       </b-row>
       <b-row class="footer">
@@ -35,16 +45,21 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import Logo from '../components/Logo.vue'
+import MapComponent from '../components/Map.vue'
 
 export default {
+  components: { Logo, MapComponent },
   name: 'home',
   data() {
     return {
-      message: ''
+      message: '',
+      attractions: []
     }
   },
   mounted() {
     this.getMessage()
+    this.getAttractions()
   },
   methods: {
     getMessage() {
@@ -55,25 +70,47 @@ export default {
         .catch(error => {
           this.message = error
         })
+    },
+    getAttractions() {
+      Api.get('/attractions')
+        .then(res => {
+          this.attractions = res.data.data || []
+        })
+        // .bind(this)
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
 </script>
 
 <style>
-.logo {
-  height: 100px;
-  margin-bottom: 50px;
-  margin-top: 20px;
-}
-.title {
-  margin-bottom: 20px;
-}
-.footer {
-  background: var(--color-green);
-  color: white;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  margin-top: 100px;
-}
+  .logo {
+    height: 100px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .footer {
+    background: var(--color-green);
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-top: 100px;
+  }
+
+  .map {
+    margin-top: 50px;
+  }
+
+  .map_img {
+    height: 500px;
+    margin-top: 10px;
+  }
+
 </style>
