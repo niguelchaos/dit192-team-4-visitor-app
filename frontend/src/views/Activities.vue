@@ -55,14 +55,13 @@ export default {
     return {
       activities: [],
       attractions: [],
+      restaurants: [],
       categories: [
         { type: 'All', state: true },
         { type: 'Attractions', state: false },
         { type: 'Games', state: false },
         { type: 'Restaurants', state: false }
       ],
-      restaurants: [],
-
       currentCategory: null,
 
       // TODO: Split filtering panel into a separate component
@@ -85,18 +84,10 @@ export default {
       totalGames: 0,
       totalRestaurants: 0,
       totalActivities: 0,
-      pageSize: 1,
+      pageSize: 6,
+      activityLimit: 6,
       totalPages: 3
     }
-  },
-  computed: {
-    // totPages: function () {
-    //   var totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
-    //   var pageSize = 6
-    //   var totalPages = Math.ceil(totalActivities / pageSize)
-    //   // console.log(totalPages)
-    //   return totalPages
-    // }
   },
   beforeMount() {
   },
@@ -105,8 +96,6 @@ export default {
     // updatePageNum already executes getActivities
     this.linkGen(this.currentPage)
     this.updatePageNum(this.currentPage)
-    // this.currentCategory = this.categories[0]
-    // console.log(this.currentCategory.type)
   },
   beforeUpdate() {
   },
@@ -122,7 +111,7 @@ export default {
       this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
     },
     totalActivities() {
-      this.getTotalPages()
+      this.getTotalPages() // only needed for beginning - dunno how else to do it
     }
   },
   methods: {
@@ -136,7 +125,6 @@ export default {
 
       this.activities = []
       this.currentCategory = filter
-      console.log(this.currentCategory.type)
 
       switch (filter.type.toLowerCase()) {
         case 'all':
@@ -158,19 +146,21 @@ export default {
 
       // get correct activities
       this.updatePageNum(1)
-      // this.getTotalPages()
+      this.getTotalPages()
     },
 
     getActivities() {
       this.getAttractions()
       this.getGames()
       this.getRestaurants()
+      console.log('getactive called')
     },
 
     getAttractions() {
       Api.get('attractions', {
         params: {
-          page: this.currentPage
+          page: this.currentPage,
+          limit: this.activityLimit
         }
       })
         .then(res => {
@@ -189,7 +179,8 @@ export default {
     getGames() {
       Api.get('games', {
         params: {
-          page: this.currentPage
+          page: this.currentPage,
+          limit: this.activityLimit
         }
       })
         .then(res => {
@@ -208,7 +199,8 @@ export default {
     getRestaurants() {
       Api.get('restaurants', {
         params: {
-          page: this.currentPage
+          page: this.currentPage,
+          limit: this.activityLimit
         }
       })
         .then(res => {
@@ -242,6 +234,16 @@ export default {
       }
 
       // console.log(this.currentCategory.type)
+      if (this.currentCategory.type.toLowerCase() === 'all') {
+        this.activityLimit = 2
+        this.pageSize = 6
+      } else {
+        this.activityLimit = 3
+        this.pageSize = 3
+      }
+
+      console.log('pagenum get: ' + this.currentCategory.type)
+
       switch (this.currentCategory.type.toLowerCase()) {
         case 'all':
           this.getActivities()
@@ -266,16 +268,12 @@ export default {
     },
 
     getTotalPages() {
-      this.pageSize = 6
-
-      console.log(this.currentCategory.type)
       switch (this.currentCategory.type.toLowerCase()) {
         case 'all':
           this.totalPages = Math.ceil(this.totalActivities / this.pageSize)
           break
         case 'attractions':
           this.totalPages = Math.ceil(this.totalAttractions / this.pageSize)
-          console.log(this.totalPages + ' for attractions')
           break
         case 'games':
           this.totalPages = Math.ceil(this.totalGames / this.pageSize)
@@ -284,7 +282,6 @@ export default {
           this.totalPages = Math.ceil(this.totalRestaurants / this.pageSize)
           break
       }
-      console.log(this.totalPages)
     }
 
   }
