@@ -101,8 +101,7 @@ export default {
     this.linkGen(this.currentPage)
     this.updatePageNum(this.currentPage)
   },
-  beforeUpdate() {
-  },
+  beforeUpdate() {},
   updated() {},
   watch: {
     totalAttractions() {
@@ -230,7 +229,7 @@ export default {
       for (const i in source) {
         this.activities.push({ type: category, data: source[i] })
       }
-      // console.log('activities:' + this.activities.length + ' == category: ' + category)
+      console.log('activities:' + this.activities.length + ' == category: ' + category)
     },
 
     changePage(pageNum) {
@@ -259,16 +258,17 @@ export default {
       if (this.currentCategory === null) {
         console.log('currentcat null, defaulting to all')
         this.currentCategory = this.categories[0]
+        this.activityLimit = 2
+        this.pageSize = 6
         // this.prevFilter = this.categories[1]
       }
 
       // console.log(this.currentCategory.type)
 
-      // console.log('pagenum get: ' + this.currentCategory.type)
-      // console.log('-- prev page: ' + this.prevPage + '  ' + this.prevFilter.type + ' === page: ' + this.currentPage + '  ' + this.currentCategory.type)
+      console.log('pagenum get: ' + this.currentCategory.type)
+      console.log(' === page: ' + this.currentPage + '  ' + this.currentCategory.type)
 
       if (this.currentPage > this.totalPages) {
-        console.log('go back')
         this.currentPage = 1
         this.$router.replace({ query: { currentPage: this.currentPage } })
         // this.changePage(this.currentPage)
