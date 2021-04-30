@@ -38,7 +38,7 @@
         v-on:change="changePage($event)"
         :link-gen="linkGen"
         :number-of-pages="totalPages"
-        align="fill"
+        align="center"
         use-router
         size="md"
       ></b-pagination-nav>
@@ -88,6 +88,7 @@ export default {
       activityLimit: 6,
       totalPages: 3,
       // ima kill myself with this workaround - not a good solution
+      // maybe not needed anymore
       prevPage: 1,
       prevFilter: null
     }
@@ -116,9 +117,13 @@ export default {
     totalActivities() {
       this.getTotalPages() // only needed for beginning - dunno how else to do it
     },
-    currentCategory() {
-      // this.updatePageNum(1)
-      // this.getTotalPages()
+    totalPages() {
+      if (this.currentPage > this.totalPages) {
+        console.log('go back')
+        this.currentPage = 1
+        this.$router.replace({ query: { currentPage: this.currentPage } })
+        this.changePage(this.currentPage)
+      }
     }
   },
   methods: {
@@ -166,7 +171,6 @@ export default {
       this.getAttractions()
       this.getGames()
       this.getRestaurants()
-      // console.log('getactive called')
     },
 
     getAttractions() {
@@ -274,8 +278,7 @@ export default {
         this.pageSize = 3
       }
       // console.log('pagenum get: ' + this.currentCategory.type)
-      console.log('-- prev page: ' + this.prevPage + '  ' + this.prevFilter.type)
-      console.log(' === page: ' + this.currentPage + '  ' + this.currentCategory.type)
+      console.log('-- prev page: ' + this.prevPage + '  ' + this.prevFilter.type + ' === page: ' + this.currentPage + '  ' + this.currentCategory.type)
 
       // if (this.prevPage === this.currentPage && this.prevFilter.type === this.currentCategory.type) {
       //   console.log(' wah')
@@ -302,7 +305,8 @@ export default {
     linkGen(pageNum) {
       return {
         // vmodel already takes care of path additions, but this needed for correct path
-        query: { currentPage: pageNum }
+        query: { currentPage: pageNum },
+        path: './activities'
       }
     },
 
