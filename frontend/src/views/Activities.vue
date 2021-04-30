@@ -86,11 +86,11 @@ export default {
       totalActivities: 0,
       pageSize: 6,
       activityLimit: 6,
-      totalPages: 3,
+      totalPages: 3
       // ima kill myself with this workaround - not a good solution
       // maybe not needed anymore
-      prevPage: 1,
-      prevFilter: null
+      // prevPage: 1,
+      // prevFilter: null
     }
   },
   beforeMount() {
@@ -116,14 +116,6 @@ export default {
     },
     totalActivities() {
       this.getTotalPages() // only needed for beginning - dunno how else to do it
-    },
-    totalPages() {
-      if (this.currentPage > this.totalPages) {
-        console.log('go back')
-        this.currentPage = 1
-        this.$router.replace({ query: { currentPage: this.currentPage } })
-        this.changePage(this.currentPage)
-      }
     }
   },
   methods: {
@@ -136,7 +128,7 @@ export default {
       }
 
       this.activities = []
-      this.prevFilter = this.currentCategory
+      // this.prevFilter = this.currentCategory
       this.currentCategory = filter
 
       // console.log('filter pop: ' + this.currentCategory.type)
@@ -158,13 +150,14 @@ export default {
       // }
       // this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
 
-      if (this.prevPage === this.currentPage && this.prevFilter.type === this.currentCategory.type) {
-        console.log(' wah 2')
-        return
-      }
+      // if (this.prevPage === this.currentPage && this.prevFilter.type === this.currentCategory.type) {
+      //   console.log(' wah 2')
+      //   // return
+      // }
+
       // get correct activities
-      this.updatePageNum(1)
       this.getTotalPages()
+      this.updatePageNum(this.currentPage)
     },
 
     getActivities() {
@@ -237,21 +230,21 @@ export default {
       for (const i in source) {
         this.activities.push({ type: category, data: source[i] })
       }
-      console.log('activities:' + this.activities.length + ' == category: ' + category)
+      // console.log('activities:' + this.activities.length + ' == category: ' + category)
     },
 
     changePage(pageNum) {
-      this.prevPage = this.currentPage
+      // this.prevPage = this.currentPage
       this.currentPage = pageNum
 
-      if (this.prevPage !== this.currentPage) {
-        this.prevFilter = this.currentCategory
-      }
+      // if (this.prevPage !== this.currentPage) {
+      //   this.prevFilter = this.currentCategory
+      // }
 
-      if (this.prevPage === this.currentPage && this.prevFilter.type === this.currentCategory.type) {
-        console.log(' wah')
-        return
-      }
+      // if (this.prevPage === this.currentPage && this.prevFilter.type === this.currentCategory.type) {
+      //   console.log(' wah')
+      //   // return
+      // }
 
       this.updatePageNum(pageNum)
     },
@@ -266,24 +259,20 @@ export default {
       if (this.currentCategory === null) {
         console.log('currentcat null, defaulting to all')
         this.currentCategory = this.categories[0]
-        this.prevFilter = this.categories[1]
+        // this.prevFilter = this.categories[1]
       }
 
       // console.log(this.currentCategory.type)
-      if (this.currentCategory.type.toLowerCase() === 'all') {
-        this.activityLimit = 2
-        this.pageSize = 6
-      } else {
-        this.activityLimit = 3
-        this.pageSize = 3
-      }
-      // console.log('pagenum get: ' + this.currentCategory.type)
-      console.log('-- prev page: ' + this.prevPage + '  ' + this.prevFilter.type + ' === page: ' + this.currentPage + '  ' + this.currentCategory.type)
 
-      // if (this.prevPage === this.currentPage && this.prevFilter.type === this.currentCategory.type) {
-      //   console.log(' wah')
-      //   return
-      // }
+      // console.log('pagenum get: ' + this.currentCategory.type)
+      // console.log('-- prev page: ' + this.prevPage + '  ' + this.prevFilter.type + ' === page: ' + this.currentPage + '  ' + this.currentCategory.type)
+
+      if (this.currentPage > this.totalPages) {
+        console.log('go back')
+        this.currentPage = 1
+        this.$router.replace({ query: { currentPage: this.currentPage } })
+        // this.changePage(this.currentPage)
+      }
 
       switch (this.currentCategory.type.toLowerCase()) {
         case 'all':
@@ -311,6 +300,14 @@ export default {
     },
 
     getTotalPages() {
+      if (this.currentCategory.type.toLowerCase() === 'all') {
+        this.activityLimit = 2
+        this.pageSize = 6
+      } else {
+        this.activityLimit = 3
+        this.pageSize = 3
+      }
+
       switch (this.currentCategory.type.toLowerCase()) {
         case 'all':
           this.totalPages = Math.ceil(this.totalActivities / this.pageSize)
