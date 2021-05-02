@@ -8,10 +8,10 @@
     <!-- drop box -->
     <b-container>
       <div class="filter-div">
-        <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="filterCards(buttons, i)" :key="i"
+        <b-button style="background-color: white; color:black" class="btn-filter" v-for="(buttons, i) in categories" v-on:click="filterCards(buttons, i)" :key="i"
           :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
         {{ buttons.type }}
-        </button>
+        </b-button>
       </div>
 
       <div>
@@ -80,17 +80,16 @@ export default {
           ? 1
           : this.$router.currentRoute.query.currentPage,
 
+      // used to get number of pages
       totalAttractions: 0,
       totalGames: 0,
       totalRestaurants: 0,
       totalActivities: 0,
       pageSize: 6,
       activityLimit: 6,
-      totalPages: 3
-      // ima kill myself with this workaround - not a good solution
-      // maybe not needed anymore
-      // prevPage: 1,
-      // prevFilter: null
+      totalPages: 3,
+      // used to cancel GET when same category clicked
+      prevFilter: null
     }
   },
   beforeMount() {
@@ -120,43 +119,29 @@ export default {
   methods: {
 
     filterCards(filter, i) {
+      console.log('prev:' + this.prevFilter.type)
+
+      if (this.prevFilter.type === this.categories[i].type) {
+        console.log('current cat clicked')
+        return
+      }
+
       let s = this.categories[i].state
+      console.log('current cat:' + this.categories[i].type)
+
       for (const itm in this.categories) {
         this.categories[itm].state = false
         this.categories[i].state = !s
       }
 
       this.activities = []
-      // this.prevFilter = this.currentCategory
       this.currentCategory = filter
-
-      // console.log('filter pop: ' + this.currentCategory.type)
-      // switch (filter.type.toLowerCase()) {
-      //   case 'all':
-      //     this.populate('attractions', this.attractions)
-      //     this.populate('games', this.games)
-      //     this.populate('restaurants', this.restaurants)
-      //     break
-      //   case 'attractions':
-      //     this.populate('attractions', this.attractions)
-      //     break
-      //   case 'games':
-      //     this.populate('games', this.games)
-      //     break
-      //   case 'restaurants':
-      //     this.populate('restaurants', this.restaurants)
-      //     break
-      // }
-      // this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
-
-      // if (this.prevPage === this.currentPage && this.prevFilter.type === this.currentCategory.type) {
-      //   console.log(' wah 2')
-      //   // return
-      // }
 
       // get correct activities
       this.getTotalPages()
       this.updatePageNum(this.currentPage)
+
+      this.prevFilter = this.currentCategory
     },
 
     getActivities() {
@@ -165,6 +150,7 @@ export default {
       this.getRestaurants()
     },
 
+    // Sort added for each GET because it is async
     getAttractions() {
       Api.get('attractions', {
         params: {
@@ -232,27 +218,14 @@ export default {
       console.log('activities:' + this.activities.length + ' == category: ' + category)
     },
 
+    // separated to let filtercards use GET without changing page
     changePage(pageNum) {
-      // this.prevPage = this.currentPage
       this.currentPage = pageNum
-
-      // if (this.prevPage !== this.currentPage) {
-      //   this.prevFilter = this.currentCategory
-      // }
-
-      // if (this.prevPage === this.currentPage && this.prevFilter.type === this.currentCategory.type) {
-      //   console.log(' wah')
-      //   // return
-      // }
-
       this.updatePageNum(pageNum)
     },
 
-    // updates page number, calls attractions every time page is changed
+    // GETs activities, checks for page edge cases
     updatePageNum(pageNum) {
-      // this.prevPage = this.currentPage
-      // this.currentPage = pageNum
-
       this.activities = []
 
       if (this.currentCategory === null) {
@@ -260,18 +233,14 @@ export default {
         this.currentCategory = this.categories[0]
         this.activityLimit = 2
         this.pageSize = 6
-        // this.prevFilter = this.categories[1]
+        this.prevFilter = this.categories[0]
       }
 
-      // console.log(this.currentCategory.type)
-
-      console.log('pagenum get: ' + this.currentCategory.type)
-      console.log(' === page: ' + this.currentPage + '  ' + this.currentCategory.type)
+      console.log(this.currentCategory.type)
 
       if (this.currentPage > this.totalPages) {
         this.currentPage = 1
         this.$router.replace({ query: { currentPage: this.currentPage } })
-        // this.changePage(this.currentPage)
       }
 
       switch (this.currentCategory.type.toLowerCase()) {
@@ -288,6 +257,7 @@ export default {
           this.getRestaurants()
           break
       }
+      console.log(this.activities)
       this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
     },
 
@@ -299,6 +269,7 @@ export default {
       }
     },
 
+    // sets pagesize, needs updatepagenum first to get corrent totalactivities
     getTotalPages() {
       if (this.currentCategory.type.toLowerCase() === 'all') {
         this.activityLimit = 2

@@ -10,7 +10,7 @@ exports.getAttractions = async function (req, res, next) {
     Attraction.count({}, function(err, numOfAttractions) {
         if (err) { return next(err); }
         totalAttractions = numOfAttractions;
-        // console.log(totalAttractions);
+
         // putting find in count ensures count() is executed first before find
         Attraction.find(query, function(err, attractions) {
             if (err) { return next(err); }
