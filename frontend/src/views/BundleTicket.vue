@@ -14,6 +14,14 @@
             <p><strong>Arcade bundle:</strong> 10 arcade games</p>
 
           <div>
+            <b-dropdown id="dropdown-1" text="Bundle type" class="btnBundle">
+            <b-dropdown-item>Big bundle</b-dropdown-item>
+            <b-dropdown-item>Small bundle</b-dropdown-item>
+            <b-dropdown-item>Arcade bundle</b-dropdown-item>
+            </b-dropdown>
+          </div>
+          <br />
+          <div>
             <select> id="dropdown-1"
               <option>Bundle type</option>
               <option>Big Bundle</option>
