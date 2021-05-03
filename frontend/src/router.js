@@ -14,7 +14,8 @@ import Signin from './views/Signin.vue'
 import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
-
+import Reserve from './views/Reserve.vue'
+import GetReservation from './components/GetReservation.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -83,6 +84,16 @@ export default new Router({
       path: '/reservations',
       name: 'reservations',
       component: Reservation
+    },
+    {
+      path: '/reservations/reserve',
+      name: 'reserve',
+      component: Reserve
+    },
+    {
+      path: '/reservations/reserve/getreservation',
+      name: 'getreservation',
+      component: GetReservation
     },
     {
       path: '/ticketprices/singleticket',
