@@ -22,7 +22,7 @@
             <label for="tickets">Number of tickets you would like to buy:</label>
             <input type="number" id="btnticket" name="tickets" />
 
-            <b-button pill to="/entrance/book" class="btnBK">Book</b-button>
+            <b-button pill to="/ticketprices/entrance/book" class="btnBK">Book</b-button>
         </b-col>
       </b-row>
    </b-container>
