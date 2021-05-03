@@ -44,18 +44,6 @@
       </div>
     </b-container>
   </div>
-  <!-- Load attractions via API -->
-  <!-- drop box -->
-        <!-- scrollable container -->
-    <b-container class="card-main-div">
-      <b-row>
-        <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
-          <activity-card :activity="a.data" :type="a.type"></activity-card>
-          <!-- idk why this works -->
-        </b-col>
-      </b-row>
-    </b-container>
-    <!-- Pagination -->
   </div>
 </template>
 <style scoped>
