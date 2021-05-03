@@ -4,17 +4,21 @@ var Game = require('../models/game.model')
 exports.getGames = async function (req, res, next) {
     var query = req.params.query ? req.params.query : {};
     var pageskip =  (req.query.page ? req.query.page : 1) - 1;
-    var limit = req.params.limit ? req.params.limit : 4;
-    var gameCount = Game.count();
-
-    console.log(pageskip * limit);
+    var limit = parseInt(req.query.limit) ? parseInt(req.query.limit) : 2;
+    var totalGames = 0;
     
-    Game.find(query, function(err, games) {
+    Game.count({}, function(err, numOfGames) {
         if (err) { return next(err); }
-        res.status(200).json({ status: 200, data: games, message: 'Successfully retrieved the games.' });
+        totalGames = numOfGames;
+
+        Game.find(query, function(err, games) {
+            if (err) { return next(err); }
+            res.status(200).json({ status: 200, data: games, totalGames: totalGames, message: 'Successfully retrieved the games.' });
+        })
+        .skip(pageskip * limit)
+        .limit(limit);
     })
-    .skip(pageskip * limit)
-    .limit(limit);
+
 }
 
 // GET method
