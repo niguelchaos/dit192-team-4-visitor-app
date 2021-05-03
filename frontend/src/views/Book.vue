@@ -35,6 +35,7 @@
           </div>
             <span class="info"> * CVV or CVC is the card security code, unique three digits number on the back of your card separate from its number.
             </span>
+            <br />
           <b-button pill to="/Book/Confirm Pay" class="btnCP">Confirm Pay</b-button>
         </b-col>
       </b-row>
