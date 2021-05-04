@@ -33,22 +33,22 @@ export default new Router({
       component: Camels
     },
     {
-      path: '/entrance/book',
-      name: 'book',
+      path: '/ticketprices/entrance/book',
+      name: 'entrancebook',
       component: Book
     },
     {
-      path: '/singleticket/book',
-      name: 'book',
+      path: '/ticketprices/singleticket/book',
+      name: 'singlebook',
       component: Book
     },
     {
-      path: '/bundleticket/book',
-      name: 'book',
+      path: '/ticketprices/bundleticket/book',
+      name: 'bundlebook',
       component: Book
     },
     {
-      path: '/fullpackage/registerandbook',
+      path: '/ticketprices/fullpackage/registerandbook',
       name: 'registerandbook',
       component: Signin
     },
