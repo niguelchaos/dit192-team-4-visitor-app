@@ -21,25 +21,25 @@
                 <div class="input-group form-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-key"></i></span>
-						      </div>
-						      <input type="user name" placeholder="password" name="uname" required>
-					      </div>
+                  </div>
+                  <input type="user name" placeholder="password" name="uname" required>
+                </div>
                 <div class="row align-items-center remember">
                   <input type="checkbox">Remember Me
-					      </div>
-					      <div class="form-group">
+                </div>
+                <div class="form-group">
                   <b-button pill to= "/reservations/reserve" class="btn float-right login_btn">Login</b-button>
-					      </div>
+                </div>
               </form>
             </div>
             <div class="card-footer">
               <div class="d-flex justify-content-center links" >
                 <a href="#">Register</a>
-				      </div>
-				      <div class="d-flex justify-content-center">
+              </div>
+              <div class="d-flex justify-content-center">
                 <a href="#">Forgot your password?</a>
-				      </div>
-			      </div>
+              </div>
+            </div>
         </div>
       </div>
     </b-container>

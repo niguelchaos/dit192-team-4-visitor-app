@@ -4,6 +4,8 @@
     "description": "We have the best burgers in Sweden. Come and eat",
     "price": 0,
     "status": "open",
+    "latitude": 57.693755,
+    "longitude": 11.994589,
     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjaW9LH2-7_EwZB4AnYOHto5X9W1axLNlTaA&usqp=CAU"
   },
   {
@@ -11,6 +13,8 @@
     "description": "Come and eat all the ice cream that you can imagine!",
     "price": 0,
     "status": "open",
+    "latitude": 57.694701,
+    "longitude": 11.995404,
     "img": "https://i.pinimg.com/originals/25/9b/0a/259b0a298bc745bd3a5dcf47511d8e49.png"
   }
 ]
