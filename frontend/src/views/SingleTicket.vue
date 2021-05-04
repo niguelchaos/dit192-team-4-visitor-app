@@ -27,7 +27,7 @@
               <option>2-7 years, 100 SEK</option>
               <option>8 years+ 180 SEK</option>
             </select>
-            <b-button pill to="/singleticket/book" class="btnBK">Book</b-button>
+            <b-button pill to="/ticketprices/singleticket/book" class="btnBK">Book</b-button>
           </div>
         </b-col>
       </b-row>
