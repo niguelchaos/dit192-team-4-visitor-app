@@ -36,7 +36,7 @@
               <b-col>
                   <b-row>
                       <br />
-                      <p class="card-text">Queue: min</p>
+                      <p class="card-text">Queue: 30 min</p>
                       <b-button class="btnrese" pill to= "/reservations/reserve/getreservation">Reserve</b-button>
                   </b-row>
               </b-col>
