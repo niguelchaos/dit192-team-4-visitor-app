@@ -23,7 +23,7 @@
         </b-button-group>
 
         <!-- for large screens -->
-        <b-button-group class="pc-categorybuttons d-none d-md-inline-flex" size="lg" style="border-radius: 15px;">
+        <b-button-group class="pc-categorybuttons d-none d-md-inline-flex" size="lg">
           <button
             v-for="(button, index) in categories"
             :key="index"
@@ -249,11 +249,6 @@ export default {
   color: black;
 }
 
-.cat-buttons {
-  /* border-radius: 15px; */
-
-}
-
 .msc-filter {
   border-radius: 15px;
 }
@@ -268,10 +263,16 @@ export default {
 }
 
 .mobile-categorybuttons {
-  background-color: #ffffff;
+  background-color: #f6fff3;
   border-radius: 35px;
   padding: 2%;
   font-size: 17px;
+}
+.pc-categorybuttons {
+  background-color: #ffffff;
+  border-radius: 40px;
+  padding: 1%;
+  font-size: 20px;
 }
 
 .flt-active {
@@ -290,10 +291,10 @@ export default {
 }
 
 .cat-not-active{
-  background-color: #ffffff;
+  background-color: #f6fff3;
   border-radius: 25px;
   color: #2D3E4F;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .card-main-div {
