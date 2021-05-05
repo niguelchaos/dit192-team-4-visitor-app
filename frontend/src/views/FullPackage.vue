@@ -18,7 +18,7 @@
               <option>2-7 years, 250 SEK</option>
               <option>8 years+ 320 SEK</option>
             </select>
-          <b-button pill to="/fullpackage/registerandbook" class="btnBK">Register and book</b-button>
+          <b-button pill to="/ticketprices/fullpackage/registerandbook" class="btnBK">Register and book</b-button>
         </b-col>
       </b-row>
     </b-container>

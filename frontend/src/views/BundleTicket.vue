@@ -36,7 +36,7 @@
               <option>8 years+ 220 SEK</option>
             </select>
           </div>
-          <b-button pill to="/bundleticket/book" class="btnBK">Book</b-button>
+          <b-button pill to="/ticketprices/bundleticket/book" class="btnBK">Book</b-button>
         </b-col>
       </b-row>
     </b-container>
