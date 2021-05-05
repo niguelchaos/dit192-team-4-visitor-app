@@ -7,36 +7,36 @@
     <!-- Load attractions via API -->
     <!-- drop box -->
     <b-container>
-      <div class="currentreservations-div">
+      <div class="reservation-categories-div">
 
-        <b-button-group class="d-md-none" size="md" style="border-radius: 15px;">
-          <b-button
+        <b-button-group class="mobile-categorybuttons d-md-none" size="md">
+          <button
             v-for="(button, index) in categories"
             :key="index"
             :pressed="button.state"
-            variant="outline-primary"
-            class="text-center text-nowrap"
+            class="cat-button text-center text-nowrap"
             v-on:click="changeCategory(button, index)"
+            :class="{'cat-active': button.state, 'cat-not-active': !button.state}"
           >
             {{ button.type }}
-          </b-button>
+          </button>
         </b-button-group>
 
         <!-- for large screens -->
-        <b-button-group class="d-none d-md-inline-flex" size="lg" style="border-radius: 15px;">
-          <b-button
+        <b-button-group class="pc-categorybuttons d-none d-md-inline-flex" size="lg" style="border-radius: 15px;">
+          <button
             v-for="(button, index) in categories"
             :key="index"
             :pressed="button.state"
-            variant="outline-primary"
-            class="text-center text-nowrap"
+            class="cat-button text-center text-nowrap"
             v-on:click="changeCategory(button, index)"
+            :class="{'cat-active': button.state, 'cat-not-active': !button.state}"
           >
             {{ button.type }}
-          </b-button>
+          </button>
         </b-button-group>
 
-        <!-- <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="filterCards(buttons, i)" :key="i"
+        <!-- <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="changeCategory(buttons, i)" :key="i"
           :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
         {{ buttons.type }}
         </button> -->
@@ -249,6 +249,11 @@ export default {
   color: black;
 }
 
+.cat-buttons {
+  /* border-radius: 15px; */
+
+}
+
 .msc-filter {
   border-radius: 15px;
 }
@@ -262,6 +267,13 @@ export default {
   padding-bottom: 20px;
 }
 
+.mobile-categorybuttons {
+  background-color: #ffffff;
+  border-radius: 35px;
+  padding: 2%;
+  font-size: 17px;
+}
+
 .flt-active {
  background-color: #EDADC7;
 }
@@ -271,11 +283,17 @@ export default {
 }
 
 .cat-active {
- background-color: #EDADC7;
+  background-color: #EDADC7;
+  border-radius: 25px;
+  color: black;
+  font-weight: bolder;
 }
 
 .cat-not-active{
-  background-color: #FFFFFF;
+  background-color: #ffffff;
+  border-radius: 25px;
+  color: #2D3E4F;
+  font-weight: bold;
 }
 
 .card-main-div {
