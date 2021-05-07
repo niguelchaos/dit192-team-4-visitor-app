@@ -26,8 +26,8 @@
             <span class="align-middle font-weight-bolder">{{
               activity.name
             }}</span>
-          <p class="card-text mt-3">Queue: 30 min</p>
           </b-card-title>
+          <p class="card-queue-text card-text mt-3">Queue: 30 min</p>
         </b-col>
 
       </b-card>
@@ -70,8 +70,11 @@ export default {
 }
 .card-title {
   padding-top: 15%;
-  padding-bottom: 5%;
+  padding-bottom: 1%;
   align-content: center;
+}
+.card-queue-text {
+  padding: 0;
 }
 .card-link {
   color: #e28daf;
