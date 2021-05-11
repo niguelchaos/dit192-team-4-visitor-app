@@ -43,7 +43,7 @@
         </div>
       </div>
     </b-container>
-  </div>
+  </div><i class="fas fa-route-interstate"></i>
   </div>
 </template>
 <style scoped>
