@@ -49,27 +49,15 @@
       </div>
     </b-container>
 
-    <div v-if="categories[0].state">
-      <!-- scrollable container -->
-      <b-container class="card-main-div">
-        <b-row>
-          <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
-            <activity-card :activity="a.data" :type="a.type"></activity-card>
-            <!-- idk why this works -->
-          </b-col>
-        </b-row>
-      </b-container>
-    </div>
-
-    <div v-if="categories[1].state">
-      <!-- scrollable container -->
-      <b-container class="card-main-div">
-        <b-row>
-          <!-- TODO: Add My reservation component -->
-        </b-row>
-      </b-container>
-    </div>
-    
+    <!-- scrollable container -->
+    <b-container class="card-main-div">
+      <b-row>
+        <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
+          <activity-card :activity="a.data" :type="a.type"></activity-card>
+          <!-- idk why this works -->
+        </b-col>
+      </b-row>
+    </b-container>
     <!-- Pagination -->
     <div class="page-bar-div overflow-auto mt-3">
       <!-- on change updates when user clicks, linkgen updates path -->
