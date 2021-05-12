@@ -43,7 +43,11 @@
         </div>
       </div>
     </b-container>
+<<<<<<< HEAD
   </div>
+=======
+  </div><i class="fas fa-route-interstate"></i>
+>>>>>>> b93438c1995501d943cbe4c0683f221569e1e6c8
   </div>
 </template>
 <style scoped>

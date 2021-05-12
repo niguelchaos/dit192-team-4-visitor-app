@@ -1,12 +1,33 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var mongoosePaginate = require("mongoose-paginate-v2");
+var expressPaginate = require("express-paginate")
 var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+const db_env = require('dotenv').config({ path: '../db/.env'});
 
-var camelsController = require('./controller');
+var camelsController = require('./controllers/controller');
+var attractionsRoutes = require('./routes/attraction.route');
+var restaurantsRoutes = require('./routes/restaurant.route');
+var gamesRoutes = require('./routes/game.route');
+
+
+var mongoURI = process.env.MONGODB_URI || 
+    `mongodb://localhost:${db_env.parsed.MONGO_PORT}/${db_env.parsed.MONGO_DATABASE}`;
 var port = process.env.PORT || 3000;
+
+// Connect to MongoDB
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, function(err) {
+    if (err) {
+        console.error(`Failed to connect to MongoDB with URI: ${mongoURI}`);
+        console.error(err.stack);
+        process.exit(1);
+    }
+    console.log(`Connected to MongoDB with URI: ${mongoURI}`);
+});
 
 // Create Express app
 var app = express();
@@ -23,6 +44,10 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to the EDA397/DIT192 backend ExpressJS project!'});
 });
 app.use('/api/camels', camelsController);
+app.use('/api', attractionsRoutes);
+app.use('/api', restaurantsRoutes);
+app.use('/api', gamesRoutes);
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
