@@ -4,7 +4,7 @@ var Attraction = require('../models/attraction.model')
 exports.getAttractions = async function (req, res, next) {
     var query = req.params.query ? req.params.query : {};
     var pageskip =  (req.query.page ? req.query.page : 1) - 1;
-    var limit = parseInt(req.query.limit) ? parseInt(req.query.limit) : 2;
+    var limit = parseInt(req.query.limit) ? parseInt(req.query.limit) : 4;
     var totalAttractions = 0;
 
     Attraction.count({}, function(err, numOfAttractions) {
