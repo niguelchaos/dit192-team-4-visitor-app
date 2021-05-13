@@ -139,15 +139,15 @@ export default {
       switch (filter.type.toLowerCase()) {
         case 'all':
           this.populate('attractions', this.attractions)
-          this.populate('games', this.games)
+          //this.populate('games', this.games)
           this.populate('restaurants', this.restaurants)
           break
         case 'attractions':
           this.populate('attractions', this.attractions)
           break
-        case 'games':
-          this.populate('games', this.games)
-          break
+       //case 'games':
+         ///this.populate('games', this.games)
+         ///break
         case 'restaurants':
           this.populate('restaurants', this.restaurants)
           break
@@ -159,7 +159,7 @@ export default {
 
     getActivities() {
       this.getAttractions()
-      this.getGames()
+      //this.getGames()
       this.getRestaurants()
     },
 

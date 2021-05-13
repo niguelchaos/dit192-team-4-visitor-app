@@ -91,9 +91,10 @@ export default new Router({
       component: Reserve
     },
     {
-      path: '/reservations/reserve/getreservation',
+      path: '/reservations/reserve/getreservation/:id',
       name: 'getreservation',
-      component: GetReservation
+      component: GetReservation,
+      props: true
     },
     {
       path: '/ticketprices/singleticket',

@@ -27,7 +27,7 @@
           <div class="map">
             <h4>Map over the park</h4>
             <!-- <img class="map_img" src="../assets/Map.jpeg" alt="map" /> -->
-            <map-component :content="attractions" />
+            <map-component :content="total" />
           </div>
         </b-col>
       </b-row>
@@ -54,12 +54,17 @@ export default {
   data() {
     return {
       message: '',
-      attractions: []
+      attractions: [],
+      games: [],
+      restaurants: [],
+      total: []
     }
   },
   mounted() {
     this.getMessage()
     this.getAttractions()
+    this.getGames()
+    this.getRestaurants()
   },
   methods: {
     getMessage() {
@@ -77,6 +82,28 @@ export default {
           this.attractions = res.data.data || []
         })
         // .bind(this)
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getGames() {
+      Api.get('/games')
+        .then(res => {
+          this.games = res.data.data || []
+          this.total = this.games.concat(this.attractions)
+        })
+        // .bind(this)
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getRestaurants() {
+      Api.get('/restaurants')
+        .then(res => {
+          this.restaurants = res.data.data || []
+          console.log(this.restaurants)
+          this.total = this.total.concat(this.restaurants)
+        })
         .catch(err => {
           console.log(err)
         })
