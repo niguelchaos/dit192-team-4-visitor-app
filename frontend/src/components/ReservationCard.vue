@@ -1,21 +1,17 @@
 <template>
   <div>
-    <b
-      :to="{
-        name: type,
-        params: { id: activity._id, activity: activity }
-      }"
-    >
       <b-card
-        class="act-card overflow-hidden text-left"
+        class="res-card overflow-hidden text-left"
         img-right
         no-body
+        v-b-toggle="'reservation-details-' + activity.name"
       >
-        <b-col class="card-img-col" style="margin:0%; padding:0%;">
+        <b-col class="card-img-col">
           <b-card-img
             :src="activity.img"
             alt="Image"
-            height="90"
+            height="90%"
+            width="100%"
             class="card-image"
           ></b-card-img>
         </b-col>
@@ -31,19 +27,16 @@
               activity.name
             }}</span>
           </b-card-title>
-          <br />
-          <div class="fotter">
-              <b-col>
-                  <b-row>
-                      <br />
-                      <p class="card-text">Queue: min</p>
-                      <b-button class="btnrese" pill to= "/reservations/reserve/getreservation">Reserve</b-button>
-                  </b-row>
-              </b-col>
-          </div>
+          <p class="card-queue-text card-text mt-3">Queue: 30 min</p>
         </b-col>
+
       </b-card>
-    </b>
+        <b-collapse :id="'reservation-details-' + activity.name">
+          <b-card title="Collapsible card">
+            <b-button class="btnrese" pill to= "/reservations/reserve/getreservation">Reserve</b-button>
+          </b-card>
+        </b-collapse>
+
   </div>
 </template>
 
@@ -56,11 +49,15 @@ export default {
 </script>
 
 <style scoped>
-.act-card {
+.res-card {
    padding: 5%;
    margin: 3%;
    border-radius: 15px;
-   height: 190px;
+   /* height: 190px; */
+}
+.card-img-col {
+  margin:0%;
+  padding:0%;
 }
 .card-text-col {
   color: #2d3e4f;
@@ -69,21 +66,24 @@ export default {
   margin: 0%;
 }
 .card-image {
-   border-radius: 15px;
+  border-radius: 15px;
 }
 .card-title {
   padding-top: 15%;
-  padding-bottom: 5%;
+  padding-bottom: 1%;
   align-content: center;
+}
+.card-queue-text {
+  padding: 0;
 }
 .card-link {
   color: #e28daf;
 }
 .btnrese{
-    float: right;
-    height:35px;
-    width:88px;
-    right: 10%;
-    background-color: rgb(40, 124, 40)
-    }
+  float: right;
+  height:35px;
+  width:88px;
+  right: 10%;
+  background-color: #388659;
+}
 </style>

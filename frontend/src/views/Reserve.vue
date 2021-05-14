@@ -7,16 +7,44 @@
     <!-- Load attractions via API -->
     <!-- drop box -->
     <b-container>
-      <div class="filter-div">
-        <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="filterCards(buttons, i)" :key="i"
+      <div class="reservation-categories-div">
+
+        <b-button-group class="mobile-categorybuttons d-md-none" size="md">
+          <button
+            v-for="(button, index) in categories"
+            :key="index"
+            :pressed="button.state"
+            class="cat-button text-center text-nowrap"
+            v-on:click="changeCategory(button, index)"
+            :class="{'cat-active': button.state, 'cat-not-active': !button.state}"
+          >
+            {{ button.type }}
+          </button>
+        </b-button-group>
+
+        <!-- for large screens -->
+        <b-button-group class="pc-categorybuttons d-none d-md-inline-flex" size="lg">
+          <button
+            v-for="(button, index) in categories"
+            :key="index"
+            :pressed="button.state"
+            class="cat-button text-center text-nowrap"
+            v-on:click="changeCategory(button, index)"
+            :class="{'cat-active': button.state, 'cat-not-active': !button.state}"
+          >
+            {{ button.type }}
+          </button>
+        </b-button-group>
+
+        <!-- <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="changeCategory(buttons, i)" :key="i"
           :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
         {{ buttons.type }}
-        </button>
+        </button> -->
       </div>
 
       <div>
         <b-col>
-          <b-form-select style="border: 0px; border-radius: 15px;width:200px;" v-model="filterSelected" :options="filterOptions" class="float-left"></b-form-select>
+          <b-form-select style="border: 0px; border-radius: 15px;width:200px;" v-model="filterSelected" :options="filterOptions" class="float-center mt-3"></b-form-select>
         </b-col>
       </div>
     </b-container>
@@ -50,6 +78,8 @@ export default {
         { type: 'All', state: true },
         { type: 'My Reservations', state: false }
       ],
+      prevCategory: null,
+      currentCategory: null,
       restaurants: [],
 
       // TODO: Split filtering panel into a separate component
@@ -79,7 +109,12 @@ export default {
   updated() {},
   methods: {
 
-    filterCards(filter, i) {
+    changeCategory(filter, i) {
+      if (this.prevCategory.type === this.categories[i].type) {
+        console.log('current cat clicked')
+        return
+      }
+
       let s = this.categories[i].state
       for (const itm in this.categories) {
         this.categories[itm].state = false
@@ -87,6 +122,8 @@ export default {
       }
 
       this.activities = []
+      this.currentCategory = filter
+
       switch (filter.type.toLowerCase()) {
         case 'all':
           this.populate('attractions', this.attractions)
@@ -104,6 +141,8 @@ export default {
           break
       }
       this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+
+      this.prevCategory = this.currentCategory
     },
 
     getActivities() {
@@ -172,6 +211,13 @@ export default {
     // updates page number, calls attractions every time page is changed
     updatePageNum(pageNum) {
       this.currentPage = pageNum
+
+      if (this.currentCategory === null) {
+        console.log('currentcat null, defaulting to all')
+        this.currentCategory = this.categories[0]
+        this.prevCategory = this.categories[0]
+      }
+
       this.getActivities()
     },
 
@@ -216,12 +262,39 @@ export default {
   padding-bottom: 20px;
 }
 
+.mobile-categorybuttons {
+  background-color: #f6fff3;
+  border-radius: 35px;
+  padding: 2%;
+  font-size: 17px;
+}
+.pc-categorybuttons {
+  background-color: #ffffff;
+  border-radius: 40px;
+  padding: 1%;
+  font-size: 20px;
+}
+
 .flt-active {
  background-color: #EDADC7;
 }
 
 .flt-not-active{
   background-color: #FFFFFF;
+}
+
+.cat-active {
+  background-color: #EDADC7;
+  border-radius: 25px;
+  color: black;
+  font-weight: bolder;
+}
+
+.cat-not-active{
+  background-color: #f6fff3;
+  border-radius: 25px;
+  color: #2D3E4F;
+  font-weight: normal;
 }
 
 .card-main-div {
