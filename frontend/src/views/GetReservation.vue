@@ -19,7 +19,7 @@
       <div class="card" style="margin-left: 710px;margin-right: 710px;border-radius: 10px;">
         <div class="card-body">
           <h4 class="card-title" style="font-size: 1.5rem;">Timeslot 2</h4>
-          <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 2:00 - 2:30 pm
+          <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 3:00 - 4:30 pm
           <span style="color:" class="align-left font-weight-bolder">
             <a class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
           </span>
@@ -37,15 +37,15 @@
           <p class="align-middle">Left Seat 20/50</p>
         </div>
       </div>
-  </div>
+    </div>
 </template>
 <script>
-// this stupid camel case props thing i dont get it
 export default {
   name: 'activity-card-item',
   props: ['activity', 'type']
 }
 </script>
+
 <style scoped>
 .shadow-lg{
   background-color: white;
