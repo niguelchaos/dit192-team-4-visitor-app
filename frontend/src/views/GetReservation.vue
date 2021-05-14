@@ -37,7 +37,7 @@
           <p class="align-middle">Left Seat 20/50</p>
         </div>
       </div>
-    </div>
+  </div>
 </template>
 <script>
 export default {
