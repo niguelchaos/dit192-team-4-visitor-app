@@ -8,11 +8,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './styles/main.css'
 import './styles/variables.css'
 import 'leaflet/dist/leaflet.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
-
+library.add(fas)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 new Vue({
   router,
   render: function (h) {

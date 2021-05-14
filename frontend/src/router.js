@@ -15,7 +15,7 @@ import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
 import Reserve from './views/Reserve.vue'
-import GetReservation from './components/GetReservation.vue'
+import GetReservation from './views/GetReservation.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -91,9 +91,10 @@ export default new Router({
       component: Reserve
     },
     {
-      path: '/reservations/reserve/getreservation',
+      path: '/reservations/reserve/getreservation/:id',
       name: 'getreservation',
-      component: GetReservation
+      component: GetReservation,
+      props: true
     },
     {
       path: '/ticketprices/singleticket',

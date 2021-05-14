@@ -33,7 +33,12 @@
       </b-card>
         <b-collapse :id="'reservation-details-' + activity.name">
           <b-card title="Collapsible card">
-            <b-button class="btnrese" pill to= "/reservations/reserve/getreservation">Reserve</b-button>
+            <b-link :to="{
+                name: 'getreservation',
+                params: { id: activity._id, activity: activity, type: type }
+                }">
+              <b-button class="btnrese" pill>Reserve</b-button>
+            </b-link>
           </b-card>
         </b-collapse>
 
