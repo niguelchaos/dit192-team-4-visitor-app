@@ -49,9 +49,9 @@
       </div>
     </b-container>
 
-    <div v-if="categories[0].state">
+    <div v-if="categories[0].state" class="card-main-div">
       <!-- scrollable container -->
-      <b-container class="card-main-div">
+      <b-container >
         <b-row>
           <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
             <activity-card :activity="a.data" :type="a.type"></activity-card>
@@ -61,7 +61,7 @@
       </b-container>
     </div>
 
-    <div v-if="categories[1].state">
+    <div v-if="categories[1].state" class="card-main-div">
       <!-- scrollable container -->
       <b-container class="card-main-div">
         <b-row>
