@@ -16,6 +16,7 @@ import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
 import Reserve from './views/Reserve.vue'
 import GetReservation from './components/GetReservation.vue'
+import Confirmation from './views/Confirmation.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -114,6 +115,12 @@ export default new Router({
       path: '/ticketprices',
       name: 'ticketprices',
       component: TicketPrice
+    },
+    {
+      path: '/confirmation/:id',
+      name: 'confirmation',
+      component: Confirmation,
+      props: true
     }
   ]
 })
