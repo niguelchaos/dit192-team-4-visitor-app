@@ -32,7 +32,10 @@
           <h4 class="card-title" style="font-size: 1.5rem;">Timeslot 3</h4>
           <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 3:00 - 4:30 pm
           <span style="color:" class="align-left font-weight-bolder">
-            <a class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
+            <a v-b-modal.modal-1 class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
+            <b-modal class="mb-2" id="modal-1" ok-only no-stacking header=no-stacking>
+              <p style="font-size: 1.5rem;">Reservation Completed!</p>
+            </b-modal>
           </span>
           <p class="align-middle">Left Seat 20/50</p>
         </div>
@@ -63,4 +66,11 @@ export default {
   top: 90px;
   padding: 10px;
  }
+ .modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+  top: 0px;
+}
 </style>
