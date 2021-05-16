@@ -9,21 +9,10 @@
       <br />
       <div class="card" style="margin-left: 710px;margin-right: 710px;border-radius: 10px;">
         <div class="card-body">
-          <h4 class="card-title" style="font-size: 1.5rem;">Timeslot 1</h4>
+          <h4 class="card-title" style="font-size: 1.5rem;">Timeslot 0</h4>
           <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']" ></font-awesome-icon>  1:00 - 2:30 pm
           <a class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
           <p class="align-middle">Left Seat 2/50</p>
-        </div>
-      </div>
-      <br />
-      <div class="card" style="margin-left: 710px;margin-right: 710px;border-radius: 10px;">
-        <div class="card-body">
-          <h4 class="card-title" style="font-size: 1.5rem;">Timeslot 2</h4>
-          <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 3:00 - 4:30 pm
-          <span style="color:" class="align-left font-weight-bolder">
-            <a class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
-          </span>
-          <p class="align-middle">Left Seat 20/50</p>
         </div>
       </div>
       <br />
@@ -33,7 +22,7 @@
           <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 3:00 - 4:30 pm
           <span style="color:" class="align-left font-weight-bolder">
             <a v-b-modal.modal-1 class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
-            <b-modal class="mb-3" id="modal-0" ok-only no-stacking header=no-stacking>
+            <b-modal class="mb-3" id="modal-1" ok-only no-stacking header=no-stacking>
               <p style="font-size: 1.5rem;">Reservation Completed!</p>
             </b-modal>
           </span>
@@ -48,7 +37,7 @@
             <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon>{{item.time}}
             <span style="color:" class="align-left font-weight-bolder">
               <a v-b-modal.modal-1 class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
-              <b-modal class="mb-2" id="modal-1" ok-only no-stacking header=no-stacking>
+              <b-modal class="mb-2" id="modal2" ok-only no-stacking header=no-stacking>
                 <p style="font-size: 1.5rem;">Reservation Completed!</p>
               </b-modal>
             </span>
