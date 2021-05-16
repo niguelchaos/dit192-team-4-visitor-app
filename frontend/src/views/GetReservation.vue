@@ -66,9 +66,7 @@ export default {
         { slot: 'Timeslot 8', time: '2:30-3:00 PM', seat: '4/20 seats left' },
         { slot: 'Timeslot 9', time: '3:30-4:00 PM', seat: '3/20 seats left' },
         { slot: 'Timeslot 10', time: '4:30-5:00 PM', seat: '3/20 seats left' }
-      ],
-      modalid: [{ id: 'modal1' }, { id: 'modal2' }, { id: 'modal3' }, { id: 'modal4' },
-        { id: 'modal5' }, { id: 'modal6' }] }
+      ] }
   }
 }
 </script>
