@@ -2,39 +2,35 @@
   <div class="pageTop">
       <br />
       <h2 class="title">Reservations</h2>
-      <b-card  style="margin-left: 700px;margin-right: 700px;border-radius: 10px;">
+      <b-card  class = "topcard">
         <h2 class ="title">{{activity.name}}</h2>
         <p>Choose a timeslot to reserve below</p>
       </b-card>
       <br />
-      <div class="card" style="margin-left: 710px;margin-right: 710px;border-radius: 10px;">
-        <div class="card-body">
+      <b-card class="testcard">
           <h4 class="card-title" style="font-size: 1.5rem;">Timeslot 0</h4>
-          <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 3:00 - 4:30 pm
-          <span style="color:" class="align-left font-weight-bolder">
-            <a v-b-modal.modal-1 class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
+          <font-awesome-icon class ="icon" style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 3:00 - 4:30 pm
+          <p class="align-middle">Left Seat 20/50</p>
+          <span class="align-left font-weight-bolder">
+            <b-button v-b-modal.modal-1 class="btn btn-test bg-success mb-3" type="submit">Choose</b-button>
             <b-modal class="mb-3" id="modal-1" ok-only no-stacking header=no-stacking>
               <p style="font-size: 1.5rem;">Reservation Completed!</p>
             </b-modal>
           </span>
-          <p class="align-middle">Left Seat 20/50</p>
-        </div>
-      </div>
+      </b-card>
       <br />
       <li v-for="item in slots" :key="item.id" style="list-style-type: none;">
-      <div class="card" style="margin-left: 710px;margin-right: 710px;border-radius: 10px;">
-        <div class="card-body">
+      <b-card class="slotcard">
             <h4 class="card-title" style="font-size: 1.5rem;">{{item.slot}}</h4>
-            <font-awesome-icon style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon>{{item.time}}
+            <font-awesome-icon class="icon-card" style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon>{{item.time}}
+            <p class="text">{{item.seat}}</p>
             <span style="color:" class="align-left font-weight-bolder">
-              <a v-b-modal.modal-1 class="btn btn-primary bg-success mb-3" type="submit">Choose</a>
+              <b-button v-b-modal.modal-1 class="btn btn-card bg-success mb-3" type="submit">Choose</b-button>
               <b-modal class="mb-2" id="modal2" ok-only no-stacking header=no-stacking>
                 <p style="font-size: 1.5rem;">Reservation Completed!</p>
               </b-modal>
             </span>
-            <p class="align-middle">{{item.seat}}</p>
-          </div>
-      </div>
+      </b-card>
       <br>
       </li>
       <br/>
@@ -63,21 +59,57 @@ export default {
 </script>
 
 <style scoped>
-.shadow-lg{
-  background-color: white;
-  margin-left: 500px;
-  margin-right: 500px;
+.topcard{
+  margin-left: 32%;
+  margin-right: 32%;
   border-radius: 10px;
 }
-.btn-primary{
-  margin-left: 200px;
+.testcard{
+margin-left: 35%;
+margin-right: 35%;
+border-radius: 10px;
+height: 9.5rem;}
+.slotcard{
+margin-left: 35%;
+margin-right: 35%;
+border-radius: 10px;
+height: 9.5rem;
+}
+.icon{
+  margin-top:0%;
+  margin-left: 0%;
+}
+.btn-test{
+  margin-left: 20%;
+  margin-right: 0%;
+  width: 20%;
+  margin-top:3%;
+  height:2rem;
+ }
+ .btn-card{
+   margin-left: 20%;
+  margin-right: 0%;
+  width: 20%;
+  margin-top:3%;
+  height:2rem;
+ }
+ .icon-card{
+margin-top:0%;
+margin-left: 0%;
  }
  .align-middle{
   position: absolute;
-  left: 25px;
-  width: 150px;
-  top: 90px;
+  left: 14%;
+  width: 35%;
+  top: 62%;
   padding: 10px;
+ }
+ .text{
+position: absolute;
+left: 14%;
+width: 35%;
+top: 62%;
+padding: 10px;
  }
  .modal-header {
     border-bottom: 0 none;
