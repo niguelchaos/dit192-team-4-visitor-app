@@ -3,32 +3,60 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <h1 class="title">Single Ticket</h1>
+          <div class="checkout_form">
+            <h1 class="title">Single Ticket</h1>
 
-            <p>Your ticket to access to a single activity once. Select type of activity, age and book.</p>
-            <p>Note: You need entrance ticket also.</p>
+              <p>Your ticket to access to a single activity once. Select type of activity, age and book.</p>
+              <p>Note: You need entrance ticket also.</p>
 
-          <div>
-            <select> id="dropdown-1"
-              <option>Activity type</option>
-              <option>Arcade games, 20 SEK</option>
-              <option>Family rides, 30 SEK</option>
-              <option>Water rides, 40 SEK</option>
-              <option>Large rides, 60 SEK</option>
-            </select>
-            <br />
-            <select> id="dropdown-2"
-              <option>-Age-</option>
-              <option>0-18 years</option>
-              <option>above 18</option>
-            </select>
-            <b-button pill to="/ticketprices/singleticket/book" class="btnBK">Book</b-button>
+            <div>
+              <b-form-select v-model="form" :options="options"></b-form-select>
+              <br />
+              <br />
+              <b-form-group label="Select age group" v-slot="{ ariaDescribedby }">
+                <b-form-radio v-model="age" :aria-describedby="ariaDescribedby" name="some-radios" value="0-18 years">0-18 years (50% off)</b-form-radio>
+                <b-form-radio v-model="age" :aria-describedby="ariaDescribedby" name="some-radios" value="18+ years">above 18 years</b-form-radio>
+              </b-form-group>
+              <b-button
+                :disabled="!(age && form.price && form.subType)"
+                :to="{
+                  name: 'book',
+                  params: { ticket: { age: age, price: age == '18+ years' ? form.price : form.price * 0.5, type: ticketType + ' - ' + form.subType, amount: 1} }
+                }"
+                class="main_button"
+              >
+                Book
+              </b-button>
+            </div>
+            {{form.subType}} {{form.price}}
           </div>
         </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      age: '',
+      form: {
+        subType: '',
+        price: null
+      },
+      ticketType: 'Single ticket',
+      options: [
+        { value: { subType: '', price: null }, text: 'Please select ticket type', disabled: true },
+        { value: { subType: 'Arcade games', price: 20 }, text: 'Arcade games, 20 SEK' },
+        { value: { subType: 'Family rides', price: 30 }, text: 'Family rides, 30 SEK' },
+        { value: { subType: 'Water rides', price: 40 }, text: 'Water rides, 40 SEK' },
+        { value: { subType: 'Large rides', price: 60 }, text: 'Large rides, 60 SEK' }
+      ]
+    }
+  }
+}
+</script>
 
 <style>
 .btnBK {

@@ -5,6 +5,10 @@
         <b-col xs="12" align-self="center">
           <div class="activity_card">
             <h5 class="title">Checkout</h5>
+            <p><b>Ticket: </b>{{ticket.type}}</p>
+            <p><b>Age: </b>{{ticket.age}}</p>
+            <p><b>Amount: </b>{{ticket.amount}} (á {{ticket.price}} SEK)</p>
+            <p><b>Total: </b>{{ticket.price * ticket.amount}} SEK</p>
             <p>Please enter your credit card details below</p>
           </div>
           <b-form @submit="onSubmit" class="checkout_form">
@@ -55,13 +59,14 @@
               :disabled="!(form.name && form.number && form.date && form.code)"
               :to="{
                 name: 'confirmation',
-                params: { id: 1723481342, details: form}
+                params: { id: 1723481342, details: form, ticket: ticket}
               }"
               class="main_button"
             >
               Complete purchase
             </b-button>
           </b-form>
+          <br />
         </b-col>
       </b-row>
     </b-container>
@@ -70,6 +75,12 @@
 
 <script>
 export default {
+  props: {
+    ticket: {
+      type: Object,
+      required: false
+    }
+  },
   data() {
     return {
       loading: false,

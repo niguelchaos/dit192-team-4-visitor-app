@@ -3,12 +3,13 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-
           <div class="activity_card">
             <h4 class="title">Thank you for your purchase!</h4>
             <p><strong>Order number: </strong><i>{{id}}</i></p>
-            <p><strong>Ticket bought: </strong><i>{{"Family ride"}}</i></p>
-            <p><strong>Number of tickets: </strong><i>{{"FIXXX"}}</i></p>
+            <p><strong>Ticket: </strong><i>{{ticket.type}}</i></p>
+            <p><strong>Age: </strong><i>{{ticket.age}}</i></p>
+            <p><strong>Amount: </strong><i>{{ticket.amount}}</i></p>
+            <p><strong>Total: </strong><i>{{ticket.amount * ticket.price}} SEK</i></p>
           </div>
           <div class="activity_card">
             <h5>Customer details</h5>
@@ -21,16 +22,20 @@
           </div>
         </b-col>
       </b-row>
+      <br />
     </b-container>
   </div>
 </template>
 
 <script>
-import { Api } from '@/Api'
 export default {
   name: 'Confirmation',
   props: {
     details: {
+      type: Object,
+      required: false
+    },
+    ticket: {
       type: Object,
       required: false
     },

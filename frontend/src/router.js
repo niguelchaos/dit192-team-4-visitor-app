@@ -34,24 +34,10 @@ export default new Router({
       component: Camels
     },
     {
-      path: '/ticketprices/entrance/book',
-      name: 'entrancebook',
-      component: Book
-    },
-    {
-      path: '/ticketprices/singleticket/book',
-      name: 'singlebook',
-      component: Book
-    },
-    {
-      path: '/ticketprices/bundleticket/book',
-      name: 'bundlebook',
-      component: Book
-    },
-    {
-      path: '/ticketprices/fullpackage/book',
-      name: 'fullbook',
-      component: Book
+      path: '/ticketprices/book',
+      name: 'book',
+      component: Book,
+      props: true
     },
     {
       path: '/ticketprices/entrance',
