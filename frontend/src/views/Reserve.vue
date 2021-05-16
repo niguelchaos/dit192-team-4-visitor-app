@@ -186,6 +186,10 @@ export default {
         case "restaurants":
           this.populate("restaurants", this.restaurants);
           break;
+        case "My Reservations":
+          this.populate("attractions", this.attractions);
+          this.populate("restaurants", this.restaurants);
+          break;
       }
       this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name));
 

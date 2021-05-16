@@ -6,50 +6,44 @@
       no-body
       v-b-toggle="'reservation-details-' + activity.name"
     >
-      <b-col class="card-img-col">
-        <b-card-img
-          :src="activity.img"
-          alt="Image"
-          height="90%"
-          width="100%"
-          class="card-image"
-        ></b-card-img>
-      </b-col>
+      <div v-if="activity.img">
+        <b-col class="card-img-col">
+          <b-card-img
+            :src="activity.img"
+            alt="Image"
+            height="100px"
+            width="150px"
+            class="card-image"
+          ></b-card-img>
+        </b-col>
+      </div>
 
-      <b-col
-        style="font-size: 0.75rem"
-        cols="7"
-        no-gutters
-        class="card-text-col"
-      >
+      <b-col style="font-size: 0.75rem" no-gutters class="card-text-col">
         <b-card-title style="font-size: 1rem" class="card-title">
           <span class="align-middle font-weight-bolder">{{
             activity.name
           }}</span>
         </b-card-title>
-        <p class="card-queue-text card-text mt-3">Queue: 30 min</p>
+
+        <p class="card-queue-text card-text mt-3">
+          {{ activity.text }}
+        </p>
       </b-col>
     </b-card>
-    <b-collapse :id="'reservation-details-' + activity.name">
-      <b-card title="Collapsible card">
-        <b-button class="btnrese" pill to="/reservations/reserve/getreservation"
-          >Reserve</b-button
-        >
-      </b-card>
-    </b-collapse>
   </div>
 </template>
 
 <script>
 // this stupid camel case props thing i dont get it
 export default {
-  name: "activity-card-item",
-  props: ["activity", "type"],
+  name: "MyReservationCard",
+  props: ["activity"],
 };
 </script>
 
 <style scoped>
 .res-card {
+  width: 100%;
   padding: 5%;
   margin: 3%;
   border-radius: 15px;
@@ -67,6 +61,7 @@ export default {
 }
 .card-image {
   border-radius: 15px;
+  width: 130px;
 }
 .card-title {
   padding-top: 15%;
