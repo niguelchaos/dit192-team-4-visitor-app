@@ -3,22 +3,16 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">
-            <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div>
-
           <h1 class="title">Full Package</h1>
 
-            <p>Your ticket to have access of all the rides for one day. Select your age and book tickets.</p>
-            <p>Login required to book the full package</p>
+            <p>Your ticket to have access to all the rides for one day. Select your age and book tickets.</p>
             <br />
             <select> id="dropdown-1"
               <option>-Age-</option>
-              <option>0-2 years, Free</option>
-              <option>2-7 years, 250 SEK</option>
-              <option>8 years+ 320 SEK</option>
+              <option>0-18 years, 250 SEK</option>
+              <option>above 18, 500 SEK</option>
             </select>
-          <b-button pill to="/ticketprices/fullpackage/registerandbook" class="btnBK">Register and book</b-button>
+          <b-button pill to="/ticketprices/fullpackage/book" class="btnBK">Book</b-button>
         </b-col>
       </b-row>
     </b-container>

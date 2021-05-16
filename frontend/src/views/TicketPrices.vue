@@ -1,119 +1,122 @@
 <template>
-  <div>
-    <b-container>
-      <b-row>
-        <b-col xs="12" align-self="center">
-          <Logo></Logo>
-          <!-- <div class="logo">
-            <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div> -->
-        </b-col>
-      </b-row>
+  <div id="attractions" class="wrapper">
+    <div class="pageTop">
+      <br />
+      <h2 class="title">Tickets</h2>
+      <p>You need to login your account in order to buy tickets for rides.</p>
+    </div>
+    <div class signin>
+      <b-container>
+        <div class="d-flex justify-content-center h-120">
+          <div class="card">
+            <h3>Sign in</h3>
+            <div class="card-body">
+              <form action=" action_page" method="post">
+                <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="user name" placeholder="User name" name="uname" required>
+                </div>
+                <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  </div>
+                  <input type="user name" placeholder="password" name="uname" required>
+                </div>
+                <div class="row align-items-center remember">
+                  <input type="checkbox">Remember Me
+                </div>
+                <div class="form-group">
+                  <b-button pill to= "/ticketprices/tickets" class="btn float-right login_btn">Login</b-button>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <div class="d-flex justify-content-center links" >
+                <a href="#">Register</a>
+              </div>
+              <div class="d-flex justify-content-center">
+                <a href="#">Forgot your password?</a>
+              </div>
+            </div>
+        </div>
+      </div>
     </b-container>
-    <b-row>
-      <b-col>
-        <h2 class="title">Tickets & Prices</h2>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <p>Here you can purchase tickets for entrance and other activities</p>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <ul class="filter-group__list"></ul>
-        <b-button pill to= "/ticketprices/entrance" class="btnentrance">Entrance</b-button>
-        <b-button pill to="/ticketprices/singleticket" class="btnST">Single Ticket</b-button>
-        <br />
-        <b-button pill to="/ticketprices/bundleticket" class="btnBT">Bundle Ticket</b-button>
-        <b-button pill to="/ticketprices/fullpackage" class="btnFP">Full Package</b-button>
-      </b-col>
-    </b-row>
-    <b-row class="footer">
-      <b-col>
-        <h2 class="footer-container__heading">BEFORE YOUR VISIT</h2>
-        <p>Opening hours</p>
-        <p>Activities in Dummy park</p>
-        <p>Find us</p>
-        <p>Food & Beverages</p>
-        <p>Accomodation</p>
-      </b-col>
-    </b-row>
+  </div><i class="fas fa-route-interstate"></i>
   </div>
 </template>
+<style scoped>
 
-<script>
-import Logo from '../components/Logo.vue'
-export default {
-  components: { Logo },
-  name: 'TicketPrices'
+.container{
+height: 100%;
+align-content: center;
 }
-</script>
 
-<style>
-.btnentrance {
-  background-color: white;
-  border: 10px;
-  color: #004e64;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
+.card{
+height: 300px;
+margin-top: auto;
+margin-bottom: auto;
+width: 300px;
+align-content: center;
+background-color:hsla(180, 50%, 98%, 0.904) !important;
 }
-.btnFP {
-  background-color: white;
-  border: 10px;
-  color: #004e64;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #e599b8;
 }
-.btnST {
-  background-color: white;
-  border: 10px;
-  color: #004e64;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
+
+.card-header h3{
+color: white;
 }
-.btnBT {
-  background-color: white;
-  border: 10px;
-  color: #004e64;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
+
+.input-group-prepend span{
+width: 0px;
+background-color: #e599b8;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+width: 150px;
+
+}
+
+.remember{
+color: #070101;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login_btn{
+color: black;
+background-color: #e599b8;
+width: 100px;
+
+}
+.account {
+        color: #0c0c0c;
+          }
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
 }
 </style>

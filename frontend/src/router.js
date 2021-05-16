@@ -5,12 +5,12 @@ import Camels from './views/Camels.vue'
 import Activities from './views/Activities.vue'
 import Reservation from './views/Reservations.vue'
 import TicketPrice from './views/TicketPrices.vue'
+import Tickets from './views/Tickets.vue'
 import Entrance from './views/Entrance.vue'
 import SingleTicket from './views/SingleTicket.vue'
 import BundleTicket from './views/BundleTicket.vue'
 import FullPackage from './views/FullPackage.vue'
 import Book from './views/Book.vue'
-import Signin from './views/Signin.vue'
 import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
@@ -48,9 +48,9 @@ export default new Router({
       component: Book
     },
     {
-      path: '/ticketprices/fullpackage/registerandbook',
-      name: 'registerandbook',
-      component: Signin
+      path: '/ticketprices/fullpackage/book',
+      name: 'fullbook',
+      component: Book
     },
     {
       path: '/ticketprices/entrance',
@@ -114,6 +114,11 @@ export default new Router({
       path: '/ticketprices',
       name: 'ticketprices',
       component: TicketPrice
+    },
+    {
+      path: '/ticketprices/tickets',
+      name: 'tickets',
+      component: Tickets
     }
   ]
 })
