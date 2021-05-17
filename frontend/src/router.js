@@ -11,6 +11,7 @@ import BundleTicket from './views/BundleTicket.vue'
 import FullPackage from './views/FullPackage.vue'
 import Book from './views/Book.vue'
 import Signin from './views/Signin.vue'
+import Activity from './views/ActivityViews/Activity.vue'
 import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
@@ -52,9 +53,15 @@ export default new Router({
       component: Activities
     },
     {
+      path: '/activities/:id',
+      name: 'activity',
+      component: Activity,
+      props: true
+    },
+    {
       path: '/activities/attractions/:id',
       name: 'attractions',
-      component: Attraction,
+      component: Activity,
       props: true
     },
     {

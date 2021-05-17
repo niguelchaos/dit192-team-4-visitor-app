@@ -8,7 +8,7 @@
     <!-- drop box -->
     <b-container>
       <div class="filter-div">
-        <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="filterCards(buttons, i)" :key="i"
+        <button class="btn-filter" v-for="(buttons, i) in activityTypes" v-on:click="filterCards(buttons, i)" :key="i"
           :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
         {{ buttons.type }}
         </button>
@@ -16,7 +16,7 @@
 
       <div>
         <b-col>
-          <b-form-select style="border: 0px; border-radius: 15px" v-model="filterSelected" :options="filterOptions"></b-form-select>
+          <b-form-select style="border: 0px; border-radius: 15px" v-model="filterSelected" :options="filterOptions" v-on:change="changeFilter(filterSelected)"></b-form-select>
         </b-col>
       </div>
     </b-container>
@@ -25,7 +25,7 @@
     <b-container class="card-main-div">
       <b-row>
         <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
-          <activity-card :activity="a.data" :type="a.type"></activity-card>
+          <activity-card :activity="a"></activity-card>
           <!-- idk why this works -->
         </b-col>
       </b-row>
@@ -53,25 +53,19 @@ export default {
   components: { ActivityCard },
   data() {
     return {
+      activityTypes: [],
       activities: [],
-      attractions: [],
-      categories: [
-        { type: 'All', state: true },
-        { type: 'Attractions', state: false },
-        { type: 'Games', state: false },
-        { type: 'Restaurants', state: false }
-      ],
-      restaurants: [],
 
       // TODO: Split filtering panel into a separate component
-      filterSelected: null,
       filterOptions: [
         { value: null, text: 'Other potential filters' },
-        { value: 'name-asc', text: 'Name ascending' },
-        { value: 'name-dsc', text: 'Name descending' },
-        { value: 'price-low', text: 'Lowest price' },
-        { value: 'price-high', text: 'Highest price' }
+        { value: 'name,asc', text: 'Name ascending' },
+        { value: 'name,desc', text: 'Name descending' },
+        { value: 'price,asc', text: 'Lowest price' },
+        { value: 'price,desc', text: 'Highest price' }
       ],
+      filterSelected: null,
+      filterCategories: 'all',
       // when activities is clicked, currentroute is empty -> default to page 1
       // takes page directly from url
       currentPage:
@@ -81,60 +75,45 @@ export default {
     }
   },
   beforeMount() {
+    this.getActivityTypes()
   },
   mounted() {
     // happens only once
     // updatePageNum already executes getAttractions
-    this.linkGen(this.currentPage)
-    this.updatePageNum(this.currentPage)
+    this.getActivities(this.filterCategories, this.filterSelected)
+    //this.linkGen(this.currentPage)
+    
+    //this.updatePageNum(this.currentPage)
   },
   beforeUpdate() {},
   updated() {},
   methods: {
 
     filterCards(filter, i) {
-      let s = this.categories[i].state
-      for (const itm in this.categories) {
-        this.categories[itm].state = false
-        this.categories[i].state = !s
+      let s = this.activityTypes[i].state
+      for (const itm in this.activityTypes) {
+        this.activityTypes[itm].state = false
+        this.activityTypes[i].state = !s
       }
 
-      this.activities = []
-      switch (filter.type.toLowerCase()) {
-        case 'all':
-          this.populate('attractions', this.attractions)
-          this.populate('games', this.games)
-          this.populate('restaurants', this.restaurants)
-          break
-        case 'attractions':
-          this.populate('attractions', this.attractions)
-          break
-        case 'games':
-          this.populate('games', this.games)
-          break
-        case 'restaurants':
-          this.populate('restaurants', this.restaurants)
-          break
-      }
-      this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+      this.filterCategories = filter.type
+      this.getActivities(this.filterCategories, this.filterSelected)
     },
 
-    getActivities() {
-      this.getAttractions()
-      this.getGames()
-      this.getRestaurants()
+    changeFilter(selected) {
+      console.log("changeFilter")
+      console.log(selected)
+      this.getActivities(this.filterCategories, selected)
     },
 
-    getAttractions() {
-      Api.get('attractions', {
-        params: {
-          page: this.currentPage
-        }
-      })
+    getActivityTypes() {
+      Api.get('activities/types')
         .then(res => {
-          this.attractions = res.data.data
-          this.populate('attractions', this.attractions)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+          this.activityTypes.push({ type: 'all', state: true })
+          for (const i in res.data.data) {
+            this.activityTypes.push({ type: res.data.data[i].toLowerCase(), state: false })
+          }
+          this.activityTypes.sort((a, b) => a.type.localeCompare(b.type))
         })
         .catch(err => {
           this.attractions = []
@@ -142,36 +121,24 @@ export default {
         })
     },
 
-    getGames() {
-      Api.get('games', {
-        params: {
-          page: this.currentPage
-        }
-      })
-        .then(res => {
-          this.games = res.data.data
-          this.populate('games', this.games)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
-        })
-        .catch(err => {
-          this.games = []
-          console.log(err)
-        })
-    },
+    getActivities(type, sort) {
+      var params = {
+          page: this.currentPage,
+          type: undefined,
+          sortBy: sort
+      }
+      if (type !== 'all') {
+        params.type = type
+      }
 
-    getRestaurants() {
-      Api.get('restaurants', {
-        params: {
-          page: this.currentPage
-        }
+      Api.get('activities', {
+        params: params
       })
         .then(res => {
-          this.restaurants = res.data.data
-          this.populate('restaurants', this.restaurants)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+          this.activities = res.data.data
         })
         .catch(err => {
-          this.restaurants = []
+          this.activities = []
           console.log(err)
         })
     },
@@ -185,7 +152,7 @@ export default {
     // updates page number, calls attractions every time page is changed
     updatePageNum(pageNum) {
       this.currentPage = pageNum
-      this.getActivities()
+      this.getActivities(this.filterCategories, this.filterSelected)
     },
 
     linkGen(pageNum) {
@@ -206,6 +173,7 @@ export default {
 }
 
 .btn-filter {
+  text-transform: capitalize;
   border-radius: 15px;
   border-width: 0;
   font-size: 17px;

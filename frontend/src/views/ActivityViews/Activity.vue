@@ -9,14 +9,15 @@
 
           <div class="activity_card">
             <h5 class="title">{{ activity.name }}</h5>
+            <p><strong>Category: </strong><i class="activity-type">{{ activity.type.join(', ') }}</i></p>
             <p><strong>Status: </strong>{{ activity.status }}</p>
-            <p><strong>Price: </strong>{{ activity.price }} kr to play.</p>
+            <p v-if="!activity.type.includes('restaurant')"><strong>Price: </strong>{{ activity.price }} kr</p>
           </div>
           <div class="activity_card">
             <p>{{ activity.description }}</p>
           </div>
           <div class="activity_card">
-            <p>map</p>
+            <map-component :content="[activity]"></map-component>
           </div>
         </b-col>
       </b-row>
@@ -26,8 +27,10 @@
 
 <script>
 import { Api } from '@/Api'
+import MapComponent from '../../components/Map.vue'
 export default {
-  name: 'Game',
+  components: { MapComponent },
+  name: 'Activity',
   props: {
     activity: {
       type: Object,
@@ -63,5 +66,9 @@ export default {
 }
 .image {
   width: 100%;
+}
+
+.activity-type {
+  text-transform: capitalize;
 }
 </style>

@@ -38,7 +38,7 @@ export default {
     const id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
     // activity object is not passed with props (i.e page is reloaded) => fetch the activity again
     if (!this.activity) {
-      Api.get('restaurants/' + id)
+      Api.get('activities/' + id)
         .then(res => {
           this.activity = res.data.data
         })
