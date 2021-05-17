@@ -6,13 +6,11 @@
         no-body
         v-b-toggle="'reservation-details-' + ticket.name"
       >
-        <b-col class="card-img-col">
+        <b-col class="card-img-col text-right">
           <b-card-img
             src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/58557/ticket-emoji-clipart-md.png"
             alt="Image"
-            height="90%"
-            width="100%"
-            class="card-image"
+            class="ticket-icon"
           ></b-card-img>
         </b-col>
 
@@ -26,7 +24,6 @@
               ticket.name
             }}</span>
           </b-card-title>
-          <p class="card-queue-text card-text mt-3">Queue: 30 min</p>
         </b-col>
 
       </b-card>
@@ -58,8 +55,10 @@ export default {
   padding-right: 3%;
   margin: 0%;
 }
-.card-image {
-  border-radius: 15px;
+.ticket-icon {
+  height:70px;
+  width:70px;
+  margin-left: auto;
 }
 .card-title {
   padding-top: 15%;
