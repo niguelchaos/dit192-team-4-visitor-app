@@ -7,18 +7,6 @@
         <p>Choose a timeslot to reserve below</p>
       </b-card>
       <br />
-      <b-card class="testcard">
-          <h4 class="card-title" style="font-size: 1.5rem;">Timeslot 0</h4>
-          <font-awesome-icon class ="icon" style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 3:00 - 4:30 pm
-          <p class="align-middle">Left Seat 20/50</p>
-          <span class="align-left font-weight-bolder">
-            <b-button v-b-modal.modal-1 class="btn btn-test bg-success mb-3" type="submit">Choose</b-button>
-            <b-modal class="mb-3" id="modal-1" ok-only no-stacking header=no-stacking>
-              <p style="font-size: 1.5rem;">Reservation Completed!</p>
-            </b-modal>
-          </span>
-      </b-card>
-      <br />
       <li v-for="item in slots" :key="item.id" style="list-style-type: none;">
       <b-card class="slotcard">
             <h4 class="card-title" style="font-size: 1.5rem;">{{item.slot}}</h4>
@@ -54,10 +42,21 @@ export default {
         { slot: 'Timeslot 9', time: '3:30-4:00 PM', seat: '3/20 seats left' },
         { slot: 'Timeslot 10', time: '4:30-5:00 PM', seat: '3/20 seats left' }
       ] }
+  },
+  methods: {
+    buttonClick() {
+      var i = 3
+      // eslint-disable-next-line eqeqeq
+      while (i > 0) {
+        i--
+        document.getElementById('dec').value = i
+      }
+    }
+
   }
+
 }
 </script>
-
 <style scoped>
 .topcard{
   margin-left: 32%;
