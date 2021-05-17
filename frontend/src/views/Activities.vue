@@ -8,15 +8,15 @@
     <!-- drop box -->
     <b-container>
       <div class="filter-div">
-        <b-button style="background-color: white; color:black" class="btn-filter" v-for="(buttons, i) in categories" v-on:click="filterCards(buttons, i)" :key="i"
+        <button class="btn-filter" v-for="(buttons, i) in activityTypes" v-on:click="filterCards(buttons, i)" :key="i"
           :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
         {{ buttons.type }}
-        </b-button>
+        </button>
       </div>
 
       <div>
         <b-col>
-          <b-form-select style="border: 0px; border-radius: 15px" v-model="filterSelected" :options="filterOptions"></b-form-select>
+          <b-form-select style="border: 0px; border-radius: 15px" v-model="filterSelected" :options="filterOptions" v-on:change="changeFilter(filterSelected)"></b-form-select>
         </b-col>
       </div>
     </b-container>
@@ -25,7 +25,7 @@
     <b-container class="card-main-div">
       <b-row>
         <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
-          <activity-card :activity="a.data" :type="a.type"></activity-card>
+          <activity-card :activity="a"></activity-card>
           <!-- idk why this works -->
         </b-col>
       </b-row>
@@ -53,26 +53,19 @@ export default {
   components: { ActivityCard },
   data() {
     return {
+      activityTypes: [],
       activities: [],
-      attractions: [],
-      restaurants: [],
-      categories: [
-        { type: 'All', state: true },
-        { type: 'Attractions', state: false },
-        { type: 'Games', state: false },
-        { type: 'Restaurants', state: false }
-      ],
-      currentCategory: null,
 
       // TODO: Split filtering panel into a separate component
-      filterSelected: null,
       filterOptions: [
         { value: null, text: 'Other potential filters' },
-        { value: 'name-asc', text: 'Name ascending' },
-        { value: 'name-dsc', text: 'Name descending' },
-        { value: 'price-low', text: 'Lowest price' },
-        { value: 'price-high', text: 'Highest price' }
+        { value: 'name,asc', text: 'Name ascending' },
+        { value: 'name,desc', text: 'Name descending' },
+        { value: 'price,asc', text: 'Lowest price' },
+        { value: 'price,desc', text: 'Highest price' }
       ],
+      filterSelected: null,
+      filterCategories: 'all',
       // when activities is clicked, currentroute is empty -> default to page 1
       // takes page directly from url
       currentPage:
@@ -93,12 +86,15 @@ export default {
     }
   },
   beforeMount() {
+    this.getActivityTypes()
   },
   mounted() {
     // happens only once
-    // updatePageNum already executes getActivities
-    this.linkGen(this.currentPage)
-    this.updatePageNum(this.currentPage)
+    // updatePageNum already executes getAttractions
+    this.getActivities(this.filterCategories, this.filterSelected)
+    //this.linkGen(this.currentPage)
+    
+    //this.updatePageNum(this.currentPage)
   },
   beforeUpdate() {},
   updated() {},
@@ -119,51 +115,30 @@ export default {
   methods: {
 
     filterCards(filter, i) {
-      console.log('prev:' + this.prevFilter.type)
-
-      if (this.prevFilter.type === this.categories[i].type) {
-        console.log('current cat clicked')
-        return
+      let s = this.activityTypes[i].state
+      for (const itm in this.activityTypes) {
+        this.activityTypes[itm].state = false
+        this.activityTypes[i].state = !s
       }
 
-      let s = this.categories[i].state
-      console.log('current cat:' + this.categories[i].type)
-
-      for (const itm in this.categories) {
-        this.categories[itm].state = false
-        this.categories[i].state = !s
-      }
-
-      this.activities = []
-      this.currentCategory = filter
-
-      // get correct activities
-      this.getTotalPages()
-      this.updatePageNum(this.currentPage)
-
-      this.prevFilter = this.currentCategory
+      this.filterCategories = filter.type
+      this.getActivities(this.filterCategories, this.filterSelected)
     },
 
-    getActivities() {
-      this.getAttractions()
-      this.getGames()
-      this.getRestaurants()
+    changeFilter(selected) {
+      console.log("changeFilter")
+      console.log(selected)
+      this.getActivities(this.filterCategories, selected)
     },
 
-    // Sort added for each GET because it is async
-    getAttractions() {
-      Api.get('attractions', {
-        params: {
-          page: this.currentPage,
-          limit: this.activityLimit
-        }
-      })
+    getActivityTypes() {
+      Api.get('activities/types')
         .then(res => {
-          this.attractions = res.data.data
-          this.totalAttractions = res.data.totalAttractions
-
-          this.populate('attractions', this.attractions)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+          this.activityTypes.push({ type: 'all', state: true })
+          for (const i in res.data.data) {
+            this.activityTypes.push({ type: res.data.data[i].toLowerCase(), state: false })
+          }
+          this.activityTypes.sort((a, b) => a.type.localeCompare(b.type))
         })
         .catch(err => {
           this.attractions = []
@@ -171,42 +146,25 @@ export default {
         })
     },
 
-    getGames() {
-      Api.get('games', {
-        params: {
+    getActivities(type, sort) {
+      var params = {
           page: this.currentPage,
-          limit: this.activityLimit
-        }
+          type: undefined,
+          sortBy: sort
+      }
+      if (type !== 'all') {
+        params.type = type
+      }
+
+      Api.get('activities', {
+        params: params
       })
         .then(res => {
-          this.games = res.data.data
-          this.totalGames = res.data.totalGames
-
-          this.populate('games', this.games)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+          this.activities = res.data.data
+          console.log(this.activities)
         })
         .catch(err => {
-          this.games = []
-          console.log(err)
-        })
-    },
-
-    getRestaurants() {
-      Api.get('restaurants', {
-        params: {
-          page: this.currentPage,
-          limit: this.activityLimit
-        }
-      })
-        .then(res => {
-          this.restaurants = res.data.data
-          this.totalRestaurants = res.data.totalRestaurants
-
-          this.populate('restaurants', this.restaurants)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
-        })
-        .catch(err => {
-          this.restaurants = []
+          this.activities = []
           console.log(err)
         })
     },
@@ -221,44 +179,7 @@ export default {
     // separated to let filtercards use GET without changing page
     changePage(pageNum) {
       this.currentPage = pageNum
-      this.updatePageNum(pageNum)
-    },
-
-    // GETs activities, checks for page edge cases
-    updatePageNum(pageNum) {
-      this.activities = []
-
-      if (this.currentCategory === null) {
-        console.log('currentcat null, defaulting to all')
-        this.currentCategory = this.categories[0]
-        this.activityLimit = 2
-        this.pageSize = 6
-        this.prevFilter = this.categories[0]
-      }
-
-      console.log(this.currentCategory.type)
-
-      if (this.currentPage > this.totalPages) {
-        this.currentPage = 1
-        this.$router.replace({ query: { currentPage: this.currentPage } })
-      }
-
-      switch (this.currentCategory.type.toLowerCase()) {
-        case 'all':
-          this.getActivities()
-          break
-        case 'attractions':
-          this.getAttractions()
-          break
-        case 'games':
-          this.getGames()
-          break
-        case 'restaurants':
-          this.getRestaurants()
-          break
-      }
-      console.log(this.activities)
-      this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+      this.getActivities(this.filterCategories, this.filterSelected)
     },
 
     linkGen(pageNum) {
@@ -307,6 +228,7 @@ export default {
 }
 
 .btn-filter {
+  text-transform: capitalize;
   border-radius: 15px;
   border-width: 0;
   font-size: 17px;
