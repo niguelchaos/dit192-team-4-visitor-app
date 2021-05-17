@@ -18,7 +18,7 @@ services:
          - mongodb
       restart: "no"
       profiles: ["init"]
-      entrypoint: ["bash", "-c", "sleep 10 && mongoimport --host mongo:27017 --db ${MONGO_DATABASE} --collection attractions --drop --file /docker-entrypoint-initdb.d/attractions.json --jsonArray && mongoimport --host mongo:27017 --db ${MONGO_DATABASE} --collection restaurants --drop --file /docker-entrypoint-initdb.d/restaurants.json --jsonArray && mongoimport --host mongo:27017 --db ${MONGO_DATABASE} --collection games --drop --file /docker-entrypoint-initdb.d/games.json --jsonArray"]
+      entrypoint: ["bash", "-c", "sleep 10 && mongoimport --host mongo:27017 --db ${MONGO_DATABASE} --collection attractions --drop --file /docker-entrypoint-initdb.d/attractions.json --jsonArray && mongoimport --host mongo:27017 --db ${MONGO_DATABASE} --collection restaurants --drop --file /docker-entrypoint-initdb.d/restaurants.json --jsonArray && mongoimport --host mongo:27017 --db ${MONGO_DATABASE} --collection games --drop --file /docker-entrypoint-initdb.d/games.json --jsonArray && mongoimport --host mongo:27017 --db ${MONGO_DATABASE} --collection activities --drop --file /docker-entrypoint-initdb.d/activities.json --jsonArray"]
 
 volumes:
    dit192_data:
