@@ -50,9 +50,15 @@ export default new Router({
       component: Activities
     },
     {
+      path: '/activities/:id',
+      name: 'activity',
+      component: Activity,
+      props: true
+    },
+    {
       path: '/activities/attractions/:id',
       name: 'attractions',
-      component: Attraction,
+      component: Activity,
       props: true
     },
     {
