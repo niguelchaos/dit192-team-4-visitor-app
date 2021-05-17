@@ -38,6 +38,9 @@
           <p>Opening Times: 1pm - 10pm</p>
         </b-col>
       </b-row>
+      <div id="footer-menu">
+        <a href="/home/policies" class="btnPolicy"><b>Policies</b></a>
+      </div>
     </b-container>
   </div>
 </template>
@@ -111,6 +114,13 @@ export default {
   .map_img {
     height: 500px;
     margin-top: 10px;
+  }
+
+  .btnPolicy {
+    display: block;
+    margin-top: 15px;
+    margin-left: 950px;
+    width: 200px;
   }
 
 </style>
