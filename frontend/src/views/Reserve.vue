@@ -50,7 +50,7 @@
         </button> -->
       </div>
 
-      <div>
+      <div v-if="categories[0].state">
         <b-col>
           <b-form-select
             style="border: 0px; border-radius: 15px; width: 200px"
@@ -114,9 +114,9 @@
 </template>
 
 <script>
-import { Api } from "@/Api";
-import ActivityCard from "@/components/ReservationCard.vue";
-import MyReservation from "@/components/MyReservation.vue";
+import { Api } from '@/Api'
+import ActivityCard from '@/components/ReservationCard.vue'
+import MyReservation from '@/components/MyReservation.vue'
 export default {
   components: { ActivityCard, MyReservation },
   data() {
@@ -124,8 +124,8 @@ export default {
       activities: [],
       attractions: [],
       categories: [
-        { type: "All", state: true },
-        { type: "My Reservations", state: false },
+        { type: 'All', state: true },
+        { type: 'My Reservations', state: false }
       ],
       prevCategory: null,
       currentCategory: null,
@@ -134,158 +134,158 @@ export default {
       // TODO: Split filtering panel into a separate component
       filterSelected: null,
       filterOptions: [
-        { value: null, text: "filter options" },
-        { value: "name", text: "Restaurant" },
-        { value: "name", text: "Rides" },
+        { value: null, text: 'filter options' },
+        { value: 'name', text: 'Restaurant' },
+        { value: 'name', text: 'Rides' }
       ],
       // when activities is clicked, currentroute is empty -> default to page 1
       // takes page directly from url
       currentPage:
         this.$router.currentRoute.query.currentPage === undefined
           ? 1
-          : this.$router.currentRoute.query.currentPage,
-    };
+          : this.$router.currentRoute.query.currentPage
+    }
   },
   beforeMount() {},
   mounted() {
     // happens only once
     // updatePageNum already executes getAttractions
-    this.linkGen(this.currentPage);
-    this.updatePageNum(this.currentPage);
+    this.linkGen(this.currentPage)
+    this.updatePageNum(this.currentPage)
   },
   beforeUpdate() {},
   updated() {},
   methods: {
     changeCategory(filter, i) {
       if (this.prevCategory.type === this.categories[i].type) {
-        console.log("current cat clicked");
-        return;
+        console.log('current cat clicked')
+        return
       }
 
-      let s = this.categories[i].state;
+      let s = this.categories[i].state
       for (const itm in this.categories) {
-        this.categories[itm].state = false;
-        this.categories[i].state = !s;
+        this.categories[itm].state = false
+        this.categories[i].state = !s
       }
 
-      this.activities = [];
-      this.currentCategory = filter;
+      this.activities = []
+      this.currentCategory = filter
 
       switch (filter.type.toLowerCase()) {
-        case "all":
-          this.populate("attractions", this.attractions);
-          //this.populate('games', this.games)
-          this.populate("restaurants", this.restaurants);
-          break;
-        case "attractions":
-          this.populate("attractions", this.attractions);
-          break;
-        //case 'games':
-        ///this.populate('games', this.games)
-        ///break
-        case "restaurants":
-          this.populate("restaurants", this.restaurants);
-          break;
-        case "My Reservations":
-          this.populate("attractions", this.attractions);
-          this.populate("restaurants", this.restaurants);
-          break;
+        case 'all':
+          this.populate('attractions', this.attractions)
+          // this.populate('games', this.games)
+          this.populate('restaurants', this.restaurants)
+          break
+        case 'attractions':
+          this.populate('attractions', this.attractions)
+          break
+        // case 'games':
+        /// this.populate('games', this.games)
+        /// break
+        case 'restaurants':
+          this.populate('restaurants', this.restaurants)
+          break
+        case 'My Reservations':
+          this.populate('attractions', this.attractions)
+          this.populate('restaurants', this.restaurants)
+          break
       }
-      this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name));
+      this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
 
-      this.prevCategory = this.currentCategory;
+      this.prevCategory = this.currentCategory
     },
 
     getActivities() {
-      this.getAttractions();
-      //this.getGames()
-      this.getRestaurants();
+      this.getAttractions()
+      // this.getGames()
+      this.getRestaurants()
     },
 
     getAttractions() {
-      Api.get("attractions", {
+      Api.get('attractions', {
         params: {
-          page: this.currentPage,
-        },
+          page: this.currentPage
+        }
       })
         .then((res) => {
-          this.attractions = res.data.data;
-          this.populate("attractions", this.attractions);
+          this.attractions = res.data.data
+          this.populate('attractions', this.attractions)
           this.activities.sort((a, b) =>
             a.data.name.localeCompare(b.data.name)
-          );
+          )
         })
         .catch((err) => {
-          this.attractions = [];
-          console.log(err);
-        });
+          this.attractions = []
+          console.log(err)
+        })
     },
 
     getGames() {
-      Api.get("games", {
+      Api.get('games', {
         params: {
-          page: this.currentPage,
-        },
+          page: this.currentPage
+        }
       })
         .then((res) => {
-          this.games = res.data.data;
-          this.populate("games", this.games);
+          this.games = res.data.data
+          this.populate('games', this.games)
           this.activities.sort((a, b) =>
             a.data.name.localeCompare(b.data.name)
-          );
+          )
         })
         .catch((err) => {
-          this.games = [];
-          console.log(err);
-        });
+          this.games = []
+          console.log(err)
+        })
     },
 
     getRestaurants() {
-      Api.get("restaurants", {
+      Api.get('restaurants', {
         params: {
-          page: this.currentPage,
-        },
+          page: this.currentPage
+        }
       })
         .then((res) => {
-          this.restaurants = res.data.data;
-          this.populate("restaurants", this.restaurants);
+          this.restaurants = res.data.data
+          this.populate('restaurants', this.restaurants)
           this.activities.sort((a, b) =>
             a.data.name.localeCompare(b.data.name)
-          );
+          )
         })
         .catch((err) => {
-          this.restaurants = [];
-          console.log(err);
-        });
+          this.restaurants = []
+          console.log(err)
+        })
     },
 
     populate(category, source) {
       for (const i in source) {
-        this.activities.push({ type: category, data: source[i] });
+        this.activities.push({ type: category, data: source[i] })
       }
     },
 
     // updates page number, calls attractions every time page is changed
     updatePageNum(pageNum) {
-      this.currentPage = pageNum;
+      this.currentPage = pageNum
 
       if (this.currentCategory === null) {
-        console.log("currentcat null, defaulting to all");
-        this.currentCategory = this.categories[0];
-        this.prevCategory = this.categories[0];
+        console.log('currentcat null, defaulting to all')
+        this.currentCategory = this.categories[0]
+        this.prevCategory = this.categories[0]
       }
 
-      this.getActivities();
+      this.getActivities()
     },
 
     linkGen(pageNum) {
       return {
         // vmodel already takes care of path additions, but this needed for correct path
-        query: { currentPage: pageNum },
-      };
-    },
-  },
-};
+        query: { currentPage: pageNum }
+      }
+    }
+  }
+}
 </script>
 
 <style>

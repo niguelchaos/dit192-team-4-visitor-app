@@ -36,9 +36,9 @@
 <script>
 // this stupid camel case props thing i dont get it
 export default {
-  name: "MyReservationCard",
-  props: ["activity"],
-};
+  name: 'MyReservationCard',
+  props: ['activity']
+}
 </script>
 
 <style scoped>
