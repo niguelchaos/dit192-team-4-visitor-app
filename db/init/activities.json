@@ -1,0 +1,86 @@
+[
+  {
+    "name": "The Loophole Plunge",
+    "description": "The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!",
+    "price": 45,
+    "status": "Open",
+    "latitude": 57.695886,
+    "longitude": 11.991146,
+    "queueTime": "10 minutes",
+    "type": ["attraction", "fast"],
+    "img": "https://www.verywellfamily.com/thmb/8QHDzEB3vTVO93LfH009qQASU5Y=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/roller-coaster-149508746-57ac7eb45f9b58974ace1b67.jpg"
+  },
+  {
+    "name": "Ride of Doom",
+    "description": "A dark ride for those who dare! The ride starts out slow, but it gets faster as it goes on. There will be plenty of people around you so don't worry about being alone…or scared!",
+    "price": 60,
+    "status": "Open",
+    "latitude": 57.693369,
+    "longitude": 11.992690,
+    "queueTime": "1 minute",
+    "type": ["attraction", "family"],
+    "img": "https://steamuserimages-a.akamaihd.net/ugc/245839072336144814/A9876FE9F87EF510212C370BE7CFBC4951A484B0/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+  },
+  {
+    "name": "Happily Ever After",
+    "description": "This is the most exciting ride ever! It goes up and down at incredible speeds, then it flips upside-down and comes back around again! Don't miss out on this one of a kind experience! The ride will be over before you know it.",
+    "price": 50,
+    "status": "Open",
+    "latitude": 57.694745,
+    "longitude": 11.994666,
+    "queueTime": "30 seconds",
+    "type": ["attraction", "fast"],
+    "img": "https://www.itskona.com/wp-content/uploads/rollercoaster.jpg"
+  },
+  {
+    "name": "The Sky Screamer",
+    "description": "The Sky Screamer is a high speed thrill ride with some pretty intense twists and turns. It's designed for all ages, but we recommend at least 6 years old.",
+    "price": 40,
+    "status": "Open",
+    "latitude": 57.695273,
+    "longitude": 11.990801,
+    "queueTime": "5 minutes",
+    "type": ["attraction", "fast"],
+    "img": "https://i2.wp.com/dahlstroms.com/wp-content/uploads/2013/12/rollercoaster-ride.jpg?fit=770%2C513&ssl=1"
+  },
+  {
+    "name": "The Arcade Game Shooter",
+    "description": "This is a game that is very fun",
+    "price": 10,
+    "status": "open",
+    "latitude": 57.695270,
+    "longitude": 11.990798,
+    "type": ["game"],
+    "img": "https://www.fitness-gaming.com/images/Zones/events_and_fun/0597_tokyo_joypolis_sega_amusement_theme_park/028_tokyo_joypolis_sega.jpg"
+  },
+  {
+    "name": "Wheel of Daim",
+    "description": "Spin the wheel of fortune to win an epic price",
+    "price": 25,
+    "status": "open",
+    "latitude": 57.695271,
+    "longitude": 11.990796,
+    "type": ["game"],
+    "img": "https://live.staticflickr.com/7169/6533873757_fe28dbd081_b.jpg"
+  },
+  {
+    "name": "Max Hamburgers",
+    "description": "We have the best burgers in Sweden. Come and eat",
+    "price": 0,
+    "status": "open",
+    "latitude": 57.694755,
+    "longitude": 11.994676,
+    "type": ["restaurant"],
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjaW9LH2-7_EwZB4AnYOHto5X9W1axLNlTaA&usqp=CAU"
+  },
+  {
+    "name": "Ice Cream Land",
+    "description": "Come and eat all the ice cream that you can imagine!",
+    "price": 0,
+    "status": "open",
+    "latitude": 57.694785,
+    "longitude": 11.994691,
+    "type": ["restaurant"],
+    "img": "https://i.pinimg.com/originals/25/9b/0a/259b0a298bc745bd3a5dcf47511d8e49.png"
+  }
+]

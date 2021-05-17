@@ -21,16 +21,19 @@
     "url": "git+https://git.chalmers.se/courses/EDA397/1920/platform.git"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-paginate": "^1.0.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
     "mongoose-paginate-v2": "^1.3.17",
     "morgan": "^1.9.1",
-    "uuid": "^7.0.0"
+    "uuid": "^7.0.0",
+    "validator": "^13.6.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

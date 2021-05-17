@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "882ab74f-390b-43c3-a635-146c8a638fcf",
+		"_postman_id": "8fe101bb-205c-4f22-a0b7-b3ec0bfd97b8",
 		"name": "DIT192",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -196,7 +196,7 @@
 			"response": []
 		},
 		{
-			"name": "POST /api/attractions",
+			"name": "Create an activity",
 			"event": [
 				{
 					"listen": "test",
@@ -222,7 +222,7 @@
 							"pm.test(\"Data has _id\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.data._id).to.be.a('String')",
-							"    pm.collectionVariables.set(\"attraction_id\", jsonData.data._id);",
+							"    pm.collectionVariables.set(\"activity_id\", jsonData.data._id);",
 							"});",
 							""
 						],
@@ -253,20 +253,20 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/attractions",
+					"raw": "{{host}}/api/activities",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"attractions"
+						"activities"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "GET /api/attractions",
+			"name": "Get all activities",
 			"event": [
 				{
 					"listen": "test",
@@ -290,20 +290,20 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/attractions",
+					"raw": "{{host}}/api/activities",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"attractions"
+						"activities"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "GET /api/attractions/:id",
+			"name": "Get one activity",
 			"event": [
 				{
 					"listen": "test",
@@ -327,21 +327,21 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"raw": "{{host}}/api/activities/{{activity_id}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"attractions",
-						"{{attraction_id}}"
+						"activities",
+						"{{activity_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "PUT /api/attractions/:id",
+			"name": "Modify activity",
 			"event": [
 				{
 					"listen": "test",
@@ -374,21 +374,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"raw": "{{host}}/api/activities/{{activity_id}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"attractions",
-						"{{attraction_id}}"
+						"activities",
+						"{{activity_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DELETE /api/attractions/:id",
+			"name": "Delete activity",
 			"event": [
 				{
 					"listen": "test",
@@ -412,21 +412,21 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"raw": "{{host}}/api/activities/{{activity_id}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"attractions",
-						"{{attraction_id}}"
+						"activities",
+						"{{activity_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "GET /api/attractions/:wrongId",
+			"name": "Get activity: does not exist",
 			"event": [
 				{
 					"listen": "test",
@@ -445,21 +445,21 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"raw": "{{host}}/api/activities/{{activity_id}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"attractions",
-						"{{attraction_id}}"
+						"activities",
+						"{{activity_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "PUT /api/attractions/:wrongId",
+			"name": "Modify the activity: does not exist",
 			"event": [
 				{
 					"listen": "test",
@@ -487,21 +487,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"raw": "{{host}}/api/activities/{{activity_id}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"attractions",
-						"{{attraction_id}}"
+						"activities",
+						"{{activity_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DELETE /api/attractions/:wrongId",
+			"name": "Delete activity: does not exist",
 			"event": [
 				{
 					"listen": "test",
@@ -520,14 +520,326 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/attractions/{{attraction_id}}",
+					"raw": "{{host}}/api/activities/{{activity_id}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"attractions",
-						"{{attraction_id}}"
+						"activities",
+						"{{activity_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register a user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertions",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Registration status is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"status\")",
+							"});",
+							"",
+							"pm.test(\"Registration is successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(201);",
+							"});",
+							"",
+							"pm.test(\"Registration message is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"message\")",
+							"});",
+							"",
+							"pm.test(\"Token is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"token\")",
+							"    pm.collectionVariables.set(\"testToken\", jsonData.token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{testUser}}\",\n    \"phone\": \"{{testPhone}}\",\n    \"password\": \"{{testPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertions",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Authorization status is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"status\")",
+							"});",
+							"",
+							"pm.test(\"Authorization is successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Authorization message is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"message\")",
+							"});",
+							"",
+							"pm.test(\"Token is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"token\")",
+							"    pm.collectionVariables.set(\"testToken\", jsonData.token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\": \"{{testPhone}}\",\n    \"password\": \"{{testPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertions",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Authorization status is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"status\")",
+							"});",
+							"",
+							"pm.test(\"Authorization is successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Contains authorization message in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"message\")",
+							"});",
+							"",
+							"pm.test(\"Contains user data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});",
+							"",
+							"pm.test(\"Contains user identifier\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data).to.have.property(\"id\")",
+							"    pm.collectionVariables.set(\"testUserId\", jsonData.data.id);",
+							"});",
+							"",
+							"pm.test(\"Contains user phone\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data).to.have.property(\"phone\")",
+							"});",
+							"",
+							"pm.test(\"Phone is the same as the user\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.phone).to.eql(pm.collectionVariables.get('testPhone'));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{testToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/auth/me",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deregister user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertions",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"The user was removed\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"status\")",
+							"});",
+							"",
+							"pm.test(\"The removal was successfully\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"The user removal message exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"message\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{testToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/auth/deregister/{{testUserId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"deregister",
+						"{{testUserId}}"
 					]
 				}
 			},
@@ -556,18 +868,35 @@
 	],
 	"variable": [
 		{
-			"id": "9b994a8f-dc75-4a03-b078-91ff08b94c8a",
 			"key": "host",
 			"value": "http://localhost:3000"
 		},
 		{
-			"id": "12255588-c9f6-4468-80ff-a2479653d5df",
-			"key": "attraction_id",
+			"key": "camel_id",
 			"value": ""
 		},
 		{
-			"id": "8ffe9bc9-638b-4f67-857e-6dacdd48bced",
-			"key": "camel_id",
+			"key": "activity_id",
+			"value": "60a1c9af229a140b09e6a698"
+		},
+		{
+			"key": "testName",
+			"value": "Bence Bensson"
+		},
+		{
+			"key": "testPhone",
+			"value": "0700110011"
+		},
+		{
+			"key": "testPassword",
+			"value": "TestPassword!"
+		},
+		{
+			"key": "testToken",
+			"value": ""
+		},
+		{
+			"key": "testUserId",
 			"value": ""
 		}
 	]

@@ -13,6 +13,8 @@ var camelsController = require('./controllers/controller');
 var attractionsRoutes = require('./routes/attraction.route');
 var restaurantsRoutes = require('./routes/restaurant.route');
 var gamesRoutes = require('./routes/game.route');
+var activitiesRoutes = require('./routes/activity.route');
+var authRoutes = require('./routes/auth.route');
 
 
 var mongoURI = process.env.MONGODB_URI || 
@@ -46,8 +48,9 @@ app.get('/api', function(req, res) {
 app.use('/api/camels', camelsController);
 app.use('/api', attractionsRoutes);
 app.use('/api', restaurantsRoutes);
+app.use('/api', activitiesRoutes);
 app.use('/api', gamesRoutes);
-
+app.use('/api', authRoutes);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
