@@ -49,10 +49,23 @@
 </template>
 
 <script>
-// this stupid camel case props thing i dont get it
+import { Api } from '@/Api'
 export default {
   name: 'activity-card-item',
-  props: ['activity', 'type']
+  props: ['activity', 'type'],
+  methods: {
+    updateValues() {
+      Api.put('seats/' + this.activity._id, {
+        reservableSeats: this.activity.reservableSeats - 1
+      })
+        .then(res => {
+          this.activity.reservableSeats -= 1
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
 
