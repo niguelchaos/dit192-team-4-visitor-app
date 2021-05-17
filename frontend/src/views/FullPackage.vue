@@ -12,12 +12,13 @@
             <p>Your ticket to have access of all the rides for one day. Select your age and book tickets.</p>
             <p>Login required to book the full package</p>
             <br />
-            <b-dropdown id="dropdown-2" text="Age" class="btnAge">
-            <b-dropdown-item>0-2 years, Free</b-dropdown-item>
-            <b-dropdown-item>2-7 years, 250 SEK</b-dropdown-item>
-            <b-dropdown-item>8 years+, 320 SEK</b-dropdown-item>
-            </b-dropdown>
-          <b-button pill to="/fullpackage/registerandbook" class="btnBK">Register and book</b-button>
+            <select> id="dropdown-1"
+              <option>-Age-</option>
+              <option>0-2 years, Free</option>
+              <option>2-7 years, 250 SEK</option>
+              <option>8 years+ 320 SEK</option>
+            </select>
+          <b-button pill to="/ticketprices/fullpackage/registerandbook" class="btnBK">Register and book</b-button>
         </b-col>
       </b-row>
     </b-container>
@@ -29,8 +30,8 @@
   background-color: #388659 !important;
   color: #004e64;
   border: 10px;
-  padding: 90px;
-  margin: 50px;
+  padding: 30px;
+  margin: 10px;
   width: 150px;
   height: 45px;
   font-family: Roboto;

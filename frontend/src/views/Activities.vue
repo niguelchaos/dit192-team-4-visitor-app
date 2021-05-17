@@ -35,10 +35,10 @@
       <!-- on change updates when user clicks, linkgen updates path -->
       <b-pagination-nav
         v-model="currentPage"
-        v-on:change="updatePageNum($event)"
+        v-on:change="changePage($event)"
         :link-gen="linkGen"
-        :number-of-pages="3"
-        align="fill"
+        :number-of-pages="totalPages"
+        align="center"
         use-router
         size="md"
       ></b-pagination-nav>
@@ -71,7 +71,18 @@ export default {
       currentPage:
         this.$router.currentRoute.query.currentPage === undefined
           ? 1
-          : this.$router.currentRoute.query.currentPage
+          : this.$router.currentRoute.query.currentPage,
+
+      // used to get number of pages
+      totalAttractions: 0,
+      totalGames: 0,
+      totalRestaurants: 0,
+      totalActivities: 0,
+      pageSize: 6,
+      activityLimit: 6,
+      totalPages: 3,
+      // used to cancel GET when same category clicked
+      prevFilter: null
     }
   },
   beforeMount() {
@@ -87,6 +98,20 @@ export default {
   },
   beforeUpdate() {},
   updated() {},
+  watch: {
+    totalAttractions() {
+      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    },
+    totalGames() {
+      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    },
+    totalRestaurants() {
+      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    },
+    totalActivities() {
+      this.getTotalPages() // only needed for beginning - dunno how else to do it
+    }
+  },
   methods: {
 
     filterCards(filter, i) {
@@ -136,6 +161,7 @@ export default {
       })
         .then(res => {
           this.activities = res.data.data
+          console.log(this.activities)
         })
         .catch(err => {
           this.activities = []
@@ -147,10 +173,11 @@ export default {
       for (const i in source) {
         this.activities.push({ type: category, data: source[i] })
       }
+      console.log('activities:' + this.activities.length + ' == category: ' + category)
     },
 
-    // updates page number, calls attractions every time page is changed
-    updatePageNum(pageNum) {
+    // separated to let filtercards use GET without changing page
+    changePage(pageNum) {
       this.currentPage = pageNum
       this.getActivities(this.filterCategories, this.filterSelected)
     },
@@ -158,9 +185,37 @@ export default {
     linkGen(pageNum) {
       return {
         // vmodel already takes care of path additions, but this needed for correct path
-        query: { currentPage: pageNum }
+        query: { currentPage: pageNum },
+        path: './activities'
+      }
+    },
+
+    // sets pagesize, needs updatepagenum first to get corrent totalactivities
+    getTotalPages() {
+      if (this.currentCategory.type.toLowerCase() === 'all') {
+        this.activityLimit = 2
+        this.pageSize = 6
+      } else {
+        this.activityLimit = 3
+        this.pageSize = 3
+      }
+
+      switch (this.currentCategory.type.toLowerCase()) {
+        case 'all':
+          this.totalPages = Math.ceil(this.totalActivities / this.pageSize)
+          break
+        case 'attractions':
+          this.totalPages = Math.ceil(this.totalAttractions / this.pageSize)
+          break
+        case 'games':
+          this.totalPages = Math.ceil(this.totalGames / this.pageSize)
+          break
+        case 'restaurants':
+          this.totalPages = Math.ceil(this.totalRestaurants / this.pageSize)
+          break
       }
     }
+
   }
 }
 </script>

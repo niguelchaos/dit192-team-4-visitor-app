@@ -13,21 +13,21 @@
             <p>Note: You need entrance ticket also.</p>
 
           <div>
-            <b-dropdown id="dropdown-1" text="Activity type" class="btnActivity">
-            <b-dropdown-item>Arcade games</b-dropdown-item>
-            <b-dropdown-item>Large rides</b-dropdown-item>
-            <b-dropdown-item>Family rides</b-dropdown-item>
-            <b-dropdown-item>Water rides</b-dropdown-item>
-            </b-dropdown>
-          </div>
-          <br />
-          <div>
-            <b-dropdown id="dropdown-2" text="Age" class="btnAge">
-            <b-dropdown-item>0-2 years, Free</b-dropdown-item>
-            <b-dropdown-item>2-7 years, 100 SEK</b-dropdown-item>
-            <b-dropdown-item>8 years+, 180 SEK</b-dropdown-item>
-            </b-dropdown>
-            <b-button pill to="/singleticket/Book" class="btnBK">Book</b-button>
+            <select> id="dropdown-1"
+              <option>Activity type</option>
+              <option>Arcade games</option>
+              <option>Large rides</option>
+              <option>Family rides</option>
+              <option>Water rides</option>
+            </select>
+            <br />
+            <select> id="dropdown-2"
+              <option>-Age-</option>
+              <option>0-2 years, Free</option>
+              <option>2-7 years, 100 SEK</option>
+              <option>8 years+ 180 SEK</option>
+            </select>
+            <b-button pill to="/ticketprices/singleticket/book" class="btnBK">Book</b-button>
           </div>
         </b-col>
       </b-row>
@@ -36,20 +36,11 @@
 </template>
 
 <style>
-.btnactivity {
-  background-color: white;
-  border: 10px;
-  border: #edadc7 !important;
-  color: #004e64 !important;
-  width: 93px;
-  height: 24px;
-  left: 119px;
-}
 .btnBK {
   background-color: #388659 !important;
   color: #004e64;
   border: 10px;
-  padding: 50px;
+  padding: 80px;
   margin: 50px;
   width: 120px;
   height: 45px;
