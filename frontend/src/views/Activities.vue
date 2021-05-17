@@ -92,9 +92,9 @@ export default {
     // happens only once
     // updatePageNum already executes getAttractions
     this.getActivities(this.filterCategories, this.filterSelected)
-    //this.linkGen(this.currentPage)
-    
-    //this.updatePageNum(this.currentPage)
+    // this.linkGen(this.currentPage)
+
+    // this.updatePageNum(this.currentPage)
   },
   beforeUpdate() {},
   updated() {},
