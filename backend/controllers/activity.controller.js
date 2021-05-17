@@ -69,6 +69,24 @@ exports.remove = async function (req, res, next) {
     });
 }
 
+
+exports.updateSeats = async function (req, res) {
+    let seats = req.body.reservableSeats;
+    console.log(seats, req.params.id)
+    Activity.findByIdAndUpdate(
+      req.params.id, 
+      { reservableSeats: seats },
+      function (err, activity) {
+        if (err) { return next(err); }
+        if (activity === null) {
+            return res.status(404).json({ status: 404, message: 'Activity not found'});
+        }
+        res.status(200).json({ status: 200, data: activity.reservableSeats, message: 'Activity was added' });
+       }
+    )
+  }
+  
+
 // PUT method
 exports.update = async function (req, res, next) {
     let id = req.params.id;
@@ -81,7 +99,8 @@ exports.update = async function (req, res, next) {
         image: req.body.image,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
-        queueTime: req.body.queueTime
+        queueTime: req.body.queueTime,
+        reservableSeats: req.body.reservableSeats
     };
     var unsetParams = [];
     Object.keys(params).forEach(p => { if(params[p] === undefined) unsetParams.push(p)});

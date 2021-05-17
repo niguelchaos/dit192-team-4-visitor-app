@@ -32,7 +32,11 @@
 
       </b-card>
         <b-collapse :id="'reservation-details-' + activity.name">
-          <b-card title="Collapsible card">
+          <b-card>
+            <div v-if="type === 'attractions'">
+              {{activity.reservableSeats}}
+            </div>
+            <b-button class="btnrese" pill v-on:click="updateValues()">Update</b-button>
             <b-button class="btnrese" pill to= "/reservations/reserve/getreservation">Reserve</b-button>
           </b-card>
         </b-collapse>
@@ -41,10 +45,23 @@
 </template>
 
 <script>
-// this stupid camel case props thing i dont get it
+import { Api } from '@/Api'
 export default {
   name: 'activity-card-item',
-  props: ['activity', 'type']
+  props: ['activity', 'type'],
+  methods: {
+    updateValues() {
+      Api.put('seats/' + this.activity._id, {
+        reservableSeats: this.activity.reservableSeats - 1
+      })
+        .then(res => {
+          this.activity.reservableSeats -= 1
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
 
