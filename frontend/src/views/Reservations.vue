@@ -42,10 +42,10 @@
             </div>
         </div>
       </div>
-      <!-- <b-button v-on:click="loginUser()"></b-button>
+      <b-button v-on:click="loginUser()"></b-button>
       <b-button v-on:click="addReservation()"></b-button>
       <b-button v-on:click="getReservation()"></b-button>
-      <b-button v-on:click="deleteReservation()"></b-button> -->
+      <b-button v-on:click="deleteReservation()"></b-button>
       <br />
       {{reservations[0]}}
     </b-container>
@@ -65,7 +65,7 @@ export default {
     }
   },
   created() {
-    const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTM3NjlhNTEzZGVlMDkwMDk3ZDI5MSIsImlhdCI6MTYyMTMzMTk3NiwiZXhwIjoxNjIxNDE4Mzc2LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AeI69_5Tnr5WuqPB_KNo8X8DvZSatZDDq12fUEkUNokFLs-3Yqa6QtxQh7Hw9TU5CLe4OfcCKiueKs60kzQJ6uSaALEkiUYfE4lFk3nP1wk1UyY1iPpvhnS_FqXXQXKc4jMGHEA4Cksx3QDn_3Wybml5eK6-UKU9zUy2BMQ80yZIKA1u' }
+    const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTNlMzI3ZWFjNjY5MWNmYzVmMzQyNSIsImlhdCI6MTYyMTM1MzQzMSwiZXhwIjoxNjIxNDM5ODMxLCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AGzbka1d7OHk11yZOzIs2VOm0STaIm5wbXQ38QoldQQnWPI1L94kYYmng01f-W6QjD45FiWnZdIHd1faKa1nq8NgAWNYpycPbEHBaBb3SlOteZZQGWJss4oMVlQOyFRx_TTduGemMfZvAKk3jDjb3DS3PhqRFXLEaEuPgQ8VcbdQj8c5' }
     Api.get('/auth/reservations', { headers })
       .then(res => {
         console.log(res.data.data)
@@ -95,7 +95,7 @@ export default {
         })
     },
     addReservation() {
-      const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTM3NjlhNTEzZGVlMDkwMDk3ZDI5MSIsImlhdCI6MTYyMTMzMTk3NiwiZXhwIjoxNjIxNDE4Mzc2LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AeI69_5Tnr5WuqPB_KNo8X8DvZSatZDDq12fUEkUNokFLs-3Yqa6QtxQh7Hw9TU5CLe4OfcCKiueKs60kzQJ6uSaALEkiUYfE4lFk3nP1wk1UyY1iPpvhnS_FqXXQXKc4jMGHEA4Cksx3QDn_3Wybml5eK6-UKU9zUy2BMQ80yZIKA1u' }
+      const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTNlMzI3ZWFjNjY5MWNmYzVmMzQyNSIsImlhdCI6MTYyMTM1MzQzMSwiZXhwIjoxNjIxNDM5ODMxLCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AGzbka1d7OHk11yZOzIs2VOm0STaIm5wbXQ38QoldQQnWPI1L94kYYmng01f-W6QjD45FiWnZdIHd1faKa1nq8NgAWNYpycPbEHBaBb3SlOteZZQGWJss4oMVlQOyFRx_TTduGemMfZvAKk3jDjb3DS3PhqRFXLEaEuPgQ8VcbdQj8c5' }
       Api.put('/auth/reservation',
         {
           reservation:
@@ -109,7 +109,7 @@ export default {
       ).then(res => console.log(res))
     },
     deleteReservation() {
-      const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTM3NjlhNTEzZGVlMDkwMDk3ZDI5MSIsImlhdCI6MTYyMTMzMTk3NiwiZXhwIjoxNjIxNDE4Mzc2LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AeI69_5Tnr5WuqPB_KNo8X8DvZSatZDDq12fUEkUNokFLs-3Yqa6QtxQh7Hw9TU5CLe4OfcCKiueKs60kzQJ6uSaALEkiUYfE4lFk3nP1wk1UyY1iPpvhnS_FqXXQXKc4jMGHEA4Cksx3QDn_3Wybml5eK6-UKU9zUy2BMQ80yZIKA1u' }
+      const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTNlMzI3ZWFjNjY5MWNmYzVmMzQyNSIsImlhdCI6MTYyMTM1MzQzMSwiZXhwIjoxNjIxNDM5ODMxLCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AGzbka1d7OHk11yZOzIs2VOm0STaIm5wbXQ38QoldQQnWPI1L94kYYmng01f-W6QjD45FiWnZdIHd1faKa1nq8NgAWNYpycPbEHBaBb3SlOteZZQGWJss4oMVlQOyFRx_TTduGemMfZvAKk3jDjb3DS3PhqRFXLEaEuPgQ8VcbdQj8c5 ' }
       Api.put('/auth/deleteReservation',
         { reservation: this.reservations[0] },
         { headers })

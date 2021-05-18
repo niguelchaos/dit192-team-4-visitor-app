@@ -1,17 +1,18 @@
 <template>
-  <b-container class="card-main-div">
-    <b-row>
-      <b-col class="card-main-col" sm="12" md="6" lg="4" xl="3" no-gutters>
-        <activity-card :activity="dummyObj"></activity-card>
-      </b-col>
-      <b-col class="card-main-col" sm="12" md="6" lg="4" xl="3" no-gutters>
-        <activity-card :activity="dummyObj2"></activity-card> </b-col
+  <b-container class="wrapper">
+    <b-row v-for="a in reservations" :key="a.id">
+    <b-col class="card-main-col" sm="12" md="6" lg="4" xl="3" no-gutters>
+        <activity-card :activity="a
+"></activity-card> </b-col
     ></b-row>
+
   </b-container>
 </template>
 
 <script>
 import ActivityCard from '@/components/MyReservationCard.vue'
+import { Api } from '@/Api'
+
 export default {
   components: { ActivityCard },
   name: 'activity-card-item',
@@ -29,8 +30,20 @@ export default {
         text: 'Reserved for 3-3:30 pm',
         img:
           'https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YW11c2VtZW50JTIwcGFya3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'
-      }
+      },
+      reservations: []
+
     }
+  },
+  created() {
+    const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTNlMzI3ZWFjNjY5MWNmYzVmMzQyNSIsImlhdCI6MTYyMTM1MzQzMSwiZXhwIjoxNjIxNDM5ODMxLCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AGzbka1d7OHk11yZOzIs2VOm0STaIm5wbXQ38QoldQQnWPI1L94kYYmng01f-W6QjD45FiWnZdIHd1faKa1nq8NgAWNYpycPbEHBaBb3SlOteZZQGWJss4oMVlQOyFRx_TTduGemMfZvAKk3jDjb3DS3PhqRFXLEaEuPgQ8VcbdQj8c5' }
+    // eslint-disable-next-line no-undef
+    Api.get('/auth/reservations', { headers })
+      .then(res => {
+        console.log(res.data.data)
+        this.reservations = res.data.data
+        console.log(this.reservations)
+      })
   }
 }
 </script>
@@ -72,5 +85,18 @@ export default {
   width: 88px;
   right: 10%;
   background-color: #388659;
+}
+.card-main-div {
+  margin: 0%;
+  padding: 0%;
+  overflow-y: scroll;
+  position: relative;
+  flex: 1;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 </style>

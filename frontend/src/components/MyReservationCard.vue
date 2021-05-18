@@ -26,7 +26,7 @@
         </b-card-title>
 
         <p class="card-queue-text card-text mt-3">
-          {{ activity.text }}
+          {{ activity.time }}
         </p>
       </b-col>
     </b-card>

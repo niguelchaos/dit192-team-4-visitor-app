@@ -90,7 +90,7 @@
           >
             <my-reservation :activity="a.data" :type="a.type"></my-reservation>
             <!-- idk why this works -->
-            
+
           </b-col>
           <my-reservation></my-reservation>
         </b-row>
