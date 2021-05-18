@@ -28,7 +28,6 @@
                 Book
               </b-button>
             </div>
-            {{form.subType}} {{form.price}}
           </div>
         </b-col>
       </b-row>

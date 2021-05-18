@@ -11,5 +11,5 @@ router.put('/auth/reservation', authService.verifyToken, authController.addReser
 router.get('/auth/reservations', authService.verifyToken, authController.getReservations);
 router.put('/auth/ticket', authService.verifyToken, authController.addTicket);
 router.get('/auth/tickets', authService.verifyToken, authController.getTickets);
-
+router.put('/auth/deleteTicket', authService.verifyToken, authController.deleteTicket);
 module.exports = router;

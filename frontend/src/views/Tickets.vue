@@ -5,7 +5,7 @@
       <h2 class="title">Tickets & Prices</h2>
       <p>Here you can purchase tickets for entrance and other activities</p>
     </div>
-    <b-tabs align="center">
+    <b-tabs align="center" v-model="activeTab" >
       <b-tab title="Buy Tickets" active>
         <b-button to= "/ticketprices/entrance" class="ticketButton">Entrance</b-button>
         <b-button to="/ticketprices/singleticket" class="ticketButton">Single Ticket</b-button>
@@ -14,7 +14,7 @@
         <b-button to="/ticketprices/fullpackage" class="ticketButton">Full Package</b-button>
       </b-tab>
       <b-tab title="My Tickets">
-        <ticket-card :ticket="{name: 'Full Package'}"/>
+        <ticket-card v-for="(t, i) in tickets" v-bind:key="i" :ticket="{name: t}"/>
       </b-tab>
     </b-tabs>
     <div class="footer">
@@ -29,18 +29,28 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
 import TicketCard from '../components/TicketCard.vue'
 export default {
   components: { TicketCard },
   data() {
     return {
-      form: {
-        age: '',
-        price: null
-      },
-      amount: 1,
-      ticketType: 'Full package'
-    }
+      tickets: [],
+      activeTab: 0
+    }  
+  },
+  created() {
+    const headers = {'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTI2M2FjNWEyYTNkMzM2ODE5Mjk1NSIsImlhdCI6MTYyMTI1NTA4NywiZXhwIjoxNjIxMzQxNDg3LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwMDExMDAxMSJ9.AQOKYg13xwpLzQPoyQ4pRS2jDcb0GNtIjEcMyOZua3VMRbG6GN8BpAFvCg_FvMdYibN_UJBWWSoyJsaVfEZA4zUOAY_-oKiFdJzmT68MGU0RbLSJs2vMzIF9Wsv9SJWtdj9j618ejP_UyXsD7r1WIlvXYbAChKQBkjaf20_Jn3bfN2jR'}
+    Api.get('/auth/tickets', { headers })
+    .then(res => {
+        this.tickets = res.data.data
+        if(res.data.data.length > 0){
+          this.activeTab = 1
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>
