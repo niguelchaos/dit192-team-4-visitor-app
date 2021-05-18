@@ -1,13 +1,18 @@
 <template>
-  <div class="login-container">
-    <img class="login-logo" src="../assets/user-circle.svg"/>
-    <h2>Sign in</h2>
-    <div class="input-container">
-      <input class="login-el login-input" type="text" placeholder="Phone number" v-model="form.phone" required>
-      <input class="login-el login-input" type="password" placeholder="Password" v-model="form.password" required>        
+  <div>
+    <div class="container logo-pane">
+      <img src="../assets/logo.png"/>
     </div>
-    <button class="login-el login-btn" v-on:click="login()">Sign in</button>
-    <p>Don't have an account? Register here---></p>
+    <div class="container">
+      <img class="login-logo" src="../assets/user-circle.svg"/>
+      <h2>Sign in</h2>
+      <div class="input-container">
+        <input class="login-el login-input" type="text" placeholder="Phone number" v-model="form.phone" required>
+        <input class="login-el login-input" type="password" placeholder="Password" v-model="form.password" required>        
+      </div>
+      <button class="login-el login-btn" v-on:click="login()">Sign in</button>
+      <p>Don't have an account? Register here---></p>
+    </div>
   </div>
 </template>
 
@@ -46,7 +51,7 @@ export default {
 
 <style>
 
-.login-container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,6 +63,10 @@ export default {
   max-width: 30rem;
 }
 
+.logo-pane {
+  margin-bottom: 1rem;
+}
+
 .login-el {
   width: 100%;
   border-radius: 0.5rem;
@@ -65,7 +74,7 @@ export default {
 }
 
 .input-container {
-  margin-top: 3rem;
+  margin-top: 2rem;
   width: 100%;
 }
 
