@@ -12,8 +12,11 @@
           <font-awesome-icon class ="icon" style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon> 3:00 - 4:30 pm
           <span class="align-left font-weight-bolder">
             <b-button v-b-modal.modal-1 class="btn btn-test bg-success mb-3" @click='sub'>Choose</b-button>
-            <b-modal class="mb-3" id="modal-1" ok-only no-stacking header=no-stacking>
+            <b-modal v-if="result>=1" class="mb-3" id="modal-1" ok-only no-stacking header=no-stacking>
               <p style="font-size: 1.5rem;">Reservation Completed!</p>
+            </b-modal>
+            <b-modal v-if="result==0" class="mb-3 modal-sm" id="modal-1" ok-only no-stacking header=no-stacking>
+              <p style="font-size: 1.5rem;color:danger;">You can't reserve more!</p>
             </b-modal>
           </span>
           <p class="text">Left Seat= {{result}}</p>
