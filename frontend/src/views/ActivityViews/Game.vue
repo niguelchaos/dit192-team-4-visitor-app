@@ -27,6 +27,7 @@
 <script>
 import { Api } from '@/Api'
 import MapComponent from '../../components/Map.vue'
+
 export default {
   components: { MapComponent },
   name: 'Game',

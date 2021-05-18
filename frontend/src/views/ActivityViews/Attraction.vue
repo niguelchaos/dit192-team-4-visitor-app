@@ -16,6 +16,9 @@
           <div class="activity_card">
             <p>{{ activity.description }}</p>
           </div>
+          <div>
+            <p>busy hours</p>
+          </div>
           <div class="activity_card">
             <map-component :content="[activity]"></map-component>
           </div>
@@ -28,6 +31,7 @@
 <script>
 import { Api } from '@/Api'
 import MapComponent from '../../components/Map.vue'
+
 export default {
   components: { MapComponent },
   name: 'Attraction',

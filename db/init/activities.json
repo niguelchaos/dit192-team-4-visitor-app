@@ -2,7 +2,7 @@
   {
     "name": "The Loophole Plunge",
     "description": "The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!",
-    "price": 45,
+    "price": 60,
     "status": "Open",
     "latitude": 57.695886,
     "longitude": 11.991146,
@@ -13,7 +13,7 @@
   {
     "name": "Ride of Doom",
     "description": "A dark ride for those who dare! The ride starts out slow, but it gets faster as it goes on. There will be plenty of people around you so don't worry about being alone…or scared!",
-    "price": 60,
+    "price": 30,
     "status": "Open",
     "latitude": 57.693369,
     "longitude": 11.992690,
@@ -24,7 +24,7 @@
   {
     "name": "Happily Ever After",
     "description": "This is the most exciting ride ever! It goes up and down at incredible speeds, then it flips upside-down and comes back around again! Don't miss out on this one of a kind experience! The ride will be over before you know it.",
-    "price": 50,
+    "price": 60,
     "status": "Open",
     "latitude": 57.694745,
     "longitude": 11.994666,
@@ -35,7 +35,7 @@
   {
     "name": "The Sky Screamer",
     "description": "The Sky Screamer is a high speed thrill ride with some pretty intense twists and turns. It's designed for all ages, but we recommend at least 6 years old.",
-    "price": 40,
+    "price": 60,
     "status": "Open",
     "latitude": 57.695273,
     "longitude": 11.990801,
@@ -82,5 +82,25 @@
     "longitude": 11.994691,
     "type": ["restaurant"],
     "img": "https://i.pinimg.com/originals/25/9b/0a/259b0a298bc745bd3a5dcf47511d8e49.png"
+  },
+  {
+    "name": "Funnel Ride",
+    "description": "Sends passengers in four-person cloverleaf tubes down a steep slide and into an enormous funnel",
+    "price": 40,
+    "status": "open",
+    "latitude": 57.694785,
+    "longitude": 11.994691,
+    "type": ["attraction", "water"],
+    "img": "https://www.tripsavvy.com/thmb/0_FKk7tUP19d8Iqj0ff5WuGaRAU=/950x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/HighAnxietyfunnelrideatMountainCreekwaterpark-c0edb1cf46ac48c3bb1e19ef2152f4f7.jpg"
+  },
+  {
+    "name": "Aqua Loop",
+    "description": "Single riders are dropped down a near vertical slide and into an inclined loop",
+    "price": 40,
+    "status": "open",
+    "latitude": 57.694785,
+    "longitude": 11.994691,
+    "type": ["attraction", "water"],
+    "img":"https://www.aquaplanet.ph/sites/default/files/AP-AquaLoop-lowres.jpg" 
   }
 ]
