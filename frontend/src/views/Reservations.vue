@@ -42,10 +42,10 @@
             </div>
         </div>
       </div>
-      <b-button v-on:click="loginUser()"></b-button>
+      <!-- <b-button v-on:click="loginUser()"></b-button>
       <b-button v-on:click="addReservation()"></b-button>
       <b-button v-on:click="getReservation()"></b-button>
-      <b-button v-on:click="deleteReservation()"></b-button>
+      <b-button v-on:click="deleteReservation()"></b-button> -->
       <br />
       {{reservations[0]}}
     </b-container>

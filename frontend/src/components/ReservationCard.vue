@@ -30,26 +30,19 @@
         <p class="card-queue-text card-text mt-3">Queue: 30 min</p>
       </b-col>
     </b-card>
-    <b-collapse :id="'reservation-details-' + activity.name">
-      <b-card title="Collapsible card">
-        <b-button class="btnrese" pill to="/reservations/reserve/getreservation"
-          >Reserve</b-button
-        >
-      </b-card>
-        <b-collapse :id="'reservation-details-' + activity.name">
-          <b-card>
-            <b-card-text>
-              <img src="https://qph.fs.quoracdn.net/main-qimg-c320073f57b45ebe28d10990993ec1ad.webp" width="100%"/>
-            </b-card-text>
-            <b-link :to="{
-                name: 'getreservation',
-                params: { id: activity._id, activity: activity, type: type }
-                }">
-              <b-button class="btnrese" pill>Reserve</b-button>
-            </b-link>
-          </b-card>
-        </b-collapse>
-
+      <b-collapse :id="'reservation-details-' + activity.name">
+        <b-card>
+          <b-card-text>
+            <img src="https://qph.fs.quoracdn.net/main-qimg-c320073f57b45ebe28d10990993ec1ad.webp" width="100%"/>
+          </b-card-text>
+          <b-link :to="{
+              name: 'getreservation',
+              params: { id: activity._id, activity: activity, type: type }
+              }">
+            <b-button class="btnrese" pill>Reserve</b-button>
+          </b-link>
+        </b-card>
+      </b-collapse>
   </div>
 </template>
 

@@ -90,14 +90,12 @@
           >
             <my-reservation :activity="a.data" :type="a.type"></my-reservation>
             <!-- idk why this works -->
+            
           </b-col>
-
+          <my-reservation></my-reservation>
         </b-row>
       </b-container>
     </div>
-
-    <p>{{this.user}}</p>
-    <b-button v-on:click="getUser()"></b-button>
     <!-- Pagination -->
     <div class="page-bar-div overflow-auto mt-3">
       <!-- on change updates when user clicks, linkgen updates path -->
@@ -115,7 +113,6 @@ export default {
     return {
       activities: [],
       attractions: [],
-      user: [],
       categories: [
         { type: 'All', state: true },
         { type: 'My Reservations', state: false }
@@ -145,7 +142,6 @@ export default {
     // updatePageNum already executes getAttractions
     this.linkGen(this.currentPage)
     this.updatePageNum(this.currentPage)
-    this.getUser(this.currentPage)
   },
   beforeUpdate() {},
   updated() {},
@@ -249,24 +245,6 @@ export default {
         })
         .catch((err) => {
           this.restaurants = []
-          console.log(err)
-        })
-    },
-
-    getUser() {
-      Api.get('/auth/reservations', {
-        params: {
-          page: this.currentPage
-        }
-      })
-        .then(res => {
-          this.user = res.data.data
-          console.log(this.user)
-          // this.populate('games', this.games)
-          // this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
-        })
-        .catch(err => {
-          this.games = []
           console.log(err)
         })
     },

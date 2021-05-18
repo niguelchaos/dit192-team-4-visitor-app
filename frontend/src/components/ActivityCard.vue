@@ -2,7 +2,7 @@
   <div>
     <b-link
       :to="{
-        name: type,
+        name: 'activity',
         params: { id: activity._id, activity: activity },
       }"
     >
