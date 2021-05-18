@@ -1,6 +1,7 @@
 <template>
-  <Login />
-
+<div>
+  <p>Reservations logged in!</p>
+</div>
 <!--
   <div id="attractions" class="wrapper">
     <div class="pageTop">
@@ -54,7 +55,13 @@
 import Login from '../components/Login'
 export default {
   name: 'Reservations',
-  props: [],
+  props: {
+    userData: { 
+        phone: String,
+        name: String,
+        id: String
+    }
+  },
   components: {
     Login
   }

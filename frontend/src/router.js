@@ -22,6 +22,7 @@ import { Api } from './Api'
 Vue.use(Router)
 
 function verifyUser(to, from, next) {
+  let target = to.name || 'account'
   if (localStorage.accessToken) {
     let authorization = {
       'Authorization': `Bearer ${localStorage.accessToken}` 
@@ -34,10 +35,10 @@ function verifyUser(to, from, next) {
       })
       .catch(err => {
         localStorage.removeItem('accessToken');
-        next({name: 'login'})
+        next({name: 'login', params: { target: target }})
       })
   } else {
-    next({name: 'login'})
+    next({name: 'login', params: { target: target }})
   }
 }
 
@@ -53,7 +54,8 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      props: true
     },
     {
       path: '/account',
@@ -119,7 +121,9 @@ export default new Router({
     {
       path: '/reservations',
       name: 'reservations',
-      component: Reservation
+      component: Reservation,
+      beforeEnter: verifyUser,
+      props: true
     },
     {
       path: '/reservations/reserve',

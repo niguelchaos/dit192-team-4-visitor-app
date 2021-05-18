@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="user-container">
+    <div class="user-container" id="user-title-container">
       <div class="user-info">
         <img class="user-logo" src="../assets/user-circle.svg"/>
         <p id="username">{{userData.name}}</p>
@@ -12,18 +12,18 @@
       <div class="input-container">
         <div class="user-info-sect">
           <label>Phone number</label>
-          <input class="login-el login-input" type="text" placeholder="Phone number" :value="userData.phone" disabled>
+          <input class="el user-input" type="text" placeholder="Phone number" :value="userData.phone" disabled>
         </div>
         <div class="user-info-sect">
           <label>Name</label>
-          <input class="login-el login-input" type="text" placeholder="Name" :value="userData.name" disabled>  
+          <input class="el user-input" type="text" placeholder="Name" :value="userData.name" disabled>  
         </div>
         <div class="user-info-sect">
           <label>Password (?)</label>
-          <input class="login-el login-input" type="password" placeholder="Password (?)" value="notagoodpracticesoguesswhat" disabled> 
+          <input class="el user-input" type="password" placeholder="Password (?)" value="tryguessingwhatcauseitsnothere" disabled> 
         </div>       
       </div>
-      <button class="login-el logout-btn" v-on:click="logout()">Sign out</button>
+      <button class="el logout-btn" v-on:click="logout()">Sign out</button>
     </div>
   </div>
 </template>
@@ -47,8 +47,7 @@ export default {
         phone: String,
         name: String,
         id: String
-    },
-    userName: String
+    }
   },
   mount() {
     console.log(userData)
@@ -75,6 +74,9 @@ export default {
   background: #FFFFFF;
   min-width: 25rem;
   max-width: 30rem;
+}
+
+#user-title-container {
   margin-bottom: 1rem;
 }
 
@@ -106,7 +108,7 @@ p {
   margin-bottom: 1rem;
 }
 
-.login-el {
+.el {
   width: 100%;
   border-radius: 0.5rem;
   height: 3.5rem;
@@ -121,7 +123,7 @@ p {
   width: 100%;
 }
 
-.login-input {
+.user-input {
   border: 2px solid;
   border-color: #E28DAF;
   margin-bottom: 1rem;

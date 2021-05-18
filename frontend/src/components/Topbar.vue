@@ -1,6 +1,6 @@
 <template>
   <div class="top-wrapper">
-      <b-button :to="{name: 'account'}" class="top-btn shadow-none">
+      <b-button :to="{name: 'account', params: { target: 'account' }}" class="top-btn shadow-none">
         <img src="../assets/user-circle.svg"/>
       </b-button>
    </div>

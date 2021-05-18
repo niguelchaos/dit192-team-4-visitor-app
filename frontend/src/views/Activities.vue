@@ -261,7 +261,7 @@ export default {
 }
 
 .card-main-div {
-  margin: 0%;
+  margin-top: 1rem !important;
   padding: 0%;
   overflow-y: scroll;
   position: relative;

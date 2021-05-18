@@ -20,6 +20,9 @@ import Logo from './Logo'
 export default {
   name: 'Login',
   components: { Logo },
+  props: {
+    target: String
+  },
   data() {
     return {
       form: { 
@@ -34,7 +37,7 @@ export default {
         Api.post('auth/login', this.form)
           .then(res => {
             localStorage.accessToken = res.data.token;
-            this.$router.push( {name: "account"} )
+            this.$router.push( {name: this.target} )
           })
           .catch(err => {
             console.log(err)
