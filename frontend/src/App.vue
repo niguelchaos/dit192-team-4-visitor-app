@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div class="app">
+    <Topbar />
     <div class="content">
       <router-view />
     </div>
@@ -9,14 +10,17 @@
 
 <script>
 import Navbar from './components/Navbar'
+import Topbar from './components/Topbar'
 export default {
   components: {
-    Navbar
+    Navbar, Topbar
   }
 }
 </script>
 <style>
-#app {
+.app {
+  display: flex;
+  flex-direction: column;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,10 +28,14 @@ export default {
   color: #2c3e50;
 }
 .content {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+  padding: 1rem 1rem 1rem 1rem;
   background-color: #c7efcf;
   border: 15px solid white;
   overflow: auto;
-  height: calc(100vh - 70px); /* 70px is height of navbar */
+  height: calc(100vh - 140px); /* 70px is height of navbar */
 }
 #nav {
   padding: 30px;

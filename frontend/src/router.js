@@ -16,6 +16,7 @@ import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
 import Reserve from './views/Reserve.vue'
+import Login from './components/Login.vue'
 import GetReservation from './components/GetReservation.vue'
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/camels',
@@ -49,8 +55,8 @@ export default new Router({
       component: Book
     },
     {
-      path: '/ticketprices/fullpackage/registerandbook',
-      name: 'registerandbook',
+      path: '/signin',
+      name: 'signin',
       component: Signin
     },
     {
