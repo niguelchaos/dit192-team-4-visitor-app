@@ -10,7 +10,6 @@ import SingleTicket from './views/SingleTicket.vue'
 import BundleTicket from './views/BundleTicket.vue'
 import FullPackage from './views/FullPackage.vue'
 import Book from './views/Book.vue'
-import Signin from './views/Signin.vue'
 import Activity from './views/ActivityViews/Activity.vue'
 import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
@@ -18,7 +17,24 @@ import Game from './views/ActivityViews/Game.vue'
 import Reserve from './views/Reserve.vue'
 import Login from './components/Login.vue'
 import GetReservation from './components/GetReservation.vue'
+import { Api } from './Api'
 Vue.use(Router)
+
+function verifyUser(to, from, next) {
+  if (!localStorage.accessToken) next()
+  let authorization = {
+    'Authorization': `Bearer ${localStorage.accessToken}` 
+  }
+
+  Api.get('auth/me', {headers: authorization})
+    .then(res => {
+      next({name: 'home'})
+    })
+    .catch(err => {
+      localStorage.removeItem('accessToken');
+      next()
+    })
+}
 
 export default new Router({
   mode: 'history',
@@ -32,7 +48,8 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      beforeEnter: verifyUser
     },
     {
       path: '/camels',
@@ -53,11 +70,6 @@ export default new Router({
       path: '/ticketprices/bundleticket/book',
       name: 'bundlebook',
       component: Book
-    },
-    {
-      path: '/signin',
-      name: 'signin',
-      component: Signin
     },
     {
       path: '/ticketprices/entrance',

@@ -9,11 +9,40 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
 import Navbar from './components/Navbar'
 import Topbar from './components/Topbar'
 export default {
   components: {
     Navbar, Topbar
+  },
+  data() {
+    return {
+      accessToken: ""
+    }
+  },
+  mounted() {
+    if (localStorage.accessToken) {
+      this.accessToken = localStorage.accessToken;
+    }
+  },
+
+  methods: {
+    validateAccess() { 
+      if (localStorage.accessToken) {
+        /*
+        Api.post('auth/login', this.form)
+          .then(res => {
+            localStorage.accessToken = res.data.token;
+          })
+          .catch(err => {
+            console.log(err)
+          })*/
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }
 </script>

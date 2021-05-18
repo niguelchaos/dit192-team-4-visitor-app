@@ -29,6 +29,7 @@ export default {
         Api.post('auth/login', this.form)
           .then(res => {
             localStorage.accessToken = res.data.token;
+            this.$router.push( {name: "home"} )
           })
           .catch(err => {
             console.log(err)
