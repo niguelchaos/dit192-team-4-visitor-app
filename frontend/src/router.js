@@ -16,10 +16,28 @@ import Activity from './views/ActivityViews/Activity.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
 import Reserve from './views/Reserve.vue'
+import Login from './components/Login.vue'
 import GetReservation from './components/GetReservation.vue'
 import Confirmation from './views/Confirmation.vue'
 import Policies from './views/Policies.vue'
+import { Api } from './Api'
 Vue.use(Router)
+
+function verifyUser(to, from, next) {
+  if (!localStorage.accessToken) next()
+  let authorization = {
+    'Authorization': `Bearer ${localStorage.accessToken}` 
+  }
+
+  Api.get('auth/me', {headers: authorization})
+    .then(res => {
+      next({name: 'home'})
+    })
+    .catch(err => {
+      localStorage.removeItem('accessToken');
+      next()
+    })
+}
 
 export default new Router({
   mode: 'history',
@@ -29,6 +47,12 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      beforeEnter: verifyUser
     },
     {
       path: '/camels',

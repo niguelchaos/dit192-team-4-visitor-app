@@ -14,6 +14,7 @@
         <b-button to="/ticketprices/fullpackage" class="ticketButton">Full Package</b-button>
       </b-tab>
       <b-tab title="My Tickets">
+        <span v-if="!tickets.length">You have no tickets.</span>
         <ticket-card v-for="(t, i) in tickets" v-bind:key="i" :ticket="{name: t}"/>
       </b-tab>
     </b-tabs>
@@ -40,7 +41,8 @@ export default {
     }  
   },
   created() {
-    const headers = {'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTI2M2FjNWEyYTNkMzM2ODE5Mjk1NSIsImlhdCI6MTYyMTI1NTA4NywiZXhwIjoxNjIxMzQxNDg3LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwMDExMDAxMSJ9.AQOKYg13xwpLzQPoyQ4pRS2jDcb0GNtIjEcMyOZua3VMRbG6GN8BpAFvCg_FvMdYibN_UJBWWSoyJsaVfEZA4zUOAY_-oKiFdJzmT68MGU0RbLSJs2vMzIF9Wsv9SJWtdj9j618ejP_UyXsD7r1WIlvXYbAChKQBkjaf20_Jn3bfN2jR'}
+    const token = localStorage.accessToken;
+    const headers = {'Authorization': 'Bearer ' + token}
     Api.get('/auth/tickets', { headers })
     .then(res => {
         this.tickets = res.data.data

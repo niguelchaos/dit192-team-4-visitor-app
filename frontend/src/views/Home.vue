@@ -27,7 +27,7 @@
           <div class="map">
             <h4>Map over the park</h4>
             <!-- <img class="map_img" src="../assets/Map.jpeg" alt="map" /> -->
-            <map-component :content="attractions" />
+            <map-component :content="activities" />
           </div>
         </b-col>
       </b-row>
@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       message: '',
-      attractions: []
+      activities: []
     }
   },
   mounted() {
@@ -75,9 +75,9 @@ export default {
         })
     },
     getAttractions() {
-      Api.get('/attractions')
+      Api.get('/activities', {params: {limit: 10000}})
         .then(res => {
-          this.attractions = res.data.data || []
+          this.activities = res.data.data || []
         })
         // .bind(this)
         .catch(err => {

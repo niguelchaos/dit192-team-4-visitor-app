@@ -1,4 +1,7 @@
 <template>
+  <Login />
+
+<!--
   <div id="attractions" class="wrapper">
     <div class="pageTop">
       <br />
@@ -44,8 +47,20 @@
       </div>
     </b-container>
   </div><i class="fas fa-route-interstate"></i>
-  </div>
+  </div> -->
 </template>
+
+<script>
+import Login from '../components/Login'
+export default {
+  name: 'Reservations',
+  props: [],
+  components: {
+    Login
+  }
+}
+</script>
+
 <style scoped>
 
 .container{
