@@ -2,16 +2,12 @@
   <div>
     <b-link
       :to="{
-        name: 'activity',
-        params: { id: activity._id, activity: activity }
+        name: type,
+        params: { id: activity._id, activity: activity },
       }"
     >
-      <b-card
-        class="act-card overflow-hidden text-left"
-        img-right
-        no-body
-      >
-        <b-col class="card-img-col" style="margin:0%; padding:0%;">
+      <b-card class="act-card overflow-hidden text-left" img-right no-body>
+        <b-col class="card-img-col" style="margin: 0%; padding: 0%">
           <b-card-img
             :src="activity.img"
             alt="Image"
@@ -21,12 +17,12 @@
         </b-col>
 
         <b-col
-          style="font-size: 0.75rem;"
+          style="font-size: 0.75rem"
           cols="7"
           no-gutters
           class="card-text-col"
         >
-          <b-card-title style="font-size: 1rem;" class="card-title">
+          <b-card-title style="font-size: 1rem" class="card-title">
             <span class="align-middle font-weight-bolder">{{
               activity.name
             }}</span>
@@ -48,9 +44,9 @@ export default {
 
 <style scoped>
 .act-card {
-   padding: 5%;
-   margin: 3%;
-   border-radius: 15px;
+  padding: 5%;
+  margin: 3%;
+  border-radius: 15px;
 }
 .card-text-col {
   color: #2d3e4f;
@@ -59,7 +55,7 @@ export default {
   margin: 0%;
 }
 .card-image {
-   border-radius: 15px;
+  border-radius: 15px;
 }
 .card-title {
   padding-top: 15%;

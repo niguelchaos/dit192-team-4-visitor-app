@@ -8,7 +8,6 @@
     <!-- drop box -->
     <b-container>
       <div class="reservation-categories-div">
-
         <b-button-group class="mobile-categorybuttons d-md-none" size="md">
           <button
             v-for="(button, index) in categories"
@@ -16,21 +15,30 @@
             :pressed="button.state"
             class="cat-button text-center text-nowrap"
             v-on:click="changeCategory(button, index)"
-            :class="{'cat-active': button.state, 'cat-not-active': !button.state}"
+            :class="{
+              'cat-active': button.state,
+              'cat-not-active': !button.state,
+            }"
           >
             {{ button.type }}
           </button>
         </b-button-group>
 
         <!-- for large screens -->
-        <b-button-group class="pc-categorybuttons d-none d-md-inline-flex" size="lg">
+        <b-button-group
+          class="pc-categorybuttons d-none d-md-inline-flex"
+          size="lg"
+        >
           <button
             v-for="(button, index) in categories"
             :key="index"
             :pressed="button.state"
             class="cat-button text-center text-nowrap"
             v-on:click="changeCategory(button, index)"
-            :class="{'cat-active': button.state, 'cat-not-active': !button.state}"
+            :class="{
+              'cat-active': button.state,
+              'cat-not-active': !button.state,
+            }"
           >
             {{ button.type }}
           </button>
@@ -42,9 +50,14 @@
         </button> -->
       </div>
 
-      <div>
+      <div v-if="categories[0].state">
         <b-col>
-          <b-form-select style="border: 0px; border-radius: 15px;width:200px;" v-model="filterSelected" :options="filterOptions" class="float-center mt-3"></b-form-select>
+          <b-form-select
+            style="border: 0px; border-radius: 15px; width: 200px"
+            v-model="filterSelected"
+            :options="filterOptions"
+            class="float-center mt-3"
+          ></b-form-select>
         </b-col>
       </div>
     </b-container>
@@ -65,7 +78,20 @@
       <!-- scrollable container -->
       <b-container class="card-main-div">
         <b-row>
-          <!-- TODO: Add My reservation component -->
+          <b-col
+            class="card-main-col"
+            v-for="a in activities"
+            v-bind:key="a.id"
+            sm="12"
+            md="6"
+            lg="4"
+            xl="3"
+            no-gutters
+          >
+            <my-reservation :activity="a.data" :type="a.type"></my-reservation>
+            <!-- idk why this works -->
+          </b-col>
+
         </b-row>
       </b-container>
     </div>
@@ -82,8 +108,9 @@
 <script>
 import { Api } from '@/Api'
 import ActivityCard from '@/components/ReservationCard.vue'
+import MyReservation from '@/components/MyReservation.vue'
 export default {
-  components: { ActivityCard },
+  components: { ActivityCard, MyReservation },
   data() {
     return {
       activities: [],
@@ -112,8 +139,7 @@ export default {
           : this.$router.currentRoute.query.currentPage
     }
   },
-  beforeMount() {
-  },
+  beforeMount() {},
   mounted() {
     // happens only once
     // updatePageNum already executes getAttractions
@@ -154,6 +180,10 @@ export default {
         case 'restaurants':
           this.populate('restaurants', this.restaurants)
           break
+        case 'My Reservations':
+          this.populate('attractions', this.attractions)
+          this.populate('restaurants', this.restaurants)
+          break
       }
       this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
 
@@ -172,12 +202,14 @@ export default {
           page: this.currentPage
         }
       })
-        .then(res => {
+        .then((res) => {
           this.attractions = res.data.data
           this.populate('attractions', this.attractions)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+          this.activities.sort((a, b) =>
+            a.data.name.localeCompare(b.data.name)
+          )
         })
-        .catch(err => {
+        .catch((err) => {
           this.attractions = []
           console.log(err)
         })
@@ -189,12 +221,14 @@ export default {
           page: this.currentPage
         }
       })
-        .then(res => {
+        .then((res) => {
           this.games = res.data.data
           this.populate('games', this.games)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+          this.activities.sort((a, b) =>
+            a.data.name.localeCompare(b.data.name)
+          )
         })
-        .catch(err => {
+        .catch((err) => {
           this.games = []
           console.log(err)
         })
@@ -206,12 +240,14 @@ export default {
           page: this.currentPage
         }
       })
-        .then(res => {
+        .then((res) => {
           this.restaurants = res.data.data
           this.populate('restaurants', this.restaurants)
-          this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+          this.activities.sort((a, b) =>
+            a.data.name.localeCompare(b.data.name)
+          )
         })
-        .catch(err => {
+        .catch((err) => {
           this.restaurants = []
           console.log(err)
         })
@@ -309,24 +345,24 @@ export default {
 }
 
 .flt-active {
- background-color: #EDADC7;
+  background-color: #edadc7;
 }
 
-.flt-not-active{
-  background-color: #FFFFFF;
+.flt-not-active {
+  background-color: #ffffff;
 }
 
 .cat-active {
-  background-color: #EDADC7;
+  background-color: #edadc7;
   border-radius: 25px;
   color: black;
   font-weight: bolder;
 }
 
-.cat-not-active{
+.cat-not-active {
   background-color: #f6fff3;
   border-radius: 25px;
-  color: #2D3E4F;
+  color: #2d3e4f;
   font-weight: normal;
 }
 
@@ -349,17 +385,17 @@ export default {
 ::-webkit-scrollbar {
   height: 4px;
   width: 4px;
-  border: 1px solid #D5D5D5;
+  border: 1px solid #d5d5d5;
 }
 
 ::-webkit-scrollbar-track {
-  background: #EEEEEE;
+  background: #eeeeee;
   box-shadow: inset 0 0 14px 14px transparent;
   border: solid 4px transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 0;
-  background: #B0B0B0;
+  background: #b0b0b0;
 }
 </style>
