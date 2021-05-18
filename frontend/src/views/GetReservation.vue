@@ -28,11 +28,13 @@
       <b-card class="slotcard">
             <h4 class="card-title" style="font-size: 1.5rem;">{{item.slot}}</h4>
             <font-awesome-icon class="icon-card" style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon>{{item.time}}
-            <p class="text">{{item.seat}}</p>
+            <p class="text">Left Seat={{activity.reservableSeats}}</p>
             <span style="color:" class="align-left font-weight-bolder">
-              <b-button v-b-modal.modal-1 class="btn btn-card bg-success mb-3" type="submit">Choose</b-button>
-              <b-modal class="mb-2" id="modal2" ok-only no-stacking header=no-stacking>
-                <p style="font-size: 1.5rem;">Reservation Completed!</p>
+              <b-button v-b-modal.modal-1 class="btn btn-card bg-success mb-3" @click='sub'>Choose</b-button>
+              <b-modal :class="activity.reservableSeats" id="modal2" ok-only no-stacking header=no-stacking>
+                <p v-if="activity.reservableSeats>0" class="msg1" style="font-size: 1.5rem;">Reservation Completed!</p>
+                <p v-if="activity.reservableSeats<1" class="msg2" style="font-size: 1.5rem;color:red;">You can't reserve more!</p>
+                <p v-if="activity.reservableSeats==1" class="msg" style="font-size: 1.5rem;color:red;">One Resrvation left!</p>
               </b-modal>
             </span>
       </b-card>
@@ -48,16 +50,16 @@ export default {
   data: function () {
     return {
       slots: [
-        { slot: 'Timeslot 1', time: '10:00-10:30 AM', seat: '45/50 seats left' },
-        { slot: 'Timeslot 2', time: '10:30-11:00 AM', seat: '30/50 seats left' },
-        { slot: 'Timeslot 3', time: '11:00-11:30 AM', seat: '15/50 seats left' },
-        { slot: 'Timeslot 4', time: '11:30-12:00 AM', seat: '2/20 seats left' },
-        { slot: 'Timeslot 5', time: '12:00-12:30 AM', seat: '2/20 seats left' },
-        { slot: 'Timeslot 6', time: '1:00-1:30 PM', seat: '2/20 seats left' },
-        { slot: 'Timeslot 7', time: '1:30-2:00 PM', seat: '8/20 seats left' },
-        { slot: 'Timeslot 8', time: '2:30-3:00 PM', seat: '4/20 seats left' },
-        { slot: 'Timeslot 9', time: '3:30-4:00 PM', seat: '3/20 seats left' },
-        { slot: 'Timeslot 10', time: '4:30-5:00 PM', seat: '3/20 seats left' }
+        { slot: 'Timeslot 1', time: '10:00-10:30 AM' },
+        { slot: 'Timeslot 2', time: '10:30-11:00 AM' },
+        { slot: 'Timeslot 3', time: '11:00-11:30 AM' },
+        { slot: 'Timeslot 4', time: '11:30-12:00 AM' },
+        { slot: 'Timeslot 5', time: '12:00-12:30 AM' },
+        { slot: 'Timeslot 6', time: '1:00-1:30 PM' },
+        { slot: 'Timeslot 7', time: '1:30-2:00 PM' },
+        { slot: 'Timeslot 8', time: '2:30-3:00 PM' },
+        { slot: 'Timeslot 9', time: '3:30-4:00 PM' },
+        { slot: 'Timeslot 10', time: '4:30-5:00 PM' }
       ],
       result: 3 }
   },
