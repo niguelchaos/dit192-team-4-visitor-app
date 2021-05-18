@@ -167,7 +167,7 @@ export default {
     },
 
     getAttractions() {
-      Api.get('attractions', {
+      Api.get('activities', {
         params: {
           page: this.currentPage
         }
