@@ -88,11 +88,13 @@ exports.deregister = async function (req, res) {
 
 exports.addReservation = async function (req, res) {
   let reservation = req.body.reservation;
+  console.log(reservation, req.userId);
   User.findByIdAndUpdate(
     req.userId, 
     { $push: { reservations: reservation } },
     function (err, user) {
       if (err) { return next(err); }
+      // if (err) return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ status: httpStatus.INTERNAL_SERVER_ERROR, message: `Server error: ${err.message}` })
       if (user === null) {
           return res.status(404).json({ status: 404, message: 'User not found'});
       }
@@ -106,10 +108,26 @@ exports.getReservations = async function (req, res) {
   User.findById(id, function(err, user) {
       if (err) { return next(err); }
       if (user === null) {
-          return res.status(404).json({ status: 404, message: 'User not found'});
+          return res.status(404).json({ status: 404, message: `User not found ${id}`});
       }
       res.status(200).json({ status: 200, data: user.reservations, message: 'Successfully retrieved the reservations.' });
   });
+}
+
+exports.deleteReservation = async function (req, res) {
+  let reservation = req.body.reservation; 
+  console.log(req.userId, reservation) 
+  User.findByIdAndUpdate(
+    req.userId, 
+    { $pull: { reservations: reservation } },
+    function (err, user) {
+      if (err) { return next(err); }
+      if (user === null) {
+          return res.status(404).json({ status: 404, message: 'User not found'});
+      }
+      res.status(200).json({ status: 200, data: user.reservations, message: 'Reservation was deleted' });
+     }
+  )
 }
 
 exports.addTicket = async function (req, res) {
@@ -136,4 +154,20 @@ exports.getTickets = async function (req, res) {
       }
       res.status(200).json({ status: 200, data: user.tickets, message: 'Successfully retrieved the tickets.' });
   });
+}
+
+exports.deleteTicket = async function (req, res) {
+  let ticket = req.body.ticket; 
+  console.log(req.userId, ticket) 
+  User.findByIdAndUpdate(
+    req.userId, 
+    { $pull: { tickets: ticket } },
+    function (err, user) {
+      if (err) { return next(err); }
+      if (user === null) {
+          return res.status(404).json({ status: 404, message: 'User not found'});
+      }
+      res.status(200).json({ status: 200, data: user.tickets, message: 'Ticket was deleted' });
+     }
+  )
 }

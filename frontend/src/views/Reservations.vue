@@ -34,18 +34,93 @@
             </div>
             <div class="card-footer">
               <div class="d-flex justify-content-center links" >
-                <a href="#">Register</a>
+                <a href="#" v-on:click="createUser()">Register</a>
               </div>
               <div class="d-flex justify-content-center">
-                <a href="#">Forgot your password?</a>
+                <a href="#" >Forgot your password?</a>
               </div>
             </div>
         </div>
       </div>
+      <b-button v-on:click="loginUser()"></b-button>
+      <b-button v-on:click="addReservation()"></b-button>
+      <b-button v-on:click="getReservation()"></b-button>
+      <b-button v-on:click="deleteReservation()"></b-button>
+      <br />
+      {{reservations[0]}}
     </b-container>
   </div><i class="fas fa-route-interstate"></i>
   </div>
 </template>
+
+<script>
+import { Api } from '@/Api'
+export default {
+  name: 'Reservations',
+  data() {
+    return {
+      user: {},
+      reservations: [],
+      id: ''
+    }
+  },
+  created() {
+    const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTM3NjlhNTEzZGVlMDkwMDk3ZDI5MSIsImlhdCI6MTYyMTMzMTk3NiwiZXhwIjoxNjIxNDE4Mzc2LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AeI69_5Tnr5WuqPB_KNo8X8DvZSatZDDq12fUEkUNokFLs-3Yqa6QtxQh7Hw9TU5CLe4OfcCKiueKs60kzQJ6uSaALEkiUYfE4lFk3nP1wk1UyY1iPpvhnS_FqXXQXKc4jMGHEA4Cksx3QDn_3Wybml5eK6-UKU9zUy2BMQ80yZIKA1u' }
+    Api.get('/auth/reservations', { headers })
+      .then(res => {
+        console.log(res.data.data)
+        this.reservations = res.data.data
+        console.log(this.reservations)
+      })
+  },
+  methods: {
+    createUser() {
+      Api.post('/auth/register', {
+        name: 'Viktor',
+        phone: '0709111111',
+        password: 'testtest!'
+      })
+        .then(res => {
+          console.log(res.data._id)
+        })
+    },
+    loginUser() {
+      Api.post('/auth/login', {
+        phone: '0709111111',
+        password: 'testtest!'
+      })
+        .then(res => {
+          this.user['token'] = res.data.token
+          console.log(this.user['token'])
+        })
+    },
+    addReservation() {
+      const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTM3NjlhNTEzZGVlMDkwMDk3ZDI5MSIsImlhdCI6MTYyMTMzMTk3NiwiZXhwIjoxNjIxNDE4Mzc2LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AeI69_5Tnr5WuqPB_KNo8X8DvZSatZDDq12fUEkUNokFLs-3Yqa6QtxQh7Hw9TU5CLe4OfcCKiueKs60kzQJ6uSaALEkiUYfE4lFk3nP1wk1UyY1iPpvhnS_FqXXQXKc4jMGHEA4Cksx3QDn_3Wybml5eK6-UKU9zUy2BMQ80yZIKA1u' }
+      Api.put('/auth/reservation',
+        {
+          reservation:
+            [{
+              name: 'Loops',
+              slot: 'Timeslot 2',
+              time: '1:00-1:30'
+            }]
+        },
+        { headers }
+      ).then(res => console.log(res))
+    },
+    deleteReservation() {
+      const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTM3NjlhNTEzZGVlMDkwMDk3ZDI5MSIsImlhdCI6MTYyMTMzMTk3NiwiZXhwIjoxNjIxNDE4Mzc2LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AeI69_5Tnr5WuqPB_KNo8X8DvZSatZDDq12fUEkUNokFLs-3Yqa6QtxQh7Hw9TU5CLe4OfcCKiueKs60kzQJ6uSaALEkiUYfE4lFk3nP1wk1UyY1iPpvhnS_FqXXQXKc4jMGHEA4Cksx3QDn_3Wybml5eK6-UKU9zUy2BMQ80yZIKA1u' }
+      Api.put('/auth/deleteReservation',
+        { reservation: this.reservations[0] },
+        { headers })
+        .then(res => {
+          window.location.reload()
+        })
+    }
+  }
+}
+</script>
+
 <style scoped>
 
 .container{
