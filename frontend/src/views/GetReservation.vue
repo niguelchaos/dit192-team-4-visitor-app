@@ -61,7 +61,9 @@ export default {
       this.$emit('input', this.result)
     },
     sub() {
-      this.result -= 1
+      if (this.result > 0) {
+        this.result -= 1
+      }
       this.emitResult()
     }
   }
