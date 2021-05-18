@@ -4,9 +4,6 @@
       <b-row>
         <b-col xs="12" align-self="center">
           <Logo></Logo>
-          <!-- <div class="logo">
-            <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div> -->
         </b-col>
       </b-row>
       <b-row>
@@ -87,9 +84,7 @@ export default {
 
 <style>
   .logo {
-    height: 100px;
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin-bottom: 1rem;
   }
 
   .title {

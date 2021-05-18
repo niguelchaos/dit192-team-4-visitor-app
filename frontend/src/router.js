@@ -11,6 +11,7 @@ import BundleTicket from './views/BundleTicket.vue'
 import FullPackage from './views/FullPackage.vue'
 import Book from './views/Book.vue'
 import Activity from './views/ActivityViews/Activity.vue'
+import Account from './views/Account.vue'
 import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
@@ -21,19 +22,23 @@ import { Api } from './Api'
 Vue.use(Router)
 
 function verifyUser(to, from, next) {
-  if (!localStorage.accessToken) next()
-  let authorization = {
-    'Authorization': `Bearer ${localStorage.accessToken}` 
+  if (localStorage.accessToken) {
+    let authorization = {
+      'Authorization': `Bearer ${localStorage.accessToken}` 
+    }
+  
+    Api.get('auth/me', {headers: authorization})
+      .then(res => {
+        to.params.userData = res.data.data
+        next()
+      })
+      .catch(err => {
+        localStorage.removeItem('accessToken');
+        next({name: 'login'})
+      })
+  } else {
+    next({name: 'login'})
   }
-
-  Api.get('auth/me', {headers: authorization})
-    .then(res => {
-      next({name: 'home'})
-    })
-    .catch(err => {
-      localStorage.removeItem('accessToken');
-      next()
-    })
 }
 
 export default new Router({
@@ -48,7 +53,13 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login,
+      component: Login
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: Account,
+      props: true,
       beforeEnter: verifyUser
     },
     {

@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="container logo-pane">
-      <img src="../assets/logo.png"/>
-    </div>
-    <div class="container">
+    <Logo />
+    <div class="login-container">
       <img class="login-logo" src="../assets/user-circle.svg"/>
       <h2>Sign in</h2>
       <div class="input-container">
@@ -11,15 +9,17 @@
         <input class="login-el login-input" type="password" placeholder="Password" v-model="form.password" required>        
       </div>
       <button class="login-el login-btn" v-on:click="login()">Sign in</button>
-      <p>Don't have an account? Register here---></p>
+      <p class="reg-option">Don't have an account? Register here →</p>
     </div>
   </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
+import Logo from './Logo'
 export default {
   name: 'Login',
+  components: { Logo },
   data() {
     return {
       form: { 
@@ -34,7 +34,7 @@ export default {
         Api.post('auth/login', this.form)
           .then(res => {
             localStorage.accessToken = res.data.token;
-            this.$router.push( {name: "home"} )
+            this.$router.push( {name: "account"} )
           })
           .catch(err => {
             console.log(err)
@@ -51,13 +51,13 @@ export default {
 
 <style>
 
-.container {
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: fit-content !important;
   border-radius: 1rem;
-  padding: 1.5rem 1.5rem 1.5rem 1.5rem !important;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
   background: #FFFFFF;
   min-width: 25rem;
   max-width: 30rem;
@@ -71,6 +71,10 @@ export default {
   width: 100%;
   border-radius: 0.5rem;
   height: 3.5rem;
+}
+
+.reg-option {
+  margin: 0 0 0 0;
 }
 
 .input-container {
