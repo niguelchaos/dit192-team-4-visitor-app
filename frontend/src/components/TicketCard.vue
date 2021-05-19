@@ -37,18 +37,18 @@ export default {
   name: 'TicketCard',
   props: ['ticket'],
   methods: {
-    deleteTicket: function() {
-      const token = localStorage.accessToken;
-      const headers = {'Authorization': 'Bearer ' + token}
+    deleteTicket: function () {
+      const token = localStorage.accessToken
+      const headers = { 'Authorization': 'Bearer ' + token }
       Api.put('/auth/deleteTicket',
-      { ticket: this.ticket.name },
-      { headers })
-    .then(res => {
-        window.location.reload();
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        { ticket: this.ticket.name },
+        { headers })
+        .then(res => {
+          window.location.reload()
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

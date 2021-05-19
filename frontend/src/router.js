@@ -26,15 +26,16 @@ Vue.use(Router)
 function verifyUser(to, from, next) {
   if (!localStorage.accessToken) next()
   let authorization = {
-    'Authorization': `Bearer ${localStorage.accessToken}` 
+    'Authorization': `Bearer ${localStorage.accessToken}`
   }
 
-  Api.get('auth/me', {headers: authorization})
+  Api.get('auth/me', { headers: authorization })
     .then(res => {
-      next({name: 'home'})
+      next({ name: 'home' })
     })
     .catch(err => {
-      localStorage.removeItem('accessToken');
+      console.log(err)
+      localStorage.removeItem('accessToken')
       next()
     })
 }

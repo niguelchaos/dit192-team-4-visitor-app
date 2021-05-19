@@ -38,15 +38,15 @@ export default {
     return {
       tickets: [],
       activeTab: 0
-    }  
+    }
   },
   created() {
-    const token = localStorage.accessToken;
-    const headers = {'Authorization': 'Bearer ' + token}
+    const token = localStorage.accessToken
+    const headers = { 'Authorization': 'Bearer ' + token }
     Api.get('/auth/tickets', { headers })
-    .then(res => {
+      .then(res => {
         this.tickets = res.data.data
-        if(res.data.data.length > 0){
+        if (res.data.data.length > 0) {
           this.activeTab = 1
         }
       })

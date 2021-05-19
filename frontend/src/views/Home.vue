@@ -73,7 +73,7 @@ export default {
         })
     },
     getAttractions() {
-      Api.get('/activities', {params: {limit: 10000}})
+      Api.get('/activities', { params: { limit: 10000 } })
         .then(res => {
           this.activities = res.data.data || []
         })
