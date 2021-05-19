@@ -24,17 +24,17 @@
           </span>
       </b-card>
       <br />
-    <li v-for="item in slots" :key="item.id" style="list-style-type: none;">
+    <li v-for="item in activity.timeslot" :key="item.id" style="list-style-type: none;">
       <b-card class="slotcard">
             <h4 class="card-title" style="font-size: 1.5rem;">{{item.slot}}</h4>
             <font-awesome-icon class="icon-card" style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon>{{item.time}}
-            <p class="text">Left Seat={{activity.reservableSeats}}</p>
+            <p class="text">Left Seat={{item.seat}}</p>
             <span style="color:" class="align-left font-weight-bolder">
               <b-button v-b-modal.modal-1 class="btn btn-card bg-success mb-3" @click='sub'>Choose</b-button>
-              <b-modal :class="activity.reservableSeats" id="modal2" :title="item.slot" ok-only no-stacking header=no-stacking>
-                <p v-if="activity.reservableSeats>0" class="msg1" style="font-size: 1.5rem;">Reservation Completed!</p>
-                <p v-if="activity.reservableSeats<1" class="msg2" style="font-size: 1.5rem;color:red;">You can't reserve more!</p>
-                <p v-if="activity.reservableSeats==1" class="msg" style="font-size: 1.5rem;color:red;">One Resrvation left!</p>
+              <b-modal :class="item.seat" id="modal2" :title="item.slot" ok-only no-stacking header=no-stacking>
+                <p v-if="item.seat>0" class="msg1" style="font-size: 1.5rem;">Reservation Completed!</p>
+                <p v-if="item.seat<1" class="msg2" style="font-size: 1.5rem;color:red;">You can't reserve more!</p>
+                <p v-if="item.seat==1" class="msg" style="font-size: 1.5rem;color:red;">One Resrvation left!</p>
               </b-modal>
             </span>
       </b-card>
@@ -65,11 +65,11 @@ export default {
   },
   methods: {
     emitResult() {
-      this.$emit('input', this.activity.timeslot.seat)
+      this.$emit('input', this.activity.seat)
     },
     sub() {
-      if (this.activity.timeslot.seat > 0) {
-        this.activity.timeslot.seat -= 1
+      if (this.activity.seat > 0) {
+        this.activity.seat -= 1
         // this.result -= 1
       }
       this.emitResult()
