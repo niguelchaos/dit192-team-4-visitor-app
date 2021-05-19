@@ -17,6 +17,7 @@ import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
 import Reserve from './views/Reserve.vue'
 import Login from './components/Login.vue'
+import Register from './components/Register.vue'
 import GetReservation from './components/GetReservation.vue'
 import { Api } from './Api'
 Vue.use(Router)
@@ -55,6 +56,12 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
+      props: true
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
       props: true
     },
     {
