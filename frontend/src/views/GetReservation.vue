@@ -24,11 +24,11 @@
           </span>
       </b-card>
       <br />
-    <li v-for="item in slots" :key="item.id" style="list-style-type: none;">
+    <li v-for="item in activity.timeslot" :key="item.id" style="list-style-type: none;">
       <b-card class="slotcard">
             <h4 class="card-title" style="font-size: 1.5rem;">{{item.slot}}</h4>
             <font-awesome-icon class="icon-card" style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon>{{item.time}}
-            <p class="text">Left Seat={{activity.reservableSeats}}</p>
+            <p class="text">Left Seat={{item.seat}}</p>
             <span style="color:" class="align-left font-weight-bolder">
               <b-button v-b-modal.modal-1 class="btn btn-card bg-success mb-3" @click='sub'>Choose</b-button>
               <b-modal :class="activity.reservableSeats" id="modal2" :title="item.slot" ok-only no-stacking header=no-stacking>
