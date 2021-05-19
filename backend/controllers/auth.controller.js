@@ -137,3 +137,19 @@ exports.getTickets = async function (req, res) {
       res.status(200).json({ status: 200, data: user.tickets, message: 'Successfully retrieved the tickets.' });
   });
 }
+
+exports.deleteTicket = async function (req, res) {
+  let ticket = req.body.ticket; 
+  console.log(req.userId, ticket) 
+  User.findByIdAndUpdate(
+    req.userId, 
+    { $pull: { tickets: ticket } },
+    function (err, user) {
+      if (err) { return next(err); }
+      if (user === null) {
+          return res.status(404).json({ status: 404, message: 'User not found'});
+      }
+      res.status(200).json({ status: 200, data: user.tickets, message: 'Ticket was deleted' });
+     }
+  )
+}

@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
 export default {
   name: 'Confirmation',
   props: {
@@ -51,6 +52,19 @@ export default {
         name: 'NaN',
         number: 'NaN'
       }
+    }
+    else {
+      const token = localStorage.accessToken;
+      const headers = {'Authorization': 'Bearer ' + token}
+      Api.put('/auth/ticket', {
+        ticket: this.ticket.type + " (" + this.ticket.age + ")"
+      }, { headers })
+      .then(res => {
+        this.tickets = res.data.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 }

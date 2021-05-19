@@ -3,64 +3,81 @@
     <div class="pageTop">
       <br />
       <h2 class="title">Tickets & Prices</h2>
+      <p>Here you can purchase tickets for entrance and other activities</p>
     </div>
-    <b-row>
-      <b-col>
-        <p>Here you can purchase tickets for entrance and other activities</p>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <div>
-          <b-card no-body>
-          <b-tabs pills card align="center">
-          <b-tab class="tab1" title="Buy Tickets" active><b-card-text><ul>
-          <b-button pill to= "/ticketprices/entrance" class="btnentrance">Entrance</b-button>
-          <b-button pill to="/ticketprices/singleticket" class="btnST">Single Ticket</b-button>
-          <br />
-          <b-button pill to="/ticketprices/bundleticket" class="btnBT">Bundle Ticket</b-button>
-          <b-button pill to="/ticketprices/fullpackage" class="btnFP">Full Package</b-button></ul>
-          </b-card-text></b-tab>
-          <b-tab class="tab2" title="My Tickets"><b-card-text>tab2 contents</b-card-text></b-tab>
-          </b-tabs>
-          </b-card>
-        </div>
-      </b-col>
-    </b-row>
-    <b-row class="footer">
-      <b-col>
-        <h2 class="footer-container__heading">BEFORE YOUR VISIT</h2>
-        <p>Opening hours</p>
-        <p>Activities in Dummy park</p>
-        <p>Find us</p>
-        <p>Food & Beverages</p>
-        <p>Accomodation</p>
-      </b-col>
-    </b-row>
+    <b-tabs align="center" v-model="activeTab" >
+      <b-tab title="Buy Tickets" active>
+        <b-button to= "/ticketprices/entrance" class="ticketButton">Entrance</b-button>
+        <b-button to="/ticketprices/singleticket" class="ticketButton">Single Ticket</b-button>
+        <br />
+        <b-button to="/ticketprices/bundleticket" class="ticketButton">Bundle Ticket</b-button>
+        <b-button to="/ticketprices/fullpackage" class="ticketButton">Full Package</b-button>
+      </b-tab>
+      <b-tab title="My Tickets">
+        <span v-if="!tickets.length">You have no tickets.</span>
+        <ticket-card v-for="(t, i) in tickets" v-bind:key="i" :ticket="{name: t}"/>
+      </b-tab>
+    </b-tabs>
+    <div class="footer">
+      <h2 class="footer-container__heading">BEFORE YOUR VISIT</h2>
+      <p>Opening hours</p>
+      <p>Activities in Dummy park</p>
+      <p>Find us</p>
+      <p>Food & Beverages</p>
+      <p>Accomodation</p>
+    </div>
   </div>
 </template>
 
-<style>
-.tab1 {
-  background: #c7efcf;
-  border-radius: 25px;
-  color: black;
-  font-weight: bolder;
-  margin-left: 0%;
-  margin-right: 0%;
-  border-radius: 0px;
-  height: 9.5rem;
+<script>
+import { Api } from '@/Api'
+import TicketCard from '../components/TicketCard.vue'
+export default {
+  components: { TicketCard },
+  data() {
+    return {
+      tickets: [],
+      activeTab: 0
+    }  
+  },
+  created() {
+    const token = localStorage.accessToken;
+    const headers = {'Authorization': 'Bearer ' + token}
+    Api.get('/auth/tickets', { headers })
+    .then(res => {
+        this.tickets = res.data.data
+        if(res.data.data.length > 0){
+          this.activeTab = 1
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 }
+</script>
 
-.tab2 {
-  background: #c7efcf;
-  border-radius: 25px;
-  color: black;
-  font-weight: bolder;
-  margin-left: 0%;
-  margin-right: 0%;
-  border-radius: 0px;
-  height: 9.5rem;
+<style>
+.nav-tabs {
+  border:none !important;
+  background-color: white;
+  width: fit-content;
+  margin: auto;
+  padding: 5px 5px 4px 5px !important;
+  border-radius: 50px;
+}
+.nav-link {
+  border-radius: 50px !important;
+  color: #2c3e50 !important;
+}
+.nav-link.active {
+  background-color: var(--color-pink) !important;
+  color: #2c3e50 !important;
+  font-weight: bold;
+  border:none !important;
+}
+.tab-content{
+  margin-top: 30px !important;
 }
 
 .card-main-col {
@@ -68,68 +85,15 @@
   padding: 0%;
 }
 
-.btnentrance {
+.ticketButton {
   background-color: #FFFFFF !important;
-  border: 10px;
-  color: black !important;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
-}
-.btnFP {
-  background-color: #FFFFFF !important;
-  border: 10px;
-  color: black !important;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
-}
-.btnST {
-  background-color: #FFFFFF !important;
-  border: 10px;
-  color: black !important;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
-}
-.btnBT {
-  background-color: #FFFFFF !important;
-  border: 10px;
-  color: black !important;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
+  color: #2c3e50 !important;
+  padding-top: 20px !important;
+  border: none !important;
+  margin: 0px 10px 20px 10px;
+  width: 130px;
+  height: 65px;
+  font-weight: bold !important;
+  border-radius: 10px !important;
 }
 </style>
