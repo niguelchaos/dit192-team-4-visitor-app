@@ -1,4 +1,8 @@
 <template>
+<div>
+  <p>Reservations logged in!</p>
+</div>
+<!--
   <div id="attractions" class="wrapper">
     <div class="pageTop">
       <br />
@@ -44,8 +48,26 @@
       </div>
     </b-container>
   </div><i class="fas fa-route-interstate"></i>
-  </div>
+  </div> -->
 </template>
+
+<script>
+import Login from '../components/Login'
+export default {
+  name: 'Reservations',
+  props: {
+    userData: { 
+        phone: String,
+        name: String,
+        id: String
+    }
+  },
+  components: {
+    Login
+  }
+}
+</script>
+
 <style scoped>
 
 .container{

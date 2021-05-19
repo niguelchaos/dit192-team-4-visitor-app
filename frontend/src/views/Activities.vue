@@ -8,15 +8,44 @@
     <!-- drop box -->
     <b-container>
       <div class="filter-div">
-        <button class="btn-filter" v-for="(buttons, i) in activityTypes" v-on:click="filterCards(buttons, i)" :key="i"
+
+        <b-button-group class="mobile-categorybuttons d-lg-none" size="lg">
+          <button
+            v-for="(button, index) in activityTypes"
+            :key="index"
+            :pressed="button.state"
+            class="cat-button d-flex flex-wrap"
+            v-on:click="filterCards(button, index)"
+            :class="{'cat-active': button.state, 'cat-not-active': !button.state}"
+          >
+            {{ button.type }}
+          </button>
+        </b-button-group>
+
+        <!-- for large screens -->
+        <b-button-group class="pc-categorybuttons d-none d-md-inline-flex" size="lg">
+          <button
+            v-for="(button, index) in activityTypes"
+            :key="index"
+            :pressed="button.state"
+            class="cat-button text-center text-nowrap"
+            v-on:click="filterCards(button, index)"
+            :class="{'cat-active': button.state, 'cat-not-active': !button.state}"
+          >
+            {{ button.type }}
+          </button>
+        </b-button-group>
+
+        <!-- <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="changeCategory(buttons, i)" :key="i"
           :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
         {{ buttons.type }}
-        </button>
+        </button> -->
+
       </div>
 
       <div>
         <b-col>
-          <b-form-select style="border: 0px; border-radius: 15px" v-model="filterSelected" :options="filterOptions" v-on:change="changeFilter(filterSelected)"></b-form-select>
+          <b-form-select style="border: 0px; border-radius: 15px;width:200px;" v-model="filterSelected" :options="filterOptions" class="float-center mt-3"></b-form-select>
         </b-col>
       </div>
     </b-container>
@@ -220,6 +249,8 @@ export default {
 }
 </script>
 
+</script>
+
 <style>
 .wrapper {
   height: 100%;
@@ -259,14 +290,40 @@ export default {
 .flt-not-active{
   background-color: #FFFFFF;
 }
+.cat-active {
+  background-color: #EDADC7;
+  border-radius: 25px;
+  color: black;
+  font-weight: bolder;
+}
 
+.cat-not-active{
+  background-color: #f6fff3;
+  border-radius: 25px;
+  color: #2D3E4F;
+  font-weight: normal;
+}
 .card-main-div {
-  margin: 0%;
+  margin-top: 1rem !important;
   padding: 0%;
   overflow-y: scroll;
   position: relative;
   flex: 1;
 }
+.mobile-categorybuttons {
+  background-color: #f6fff3;
+  border-radius: 35px;
+  font-size: 30px;
+  gap: 5px;
+}
+.pc-categorybuttons {
+  background-color: #ffffff;
+  font-size: 20px;
+  border-radius: 35px;
+  width: 100%;
+  gap: 25px;
+}
+
 .card-main-col {
   margin: 0%;
   padding: 0%;
@@ -291,6 +348,13 @@ export default {
 ::-webkit-scrollbar-thumb {
   border-radius: 0;
   background: #B0B0B0;
+}
+.btn-group.special {
+  display: flex;
+}
+
+.special .btn {
+  flex: 1
 }
 
 </style>

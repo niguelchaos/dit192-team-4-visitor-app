@@ -10,14 +10,38 @@ import SingleTicket from './views/SingleTicket.vue'
 import BundleTicket from './views/BundleTicket.vue'
 import FullPackage from './views/FullPackage.vue'
 import Book from './views/Book.vue'
-import Signin from './views/Signin.vue'
 import Activity from './views/ActivityViews/Activity.vue'
+import Account from './views/Account.vue'
 import Attraction from './views/ActivityViews/Attraction.vue'
 import Restaurant from './views/ActivityViews/Restaurant.vue'
 import Game from './views/ActivityViews/Game.vue'
 import Reserve from './views/Reserve.vue'
+import Login from './components/Login.vue'
+import Register from './components/Register.vue'
 import GetReservation from './views/GetReservation.vue'
+import { Api } from './Api'
 Vue.use(Router)
+
+function verifyUser(to, from, next) {
+  let target = to.name || 'account'
+  if (localStorage.accessToken) {
+    let authorization = {
+      'Authorization': `Bearer ${localStorage.accessToken}` 
+    }
+  
+    Api.get('auth/me', {headers: authorization})
+      .then(res => {
+        to.params.userData = res.data.data
+        next()
+      })
+      .catch(err => {
+        localStorage.removeItem('accessToken');
+        next({name: 'login', params: { target: target }})
+      })
+  } else {
+    next({name: 'login', params: { target: target }})
+  }
+}
 
 export default new Router({
   mode: 'history',
@@ -27,6 +51,25 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      props: true
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+      props: true
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: Account,
+      props: true,
+      beforeEnter: verifyUser
     },
     {
       path: '/camels',
@@ -47,11 +90,6 @@ export default new Router({
       path: '/ticketprices/bundleticket/book',
       name: 'bundlebook',
       component: Book
-    },
-    {
-      path: '/ticketprices/fullpackage/registerandbook',
-      name: 'registerandbook',
-      component: Signin
     },
     {
       path: '/ticketprices/entrance',
@@ -90,7 +128,9 @@ export default new Router({
     {
       path: '/reservations',
       name: 'reservations',
-      component: Reservation
+      component: Reservation,
+      beforeEnter: verifyUser,
+      props: true
     },
     {
       path: '/reservations/reserve',

@@ -4,9 +4,6 @@
       <b-row>
         <b-col xs="12" align-self="center">
           <Logo></Logo>
-          <!-- <div class="logo">
-            <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div> -->
         </b-col>
       </b-row>
       <b-row>
@@ -27,7 +24,7 @@
           <div class="map">
             <h4>Map over the park</h4>
             <!-- <img class="map_img" src="../assets/Map.jpeg" alt="map" /> -->
-            <map-component :content="attractions" />
+            <map-component :content="activities" />
           </div>
         </b-col>
       </b-row>
@@ -54,7 +51,7 @@ export default {
   data() {
     return {
       message: '',
-      attractions: []
+      activities: []
     }
   },
   mounted() {
@@ -72,9 +69,9 @@ export default {
         })
     },
     getAttractions() {
-      Api.get('/attractions')
+      Api.get('/activities', {params: {limit: 10000}})
         .then(res => {
-          this.attractions = res.data.data || []
+          this.activities = res.data.data || []
         })
         // .bind(this)
         .catch(err => {
@@ -87,9 +84,7 @@ export default {
 
 <style>
   .logo {
-    height: 100px;
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin-bottom: 1rem;
   }
 
   .title {

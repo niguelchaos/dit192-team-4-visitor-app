@@ -4,9 +4,6 @@
       <b-row>
         <b-col xs="12" align-self="center">
           <Logo></Logo>
-          <!-- <div class="logo">
-            <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div> -->
         </b-col>
       </b-row>
     </b-container>

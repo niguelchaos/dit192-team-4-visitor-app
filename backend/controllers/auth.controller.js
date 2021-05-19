@@ -74,7 +74,7 @@ exports.me = async function (req, res) {
   User.findById(req.userId, { password: 0 }, function (error, user) {
     if (error) return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ status: httpStatus.INTERNAL_SERVER_ERROR, message: `Server error: ${error.message}` })
     if (!user) return res.status(httpStatus.NOT_FOUND).send({ status: httpStatus.NOT_FOUND, message: `Auth: user not found (id: ${req.userId}).` })
-    res.status(httpStatus.OK).send({ status: httpStatus.OK, data: { id: user.id, phone: user.phone }, message: `Auth: user is authenticated (#: ${user.phone}).` })
+    res.status(httpStatus.OK).send({ status: httpStatus.OK, data: { id: user.id, phone: user.phone, name: user.name }, message: `Auth: user is authenticated (#: ${user.phone}).` })
   });
 }
 
