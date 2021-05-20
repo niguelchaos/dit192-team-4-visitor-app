@@ -178,7 +178,22 @@
     "latitude": 57.694785,
     "longitude": 11.994691,
     "type": ["attraction", "water"],
-    "img": "https://www.tripsavvy.com/thmb/0_FKk7tUP19d8Iqj0ff5WuGaRAU=/950x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/HighAnxietyfunnelrideatMountainCreekwaterpark-c0edb1cf46ac48c3bb1e19ef2152f4f7.jpg"
+    "img": "https://www.tripsavvy.com/thmb/0_FKk7tUP19d8Iqj0ff5WuGaRAU=/950x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/HighAnxietyfunnelrideatMountainCreekwaterpark-c0edb1cf46ac48c3bb1e19ef2152f4f7.jpg",
+    "timeslot" : [
+      { "slot": "Timeslot 1", "time": "10:00-10:30 AM", "seat":3},
+      { "slot": "Timeslot 2", "time": "10:30-11:00 AM" , "seat":3},
+      { "slot": "Timeslot 3", "time": "11:00-11:30 AM" , "seat":3},
+      { "slot": "Timeslot 4", "time": "11:30-12:00 AM", "seat":3 },
+      { "slot": "Timeslot 5", "time": "12:00-12:30 AM" , "seat":3},
+      { "slot": "Timeslot 6", "time": "12:30-1:00 PM" , "seat":3},
+      { "slot": "Timeslot 7", "time": "1:00-1:30 PM" , "seat":3},
+      { "slot": "Timeslot 8", "time": "1:30-2:00 PM", "seat":3 },
+      { "slot": "Timeslot 9", "time": "2:00-2:30 PM" , "seat":3},
+      { "slot": "Timeslot 10", "time": "2:30-3:00 PM" , "seat":3},
+      { "slot": "Timeslot 11", "time": "3:00-3:30 PM" , "seat":3},
+      { "slot": "Timeslot 12", "time": "3:30-4:00 PM" , "seat":3}
+    ],
+    "aseat": [3]
   },
   {
     "name": "Aqua Loop",
@@ -188,6 +203,21 @@
     "latitude": 57.694785,
     "longitude": 11.994691,
     "type": ["attraction", "water"],
-    "img":"https://www.aquaplanet.ph/sites/default/files/AP-AquaLoop-lowres.jpg" 
+    "img":"https://www.aquaplanet.ph/sites/default/files/AP-AquaLoop-lowres.jpg",
+    "timeslot" : [
+      { "slot": "Timeslot 1", "time": "10:00-10:30 AM", "seat":3},
+      { "slot": "Timeslot 2", "time": "10:30-11:00 AM" , "seat":3},
+      { "slot": "Timeslot 3", "time": "11:00-11:30 AM" , "seat":3},
+      { "slot": "Timeslot 4", "time": "11:30-12:00 AM", "seat":3 },
+      { "slot": "Timeslot 5", "time": "12:00-12:30 AM" , "seat":3},
+      { "slot": "Timeslot 6", "time": "12:30-1:00 PM" , "seat":3},
+      { "slot": "Timeslot 7", "time": "1:00-1:30 PM" , "seat":3},
+      { "slot": "Timeslot 8", "time": "1:30-2:00 PM", "seat":3 },
+      { "slot": "Timeslot 9", "time": "2:00-2:30 PM" , "seat":3},
+      { "slot": "Timeslot 10", "time": "2:30-3:00 PM" , "seat":3},
+      { "slot": "Timeslot 11", "time": "3:00-3:30 PM" , "seat":3},
+      { "slot": "Timeslot 12", "time": "3:30-4:00 PM" , "seat":3}
+    ],
+    "aseat": [3]
   }
 ]
