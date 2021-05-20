@@ -59,7 +59,7 @@ export default {
   display: flex;
   justify-content: center;
   margin-top: 70px;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 1rem 0.5rem 0rem 0.5rem;
   background-color: #c7efcf;
   border: 15px solid white;
   overflow: auto;
