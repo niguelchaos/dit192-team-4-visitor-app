@@ -24,8 +24,8 @@ export default {
     }
   },
   created() {
-    const headers = { 'Authorization': 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTNlMzI3ZWFjNjY5MWNmYzVmMzQyNSIsImlhdCI6MTYyMTM1MzQzMSwiZXhwIjoxNjIxNDM5ODMxLCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwOTExMTExMSJ9.AGzbka1d7OHk11yZOzIs2VOm0STaIm5wbXQ38QoldQQnWPI1L94kYYmng01f-W6QjD45FiWnZdIHd1faKa1nq8NgAWNYpycPbEHBaBb3SlOteZZQGWJss4oMVlQOyFRx_TTduGemMfZvAKk3jDjb3DS3PhqRFXLEaEuPgQ8VcbdQj8c5' }
-    // eslint-disable-next-line no-undef
+    const token = localStorage.accessToken
+    const headers = { 'Authorization': 'Bearer ' + token }
     Api.get('/auth/reservations', { headers })
       .then(res => {
         console.log(res.data.data)
