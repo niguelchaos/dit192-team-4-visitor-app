@@ -33,6 +33,7 @@
           <p>Address: Göteborgsvägen 1</p>
           <p>E-mail: contact@email.com</p>
           <p>Opening Times: 1pm - 10pm</p>
+          <a style="color:white;" href="/home/policies">Policies</a>
         </b-col>
       </b-row>
     </b-container>
@@ -69,7 +70,7 @@ export default {
         })
     },
     getAttractions() {
-      Api.get('/activities', {params: {limit: 10000}})
+      Api.get('/activities', { params: { limit: 10000 } })
         .then(res => {
           this.activities = res.data.data || []
         })
@@ -107,5 +108,4 @@ export default {
     height: 500px;
     margin-top: 10px;
   }
-
 </style>

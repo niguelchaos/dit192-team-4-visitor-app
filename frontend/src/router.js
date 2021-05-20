@@ -4,7 +4,7 @@ import Home from './views/Home.vue'
 import Camels from './views/Camels.vue'
 import Activities from './views/Activities.vue'
 import Reservation from './views/Reservations.vue'
-import TicketPrice from './views/TicketPrices.vue'
+import Tickets from './views/Tickets.vue'
 import Entrance from './views/Entrance.vue'
 import SingleTicket from './views/SingleTicket.vue'
 import BundleTicket from './views/BundleTicket.vue'
@@ -19,6 +19,8 @@ import Reserve from './views/Reserve.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import GetReservation from './components/GetReservation.vue'
+import Confirmation from './views/Confirmation.vue'
+import Policies from './views/Policies.vue'
 import { Api } from './Api'
 Vue.use(Router)
 
@@ -77,22 +79,13 @@ export default new Router({
       component: Camels
     },
     {
-      path: '/ticketprices/entrance/book',
-      name: 'entrancebook',
-      component: Book
+      path: '/tickets/book',
+      name: 'book',
+      component: Book,
+      props: true
     },
     {
-      path: '/ticketprices/singleticket/book',
-      name: 'singlebook',
-      component: Book
-    },
-    {
-      path: '/ticketprices/bundleticket/book',
-      name: 'bundlebook',
-      component: Book
-    },
-    {
-      path: '/ticketprices/entrance',
+      path: '/tickets/entrance',
       name: 'entrance',
       component: Entrance
     },
@@ -143,24 +136,36 @@ export default new Router({
       component: GetReservation
     },
     {
-      path: '/ticketprices/singleticket',
+      path: '/tickets/singleticket',
       name: 'singleticket',
       component: SingleTicket
     },
     {
-      path: '/ticketprices/bundleticket',
+      path: '/tickets/bundleticket',
       name: 'bundleticket',
       component: BundleTicket
     },
     {
-      path: '/ticketprices/fullpackage',
+      path: '/tickets/fullpackage',
       name: 'fullpackage',
       component: FullPackage
     },
     {
-      path: '/ticketprices',
-      name: 'ticketprices',
-      component: TicketPrice
+      path: '/confirmation/:id',
+      name: 'confirmation',
+      component: Confirmation,
+      props: true
+    },
+    {
+      path: '/tickets',
+      name: 'tickets',
+      component: Tickets,
+      beforeEnter: verifyUser
+    },
+    {
+      path: '/home/policies',
+      name: 'policies',
+      component: Policies
     }
   ]
 })

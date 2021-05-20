@@ -92,9 +92,9 @@ export default {
     // happens only once
     // updatePageNum already executes getAttractions
     this.getActivities(this.filterCategories, this.filterSelected)
-    //this.linkGen(this.currentPage)
-    
-    //this.updatePageNum(this.currentPage)
+    // this.linkGen(this.currentPage)
+
+    // this.updatePageNum(this.currentPage)
   },
   beforeUpdate() {},
   updated() {},
@@ -126,7 +126,7 @@ export default {
     },
 
     changeFilter(selected) {
-      console.log("changeFilter")
+      console.log('changeFilter')
       console.log(selected)
       this.getActivities(this.filterCategories, selected)
     },
@@ -148,9 +148,9 @@ export default {
 
     getActivities(type, sort) {
       var params = {
-          page: this.currentPage,
-          type: undefined,
-          sortBy: sort
+        page: this.currentPage,
+        type: undefined,
+        sortBy: sort
       }
       if (type !== 'all') {
         params.type = type

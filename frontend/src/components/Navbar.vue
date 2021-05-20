@@ -5,7 +5,7 @@
     <b-button :to="{path: '/reservations'}" class="nav-btn shadow-none"
       >Reservations</b-button
     >
-    <b-button to="/ticketprices" class="nav-btn shadow-none">Tickets</b-button>
+    <b-button :to="{path: '/tickets'}" class="nav-btn shadow-none">Tickets</b-button>
    </div>
 </template>
 

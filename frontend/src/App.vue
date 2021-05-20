@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { Api } from '@/Api'
 import Navbar from './components/Navbar'
 import Topbar from './components/Topbar'
 export default {
@@ -18,17 +17,17 @@ export default {
   },
   data() {
     return {
-      accessToken: ""
+      accessToken: ''
     }
   },
   mounted() {
     if (localStorage.accessToken) {
-      this.accessToken = localStorage.accessToken;
+      this.accessToken = localStorage.accessToken
     }
   },
 
   methods: {
-    validateAccess() { 
+    validateAccess() {
       if (localStorage.accessToken) {
         /*
         Api.post('auth/login', this.form)
@@ -37,10 +36,10 @@ export default {
           })
           .catch(err => {
             console.log(err)
-          })*/
-        return true;
+          }) */
+        return true
       } else {
-        return false;
+        return false
       }
     }
   }

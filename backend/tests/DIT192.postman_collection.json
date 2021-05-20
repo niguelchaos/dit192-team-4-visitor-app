@@ -1,0 +1,1021 @@
+{
+	"info": {
+		"_postman_id": "feb0caf7-4f54-4b45-a94e-f4b4356fd03c",
+		"name": "DIT192",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /api",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /api/camels",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Save and read environment variables",
+							"",
+							"// 1) Create an environment in Postman:",
+							"// https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments",
+							"",
+							"// 2) Save reponse data in environment variable",
+							"var jsonData = pm.response.json();",
+							"var camelId = jsonData._id",
+							"pm.collectionVariables.set(\"camel_id\", camelId);",
+							"",
+							"// 3) Use variable in later requests via {{variable}}",
+							"// GET {{host}}/api/camels/{{camel_id}}",
+							"var getCamelId = pm.variables.get(\"camel_id\");",
+							"",
+							"// Test assertion examples",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Body has correct color and position\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.color).to.eql(\"orange\");",
+							"    pm.expect(jsonData.position).to.eql(7);",
+							"});",
+							"",
+							"pm.test(\"Body has _id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData._id).to.be.a('String');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"color\": \"orange\",\n\t\"position\": 7\n}\n"
+				},
+				"url": {
+					"raw": "{{host}}/api/camels?=",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"camels"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/camels",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/camels?=",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"camels"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/camels/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/camels/{{camel_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"camels",
+						"{{camel_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertion examples",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});",
+							"",
+							"pm.test(\"Data has correct attraction name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.name).to.eql(\"The Loophole Plunge\");",
+							"});",
+							"",
+							"pm.test(\"Data has _id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data._id).to.be.a('String')",
+							"    pm.collectionVariables.set(\"activity_id\", jsonData.data._id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"The Loophole Plunge\",\n    \"description\": \"The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!\",\n    \"price\": 45,\n    \"status\": \"open\",\n    \"latitude\": 57.695886,\n    \"logitude\": 11.991146,\n    \"queueTime\": \"10 minutes\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/activities",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"activities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all activities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/activities",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"activities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/activities/{{activity_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"activities",
+						"{{activity_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\",\n    \"latitude\": \"Updated latitude\",\n    \"longitude\": \"Updated longitude\",\n    \"queueTime\": \"Updated queueTime\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/activities/{{activity_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"activities",
+						"{{activity_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Data is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/activities/{{activity_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"activities",
+						"{{activity_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get activity: does not exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/activities/{{activity_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"activities",
+						"{{activity_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify the activity: does not exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/activities/{{activity_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"activities",
+						"{{activity_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete activity: does not exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test assertion examples",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/activities/{{activity_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"activities",
+						"{{activity_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register a user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertions",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Registration status is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"status\")",
+							"});",
+							"",
+							"pm.test(\"Registration is successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(201);",
+							"});",
+							"",
+							"pm.test(\"Registration message is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"message\")",
+							"});",
+							"",
+							"pm.test(\"Token is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"token\")",
+							"    pm.collectionVariables.set(\"testToken\", jsonData.token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{testUser}}\",\n    \"phone\": \"{{testPhone}}\",\n    \"password\": \"{{testPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertions",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Authorization status is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"status\")",
+							"});",
+							"",
+							"pm.test(\"Authorization is successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Authorization message is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"message\")",
+							"});",
+							"",
+							"pm.test(\"Token is present in the body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"token\")",
+							"    pm.collectionVariables.set(\"testToken\", jsonData.token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\": \"{{testPhone}}\",\n    \"password\": \"{{testPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertions",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Authorization status is present in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"status\")",
+							"});",
+							"",
+							"pm.test(\"Authorization is successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Contains authorization message in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"message\")",
+							"});",
+							"",
+							"pm.test(\"Contains user data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"data\")",
+							"});",
+							"",
+							"pm.test(\"Contains user identifier\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data).to.have.property(\"id\")",
+							"    pm.collectionVariables.set(\"testUserId\", jsonData.data.id);",
+							"});",
+							"",
+							"pm.test(\"Contains user phone\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data).to.have.property(\"phone\")",
+							"});",
+							"",
+							"pm.test(\"Phone is the same as the user\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.phone).to.eql(pm.collectionVariables.get('testPhone'));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{testToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/auth/me",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deregister user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"// Test assertions",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"The user was removed\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"status\")",
+							"});",
+							"",
+							"pm.test(\"The removal was successfully\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"The user removal message exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"message\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{testToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/auth/deregister/{{testUserId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"deregister",
+						"{{testUserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add reservation",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTI2M2FjNWEyYTNkMzM2ODE5Mjk1NSIsImlhdCI6MTYyMTI1NjUyNywiZXhwIjoxNjIxMzQyOTI3LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwMDExMDAxMSJ9.AQr_gJxecYje8lMrMbO6EEzOLD5tflYZTcO_G_ptlzyDYJbKyKGvBsv8h5a0BgUrtUnJDqW2F4ukT7X4HjzZhYZQAXH9myFJDR_UoihL9Wmi0fbcqCgQf2GMXlKJkhRTDOl3OkcUJFSyZIS9z-xTdbejw6dYRfUS4tjfEDyF_pArY7UY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \n    \"reservation\": {\n        \"name\": \"Epic ride\",\n        \"slot\": \"Timeslot 1\",\n        \"time\": \"12 - 12:30 pm\"\n    }\n}    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/reservation",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reservations",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTI2M2FjNWEyYTNkMzM2ODE5Mjk1NSIsImlhdCI6MTYyMTI1NjUyNywiZXhwIjoxNjIxMzQyOTI3LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwMDExMDAxMSJ9.AQr_gJxecYje8lMrMbO6EEzOLD5tflYZTcO_G_ptlzyDYJbKyKGvBsv8h5a0BgUrtUnJDqW2F4ukT7X4HjzZhYZQAXH9myFJDR_UoihL9Wmi0fbcqCgQf2GMXlKJkhRTDOl3OkcUJFSyZIS9z-xTdbejw6dYRfUS4tjfEDyF_pArY7UY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/auth/reservations",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add ticket",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTI2M2FjNWEyYTNkMzM2ODE5Mjk1NSIsImlhdCI6MTYyMTI1NTA4NywiZXhwIjoxNjIxMzQxNDg3LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwMDExMDAxMSJ9.AQOKYg13xwpLzQPoyQ4pRS2jDcb0GNtIjEcMyOZua3VMRbG6GN8BpAFvCg_FvMdYibN_UJBWWSoyJsaVfEZA4zUOAY_-oKiFdJzmT68MGU0RbLSJs2vMzIF9Wsv9SJWtdj9j618ejP_UyXsD7r1WIlvXYbAChKQBkjaf20_Jn3bfN2jR",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \n    \"ticket\": \"Full package - 0-18 years\"\n}    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/ticket",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tickets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYTI2M2FjNWEyYTNkMzM2ODE5Mjk1NSIsImlhdCI6MTYyMTI1NTA4NywiZXhwIjoxNjIxMzQxNDg3LCJhdWQiOiJ3ZWJhcHAiLCJpc3MiOiJ0ZWFtNGRiIiwic3ViIjoiMDcwMDExMDAxMSJ9.AQOKYg13xwpLzQPoyQ4pRS2jDcb0GNtIjEcMyOZua3VMRbG6GN8BpAFvCg_FvMdYibN_UJBWWSoyJsaVfEZA4zUOAY_-oKiFdJzmT68MGU0RbLSJs2vMzIF9Wsv9SJWtdj9j618ejP_UyXsD7r1WIlvXYbAChKQBkjaf20_Jn3bfN2jR",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/auth/tickets",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "camel_id",
+			"value": ""
+		},
+		{
+			"key": "activity_id",
+			"value": "60a1c9af229a140b09e6a698"
+		},
+		{
+			"key": "testName",
+			"value": "Bence Bensson"
+		},
+		{
+			"key": "testPhone",
+			"value": "0700110011"
+		},
+		{
+			"key": "testPassword",
+			"value": "TestPassword!"
+		},
+		{
+			"key": "testToken",
+			"value": ""
+		},
+		{
+			"key": "testUserId",
+			"value": ""
+		}
+	]
+}

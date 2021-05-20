@@ -6,7 +6,7 @@
       <h2>Sign in</h2>
       <div class="input-container">
         <input class="login-el login-input" type="text" placeholder="Phone number" v-model="form.phone" required>
-        <input class="login-el login-input" type="password" placeholder="Password" v-model="form.password" required>        
+        <input class="login-el login-input" type="password" placeholder="Password" v-model="form.password" required>
       </div>
       <button class="login-el login-btn" v-on:click="login()">Sign in</button>
       <p class="reg-option">Don't have an account? <b-link :to="{ name: 'register', params: { target: this.target }}">Register here →</b-link></p>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      form: { 
+      form: {
         phone: undefined,
         password: undefined
       }
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     login() {
-      if (this.form.phone != "" && this.form.password != "") {
+      if (this.form.phone !== '' && this.form.password !== '') {
         Api.post('auth/login', this.form)
           .then(res => {
             localStorage.accessToken = res.data.token;
@@ -42,9 +42,8 @@ export default {
           .catch(err => {
             console.log(err)
           })
-        }
-      else {
-        console.log("Phone number and password must be present in the form.")
+      } else {
+        console.log('Phone number and password must be present in the form.')
       }
     }
   }
