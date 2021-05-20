@@ -25,6 +25,7 @@
       </div>
       <button class="el logout-btn" v-on:click="logout()">Sign out</button>
     </div>
+
   </div>
 </template>
 
@@ -66,7 +67,7 @@ export default {
   border-radius: 1rem;
   padding: 1.5rem 1.5rem 1.5rem 1.5rem;
   background: #FFFFFF;
-  min-width: 25rem;
+  min-width: 12rem;
   max-width: 30rem;
 }
 
@@ -80,7 +81,6 @@ export default {
   width: 100%;
   align-items: baseline;
 }
-
 .user-info {
   display: flex;
   flex-direction: column;
