@@ -12,15 +12,12 @@ import FullPackage from './views/FullPackage.vue'
 import Book from './views/Book.vue'
 import Activity from './views/ActivityViews/Activity.vue'
 import Account from './views/Account.vue'
-import Attraction from './views/ActivityViews/Attraction.vue'
-import Restaurant from './views/ActivityViews/Restaurant.vue'
-import Game from './views/ActivityViews/Game.vue'
 import Reserve from './views/Reserve.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
-import GetReservation from './components/GetReservation.vue'
 import Confirmation from './views/Confirmation.vue'
 import Policies from './views/Policies.vue'
+import GetReservation from './views/GetReservation.vue'
 import { Api } from './Api'
 Vue.use(Router)
 
@@ -28,20 +25,21 @@ function verifyUser(to, from, next) {
   let target = to.name || 'account'
   if (localStorage.accessToken) {
     let authorization = {
-      'Authorization': `Bearer ${localStorage.accessToken}` 
+      'Authorization': `Bearer ${localStorage.accessToken}`
     }
-  
-    Api.get('auth/me', {headers: authorization})
+
+    Api.get('auth/me', { headers: authorization })
       .then(res => {
         to.params.userData = res.data.data
         next()
       })
       .catch(err => {
-        localStorage.removeItem('accessToken');
-        next({name: 'login', params: { target: target }})
+        console.log(err)
+        localStorage.removeItem('accessToken')
+        next({ name: 'login', params: { target: target } })
       })
   } else {
-    next({name: 'login', params: { target: target }})
+    next({ name: 'login', params: { target: target } })
   }
 }
 
@@ -101,24 +99,6 @@ export default new Router({
       props: true
     },
     {
-      path: '/activities/attractions/:id',
-      name: 'attractions',
-      component: Activity,
-      props: true
-    },
-    {
-      path: '/activities/restaurants/:id',
-      name: 'restaurants',
-      component: Restaurant,
-      props: true
-    },
-    {
-      path: '/activities/games/:id',
-      name: 'games',
-      component: Game,
-      props: true
-    },
-    {
       path: '/reservations',
       name: 'reservations',
       component: Reservation,
@@ -131,9 +111,10 @@ export default new Router({
       component: Reserve
     },
     {
-      path: '/reservations/reserve/getreservation',
+      path: '/reservations/reserve/getreservation/:id',
       name: 'getreservation',
-      component: GetReservation
+      component: GetReservation,
+      props: true
     },
     {
       path: '/tickets/singleticket',

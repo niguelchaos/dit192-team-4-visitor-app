@@ -5,9 +5,9 @@
       <img class="register-logo" src="../assets/user-circle.svg"/>
       <h2>Register account</h2>
       <div class="input-container">
-        <input class="register-el register-input" type="text" placeholder="Full name" v-model="form.name" required>   
+        <input class="register-el register-input" type="text" placeholder="Full name" v-model="form.name" required>
         <input class="register-el register-input" type="text" placeholder="Phone number" v-model="form.phone" required>
-        <input class="register-el register-input" type="password" placeholder="Password" v-model="form.password" required>     
+        <input class="register-el register-input" type="password" placeholder="Password" v-model="form.password" required>
       </div>
       <button class="register-el register-btn" v-on:click="register()">Register</button>
       <p class="reg-option">Have an account? <b-link :to="{ name: 'login', params: { target: this.target }}">Sign in here →</b-link></p>
@@ -27,26 +27,25 @@ export default {
   data() {
     return {
       form: {
-        name: "", 
-        phone: "",
-        password: ""
+        name: '',
+        phone: '',
+        password: ''
       }
     }
   },
   methods: {
     register() {
-      if (this.form.phone != "" && this.form.password != "" && this.form.name) {
+      if (this.form.phone !== '' && this.form.password !== '' && this.form.name !== '') {
         Api.post('auth/register', this.form)
           .then(res => {
-            localStorage.accessToken = res.data.token;
-            this.$router.push( {name: this.target} )
+            localStorage.accessToken = res.data.token
+            this.$router.push({ name: this.target })
           })
           .catch(err => {
             console.log(err)
           })
-        }
-      else {
-        console.log("Phone number, full name, and password must be present in the form.")
+      } else {
+        console.log('Phone number, full name, and password must be present in the form.')
       }
     }
   }

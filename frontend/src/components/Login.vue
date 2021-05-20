@@ -36,8 +36,8 @@ export default {
       if (this.form.phone !== '' && this.form.password !== '') {
         Api.post('auth/login', this.form)
           .then(res => {
-            localStorage.accessToken = res.data.token;
-            this.$router.push( {name: this.target} )
+            localStorage.accessToken = res.data.token
+            this.$router.push({ name: this.target })
           })
           .catch(err => {
             console.log(err)

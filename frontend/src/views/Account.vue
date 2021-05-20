@@ -16,12 +16,12 @@
         </div>
         <div class="user-info-sect">
           <label>Name</label>
-          <input class="el user-input" type="text" placeholder="Name" :value="userData.name" disabled>  
+          <input class="el user-input" type="text" placeholder="Name" :value="userData.name" disabled>
         </div>
         <div class="user-info-sect">
           <label>Password (?)</label>
-          <input class="el user-input" type="password" placeholder="Password (?)" value="tryguessingwhatcauseitsnothere" disabled> 
-        </div>       
+          <input class="el user-input" type="password" placeholder="Password (?)" value="tryguessingwhatcauseitsnothere" disabled>
+        </div>
       </div>
       <button class="el logout-btn" v-on:click="logout()">Sign out</button>
     </div>
@@ -29,33 +29,27 @@
 </template>
 
 <script>
-import { Api } from '@/Api'
-import Logo from '../components/Logo'
 export default {
   name: 'Account',
-  components: { Logo },
   data() {
     return {
-      form: { 
+      form: {
         phone: undefined,
         password: undefined
       }
     }
   },
   props: {
-    userData: { 
-        phone: String,
-        name: String,
-        id: String
+    userData: {
+      phone: String,
+      name: String,
+      id: String
     }
-  },
-  mount() {
-    console.log(userData)
   },
   methods: {
     logout() {
-      localStorage.removeItem('accessToken');
-      this.$router.push( {name: "home"} )
+      localStorage.removeItem('accessToken')
+      this.$router.push({ name: 'home' })
     }
   }
 }

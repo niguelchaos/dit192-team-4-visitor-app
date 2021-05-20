@@ -52,18 +52,14 @@
 </template>
 
 <script>
-import Login from '../components/Login'
 export default {
   name: 'Reservations',
   props: {
-    userData: { 
-        phone: String,
-        name: String,
-        id: String
+    userData: {
+      phone: String,
+      name: String,
+      id: String
     }
-  },
-  components: {
-    Login
   }
 }
 </script>
