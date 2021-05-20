@@ -27,9 +27,7 @@ export default {
     const headers = { 'Authorization': 'Bearer ' + token }
     Api.get('/auth/reservations', { headers })
       .then(res => {
-        console.log(res.data.data)
         this.reservations = res.data.data
-        console.log(this.reservations)
       })
   }
 }

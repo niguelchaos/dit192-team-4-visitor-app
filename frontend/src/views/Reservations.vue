@@ -19,31 +19,6 @@
             {{ button.type }}
           </button>
         </b-button-group>
-
-        <!-- for large screens -->
-        <!-- <b-button-group
-          class="pc-categorybuttons d-none d-md-inline-flex"
-          size="lg"
-        >
-          <button
-            v-for="(button, index) in categories"
-            :key="index"
-            :pressed="button.state"
-            class="cat-button text-center text-nowrap"
-            v-on:click="changeCategory(button, index)"
-            :class="{
-              'cat-active': button.state,
-              'cat-not-active': !button.state,
-            }"
-          >
-            {{ button.type }}
-          </button>
-        </b-button-group> -->
-
-        <!-- <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="changeCategory(buttons, i)" :key="i"
-          :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
-        {{ buttons.type }}
-        </button> -->
       </div>
 
       <div v-if="categories[0].state">
@@ -126,7 +101,13 @@ export default {
       currentCategory: null,
 
       pageSize: 6,
-      activityLimit: 6,
+      activityLimit: 3,
+
+      // used to get number of pages
+      totalAttractions: 0,
+      // totalGames: 0,
+      totalRestaurants: 0,
+      totalActivities: 0,
       totalPages: 3,
       // TODO: Split filtering panel into a separate component
       filterSelected: null,
@@ -182,46 +163,55 @@ export default {
       this.activities = []
       this.currentCategory = filter
 
-      switch (filter.type.toLowerCase()) {
-        case 'all':
-          this.populate('attractions', this.attractions)
-          // this.populate('games', this.games)
-          this.populate('restaurants', this.restaurants)
-          break
-        case 'attractions':
-          this.populate('attractions', this.attractions)
-          break
-          // case 'games':
-          // this.populate('games', this.games)
-          // break
-        case 'restaurants':
-          this.populate('restaurants', this.restaurants)
-          break
-        case 'My Reservations':
-          this.populate('attractions', this.attractions)
-          this.populate('restaurants', this.restaurants)
-          break
+      if (filter.type === 'All') {
+        this.updatePageNum(this.currentPage)
+        this.getTotalPages()
       }
-      this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+      console.log(filter.type)
+      // switch (filter.type.toLowerCase()) {
+      //   case 'all':
+      //     this.populate('attractions', this.attractions)
+      //     // this.populate('games', this.games)
+      //     this.populate('restaurants', this.restaurants)
+      //     break
+      //   case 'attractions':
+      //     this.populate('attractions', this.attractions)
+      //     break
+      //     // case 'games':
+      //     // this.populate('games', this.games)
+      //     // break
+      //   case 'restaurants':
+      //     this.populate('restaurants', this.restaurants)
+      //     break
+      // case 'My Reservations':
+      //   this.populate('attractions', this.attractions)
+      //   this.populate('restaurants', this.restaurants)
+      //   break
+      // }
+      // this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
 
       this.prevCategory = this.currentCategory
     },
 
     getActivities() {
-      this.getAttractions()
+      this.getReservableActivities()
       // this.getGames()
-      this.getRestaurants()
+      // this.getRestaurants()
     },
 
-    getAttractions() {
+    getReservableActivities() {
       Api.get('activities', {
         params: {
-          page: this.currentPage
+          page: this.currentPage,
+          limit: this.pageSize,
+          type: 'attraction,restaurant'
         }
       })
         .then((res) => {
           this.attractions = res.data.data
+          this.totalActivities = res.data.totalActivities
           this.populate('attractions', this.attractions)
+
           this.activities.sort((a, b) =>
             a.data.name.localeCompare(b.data.name)
           )
@@ -232,43 +222,71 @@ export default {
         })
     },
 
-    getGames() {
-      Api.get('games', {
-        params: {
-          page: this.currentPage
-        }
-      })
-        .then((res) => {
-          this.games = res.data.data
-          this.populate('games', this.games)
-          this.activities.sort((a, b) =>
-            a.data.name.localeCompare(b.data.name)
-          )
-        })
-        .catch((err) => {
-          this.games = []
-          console.log(err)
-        })
-    },
+    // getAttractions() {
+    //   Api.get('activities', {
+    //     params: {
+    //       page: this.currentPage,
+    //       limit: this.pageSize,
+    //       type: 'attraction'
+    //     }
+    //   })
+    //     .then((res) => {
+    //       this.attractions = res.data.data
+    //       this.totalAttractions = res.data.totalAttractions
+    //       this.populate('attractions', this.attractions)
 
-    getRestaurants() {
-      Api.get('restaurants', {
-        params: {
-          page: this.currentPage
-        }
-      })
-        .then((res) => {
-          this.restaurants = res.data.data
-          this.populate('restaurants', this.restaurants)
-          this.activities.sort((a, b) =>
-            a.data.name.localeCompare(b.data.name)
-          )
-        })
-        .catch((err) => {
-          this.restaurants = []
-          console.log(err)
-        })
-    },
+    //       this.activities.sort((a, b) =>
+    //         a.data.name.localeCompare(b.data.name)
+    //       )
+    //     })
+    //     .catch((err) => {
+    //       this.attractions = []
+    //       console.log(err)
+    //     })
+    // },
+
+    // getGames() {
+    //   Api.get('games', {
+    //     params: {
+    //       page: this.currentPage,
+    //       limit: this.activityLimit
+    //     }
+    //   })
+    //     .then((res) => {
+    //       this.games = res.data.data
+    //       this.populate('games', this.games)
+    //       this.activities.sort((a, b) =>
+    //         a.data.name.localeCompare(b.data.name)
+    //       )
+    //     })
+    //     .catch((err) => {
+    //       this.games = []
+    //       console.log(err)
+    //     })
+    // },
+
+    // getRestaurants() {
+    //   Api.get('activities', {
+    //     params: {
+    //       page: this.currentPage,
+    //       limit: this.activityLimit,
+    //       type: 'restaurant'
+    //     }
+    //   })
+    //     .then((res) => {
+    //       this.restaurants = res.data.data
+    //       this.totalRestaurants = res.data.totalRestaurants
+    //       this.populate('restaurants', this.restaurants)
+
+    //       this.activities.sort((a, b) =>
+    //         a.data.name.localeCompare(b.data.name)
+    //       )
+    //     })
+    //     .catch((err) => {
+    //       this.restaurants = []
+    //       console.log(err)
+    //     })
+    // },
 
     populate(category, source) {
       for (const i in source) {
@@ -303,28 +321,10 @@ export default {
 
     // sets pagesize, needs updatepagenum first to get corrent totalactivities
     getTotalPages() {
-      if (this.currentCategory.type.toLowerCase() === 'all') {
-        this.activityLimit = 2
-        this.pageSize = 6
-      } else {
-        this.activityLimit = 3
-        this.pageSize = 3
-      }
-
-      // switch (this.currentCategory.type.toLowerCase()) {
-      //   case 'all':
-      //     this.totalPages = Math.ceil(this.totalActivities / this.pageSize)
-      //     break
-      //   case 'attractions':
-      //     this.totalPages = Math.ceil(this.totalAttractions / this.pageSize)
-      //     break
-      //   case 'games':
-      //     this.totalPages = Math.ceil(this.totalGames / this.pageSize)
-      //     break
-      //   case 'restaurants':
-      //     this.totalPages = Math.ceil(this.totalRestaurants / this.pageSize)
-      //     break
-      // }
+      this.activityLimit = 3
+      this.pageSize = 6
+      this.totalPages = Math.ceil(this.totalActivities / this.pageSize)
+      console.log(this.totalActivities)
     }
 
   }

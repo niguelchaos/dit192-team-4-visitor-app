@@ -27,13 +27,22 @@ exports.getAll = async function (req, res, next) {
 
     console.log(sortBy)
 
-    Activity.find({'type': { '$in': type}}, function(err, activities) {
+    var totalActivities = 0;
+
+    Activity.count({'type': { '$in': type}}, function(err, numOfActivities) {
         if (err) { return next(err); }
-        res.status(200).json({ status: 200, data: activities, message: 'Successfully retrieved the activities.' });
+        totalActivities = numOfActivities;
+
+        console.log("guh " + totalActivities);
+
+        Activity.find({'type': { '$in': type}}, function(err, activities) {
+            if (err) { return next(err); }
+            res.status(200).json({ status: 200, data: activities, totalActivities: totalActivities, message: 'Successfully retrieved the activities.' });
+        })
+        .sort([sortBy])
+        .skip(pageskip * limit)
+        .limit(limit);
     })
-    .sort([sortBy])
-    .skip(pageskip * limit)
-    .limit(limit);
 }
 
 // GET method
