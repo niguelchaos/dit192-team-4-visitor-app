@@ -22,6 +22,6 @@ export default {
   border-radius: 1rem;
   padding: 1.5rem 1.5rem 1.5rem 1.5rem;
   background: #FFFFFF;
-  min-width: 25rem;
+  /* min-width: 25rem; */
   }
 </style>
