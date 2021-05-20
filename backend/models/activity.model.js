@@ -13,7 +13,8 @@ var ActivitySchema = new Schema({
   image: { data: Buffer, contentType: String },
   latitude: { type: Number },
   longitude: { type: Number },
-  queueTime: { type: String }
+  queueTime: { type: String },
+  reservableSeats: { type: Number }
 });
 
 const Activity = mongoose.model("activities", ActivitySchema);

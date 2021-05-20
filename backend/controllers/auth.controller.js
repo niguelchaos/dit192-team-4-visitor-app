@@ -108,10 +108,26 @@ exports.getReservations = async function (req, res) {
   User.findById(id, function(err, user) {
       if (err) { return next(err); }
       if (user === null) {
-          return res.status(404).json({ status: 404, message: 'User not found'});
+        return res.status(404).json({ status: 404, message: `User not found ${id}`});
       }
       res.status(200).json({ status: 200, data: user.reservations, message: 'Successfully retrieved the reservations.' });
   });
+}
+
+exports.deleteReservation = async function (req, res) {
+  let reservation = req.body.reservation; 
+  console.log(req.userId, reservation) 
+  User.findByIdAndUpdate(
+    req.userId, 
+    { $pull: { reservations: reservation } },
+    function (err, user) {
+      if (err) { return next(err); }
+      if (user === null) {
+          return res.status(404).json({ status: 404, message: 'User not found'});
+      }
+      res.status(200).json({ status: 200, data: user.reservations, message: 'Reservation was deleted' });
+     }
+  )
 }
 
 exports.addTicket = async function (req, res) {

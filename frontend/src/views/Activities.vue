@@ -1,9 +1,5 @@
 <template>
   <div id="attractions" class="wrapper">
-    <div class="pageTop">
-      <br />
-      <h2 class="title">Activities</h2>
-    </div>
     <!-- Load attractions via API -->
     <!-- drop box -->
     <b-container>

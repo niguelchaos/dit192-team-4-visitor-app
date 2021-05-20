@@ -58,6 +58,8 @@ export default {
   mounted() {
     this.getMessage()
     this.getAttractions()
+    this.getGames()
+    this.getRestaurants()
   },
   methods: {
     getMessage() {
@@ -75,6 +77,28 @@ export default {
           this.activities = res.data.data || []
         })
         // .bind(this)
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getGames() {
+      Api.get('/games')
+        .then(res => {
+          this.games = res.data.data || []
+          this.total = this.games.concat(this.attractions)
+        })
+        // .bind(this)
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getRestaurants() {
+      Api.get('/restaurants')
+        .then(res => {
+          this.restaurants = res.data.data || []
+          console.log(this.restaurants)
+          this.total = this.total.concat(this.restaurants)
+        })
         .catch(err => {
           console.log(err)
         })

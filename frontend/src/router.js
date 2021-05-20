@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Camels from './views/Camels.vue'
 import Activities from './views/Activities.vue'
-import Reservation from './views/Reservations.vue'
+import Reservations from './views/Reservations.vue'
 import Tickets from './views/Tickets.vue'
 import Entrance from './views/Entrance.vue'
 import SingleTicket from './views/SingleTicket.vue'
@@ -12,7 +12,6 @@ import FullPackage from './views/FullPackage.vue'
 import Book from './views/Book.vue'
 import Activity from './views/ActivityViews/Activity.vue'
 import Account from './views/Account.vue'
-import Reserve from './views/Reserve.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import Confirmation from './views/Confirmation.vue'
@@ -50,26 +49,38 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        title: 'Home'
+      }
     },
     {
       path: '/login',
       name: 'login',
       component: Login,
-      props: true
+      props: true,
+      meta: {
+        title: 'Sign in'
+      }
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
-      props: true
+      props: true,
+      meta: {
+        title: 'Sign up'
+      }
     },
     {
       path: '/account',
       name: 'account',
       component: Account,
       props: true,
-      beforeEnter: verifyUser
+      beforeEnter: verifyUser,
+      meta: {
+        title: 'Account'
+      }
     },
     {
       path: '/camels',
@@ -80,73 +91,104 @@ export default new Router({
       path: '/tickets/book',
       name: 'book',
       component: Book,
-      props: true
+      props: true,
+      meta: {
+        title: 'Tickets & Prices'
+      }
     },
     {
       path: '/tickets/entrance',
       name: 'entrance',
-      component: Entrance
+      component: Entrance,
+      meta: {
+        title: 'Tickets & Prices'
+      }
     },
     {
       path: '/activities',
       name: 'activities',
-      component: Activities
+      component: Activities,
+      meta: {
+        title: 'Activities'
+      }
     },
     {
       path: '/activities/:id',
       name: 'activity',
       component: Activity,
-      props: true
+      props: true,
+      meta: {
+        title: 'Activities'
+      }
     },
     {
       path: '/reservations',
-      name: 'reservations',
-      component: Reservation,
-      beforeEnter: verifyUser,
-      props: true
-    },
-    {
-      path: '/reservations/reserve',
       name: 'reserve',
-      component: Reserve
+      component: Reservations,
+      beforeEnter: verifyUser,
+      props: true,
+      meta: {
+        title: 'Reservations'
+      }
     },
     {
       path: '/reservations/reserve/getreservation/:id',
       name: 'getreservation',
       component: GetReservation,
-      props: true
+      props: true,
+      meta: {
+        title: 'Reservations'
+      }
     },
     {
       path: '/tickets/singleticket',
       name: 'singleticket',
-      component: SingleTicket
+      component: SingleTicket,
+      meta: {
+        title: 'Tickets & Prices'
+      }
     },
     {
       path: '/tickets/bundleticket',
       name: 'bundleticket',
-      component: BundleTicket
+      component: BundleTicket,
+      meta: {
+        title: 'Tickets & Prices'
+      }
     },
     {
       path: '/tickets/fullpackage',
       name: 'fullpackage',
-      component: FullPackage
+      component: FullPackage,
+      meta: {
+        title: 'Tickets & Prices'
+      }
     },
     {
       path: '/confirmation/:id',
       name: 'confirmation',
       component: Confirmation,
-      props: true
+      props: true,
+      meta: {
+        title: 'Confirmation'
+      }
     },
     {
       path: '/tickets',
       name: 'tickets',
       component: Tickets,
-      beforeEnter: verifyUser
+      beforeEnter: verifyUser,
+      meta: {
+        title: 'Tickets & Prices'
+      }
     },
     {
       path: '/home/policies',
       name: 'policies',
-      component: Policies
+      component: Policies,
+      meta: {
+        title: 'Policies'
+      }
     }
   ]
 })

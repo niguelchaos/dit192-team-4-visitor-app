@@ -8,7 +8,22 @@
     "longitude": 11.991146,
     "queueTime": "10 minutes",
     "type": ["attraction", "fast"],
-    "img": "https://www.verywellfamily.com/thmb/8QHDzEB3vTVO93LfH009qQASU5Y=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/roller-coaster-149508746-57ac7eb45f9b58974ace1b67.jpg"
+    "img": "https://www.verywellfamily.com/thmb/8QHDzEB3vTVO93LfH009qQASU5Y=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/roller-coaster-149508746-57ac7eb45f9b58974ace1b67.jpg",
+    "timeslot" : [
+      { "slot": "Timeslot 1", "time": "10:00-10:30 AM", "seat":3},
+      { "slot": "Timeslot 2", "time": "10:30-11:00 AM" , "seat":3},
+      { "slot": "Timeslot 3", "time": "11:00-11:30 AM" , "seat":3},
+      { "slot": "Timeslot 4", "time": "11:30-12:00 AM", "seat":3 },
+      { "slot": "Timeslot 5", "time": "12:00-12:30 AM" , "seat":3},
+      { "slot": "Timeslot 6", "time": "12:30-1:00 PM" , "seat":3},
+      { "slot": "Timeslot 7", "time": "1:00-1:30 PM" , "seat":3},
+      { "slot": "Timeslot 8", "time": "1:30-2:00 PM", "seat":3 },
+      { "slot": "Timeslot 9", "time": "2:00-2:30 PM" , "seat":3},
+      { "slot": "Timeslot 10", "time": "2:30-3:00 PM" , "seat":3},
+      { "slot": "Timeslot 11", "time": "3:00-3:30 PM" , "seat":3},
+      { "slot": "Timeslot 12", "time": "3:30-4:00 PM" , "seat":3}
+      ],
+    "aseat": [3]
   },
   {
     "name": "Ride of Doom",
@@ -19,7 +34,21 @@
     "longitude": 11.992690,
     "queueTime": "1 minute",
     "type": ["attraction", "family"],
-    "img": "https://steamuserimages-a.akamaihd.net/ugc/245839072336144814/A9876FE9F87EF510212C370BE7CFBC4951A484B0/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+    "img": "https://steamuserimages-a.akamaihd.net/ugc/245839072336144814/A9876FE9F87EF510212C370BE7CFBC4951A484B0/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true",
+    "timeslot" : [
+      { "slot": "Timeslot 1", "time": "10:00-10:30 AM", "seat":3},
+      { "slot": "Timeslot 2", "time": "10:30-11:00 AM" , "seat":3},
+      { "slot": "Timeslot 3", "time": "11:00-11:30 AM" , "seat":3},
+      { "slot": "Timeslot 4", "time": "11:30-12:00 AM", "seat":3 },
+      { "slot": "Timeslot 5", "time": "12:00-12:30 AM" , "seat":3},
+      { "slot": "Timeslot 6", "time": "12:30-1:00 PM" , "seat":3},
+      { "slot": "Timeslot 7", "time": "1:00-1:30 PM" , "seat":3},
+      { "slot": "Timeslot 8", "time": "1:30-2:00 PM", "seat":3 },
+      { "slot": "Timeslot 9", "time": "2:00-2:30 PM" , "seat":3},
+      { "slot": "Timeslot 10", "time": "2:30-3:00 PM" , "seat":3},
+      { "slot": "Timeslot 11", "time": "3:00-3:30 PM" , "seat":3},
+      { "slot": "Timeslot 12", "time": "3:30-4:00 PM" , "seat":3}
+    ]
   },
   {
     "name": "Happily Ever After",
@@ -30,7 +59,21 @@
     "longitude": 11.994666,
     "queueTime": "30 seconds",
     "type": ["attraction", "fast"],
-    "img": "https://www.itskona.com/wp-content/uploads/rollercoaster.jpg"
+    "img": "https://www.itskona.com/wp-content/uploads/rollercoaster.jpg",
+    "timeslot" : [
+      { "slot": "Timeslot 1", "time": "10:00-10:30 AM", "seat":3},
+      { "slot": "Timeslot 2", "time": "10:30-11:00 AM" , "seat":3},
+      { "slot": "Timeslot 3", "time": "11:00-11:30 AM" , "seat":3},
+      { "slot": "Timeslot 4", "time": "11:30-12:00 AM", "seat":3 },
+      { "slot": "Timeslot 5", "time": "12:00-12:30 AM" , "seat":3},
+      { "slot": "Timeslot 6", "time": "12:30-1:00 PM" , "seat":3},
+      { "slot": "Timeslot 7", "time": "1:00-1:30 PM" , "seat":3},
+      { "slot": "Timeslot 8", "time": "1:30-2:00 PM", "seat":3 },
+      { "slot": "Timeslot 9", "time": "2:00-2:30 PM" , "seat":3},
+      { "slot": "Timeslot 10", "time": "2:30-3:00 PM" , "seat":3},
+      { "slot": "Timeslot 11", "time": "3:00-3:30 PM" , "seat":3},
+      { "slot": "Timeslot 12", "time": "3:30-4:00 PM" , "seat":3}
+    ]
   },
   {
     "name": "The Sky Screamer",
@@ -41,7 +84,21 @@
     "longitude": 11.990801,
     "queueTime": "5 minutes",
     "type": ["attraction", "fast"],
-    "img": "https://i2.wp.com/dahlstroms.com/wp-content/uploads/2013/12/rollercoaster-ride.jpg?fit=770%2C513&ssl=1"
+    "img": "https://i2.wp.com/dahlstroms.com/wp-content/uploads/2013/12/rollercoaster-ride.jpg?fit=770%2C513&ssl=1",
+    "timeslot" : [
+      { "slot": "Timeslot 1", "time": "10:00-10:30 AM", "seat":3},
+      { "slot": "Timeslot 2", "time": "10:30-11:00 AM" , "seat":3},
+      { "slot": "Timeslot 3", "time": "11:00-11:30 AM" , "seat":3},
+      { "slot": "Timeslot 4", "time": "11:30-12:00 AM", "seat":3 },
+      { "slot": "Timeslot 5", "time": "12:00-12:30 AM" , "seat":3},
+      { "slot": "Timeslot 6", "time": "12:30-1:00 PM" , "seat":3},
+      { "slot": "Timeslot 7", "time": "1:00-1:30 PM" , "seat":3},
+      { "slot": "Timeslot 8", "time": "1:30-2:00 PM", "seat":3 },
+      { "slot": "Timeslot 9", "time": "2:00-2:30 PM" , "seat":3},
+      { "slot": "Timeslot 10", "time": "2:30-3:00 PM" , "seat":3},
+      { "slot": "Timeslot 11", "time": "3:00-3:30 PM" , "seat":3},
+      { "slot": "Timeslot 12", "time": "3:30-4:00 PM" , "seat":3}
+    ]
   },
   {
     "name": "The Arcade Game Shooter",
@@ -71,7 +128,22 @@
     "latitude": 57.694755,
     "longitude": 11.994676,
     "type": ["restaurant"],
-    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjaW9LH2-7_EwZB4AnYOHto5X9W1axLNlTaA&usqp=CAU"
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjaW9LH2-7_EwZB4AnYOHto5X9W1axLNlTaA&usqp=CAU",
+    "timeslot" : [
+      { "slot": "Timeslot 1", "time": "10:00-10:30 AM", "seat":3},
+      { "slot": "Timeslot 2", "time": "10:30-11:00 AM" , "seat":3},
+      { "slot": "Timeslot 3", "time": "11:00-11:30 AM" , "seat":3},
+      { "slot": "Timeslot 4", "time": "11:30-12:00 AM", "seat":3 },
+      { "slot": "Timeslot 5", "time": "12:00-12:30 AM" , "seat":3},
+      { "slot": "Timeslot 6", "time": "12:30-1:00 PM" , "seat":3},
+      { "slot": "Timeslot 7", "time": "1:00-1:30 PM" , "seat":3},
+      { "slot": "Timeslot 8", "time": "1:30-2:00 PM", "seat":3 },
+      { "slot": "Timeslot 9", "time": "2:00-2:30 PM" , "seat":3},
+      { "slot": "Timeslot 10", "time": "2:30-3:00 PM" , "seat":3},
+      { "slot": "Timeslot 11", "time": "3:00-3:30 PM" , "seat":3},
+      { "slot": "Timeslot 12", "time": "3:30-4:00 PM" , "seat":3}
+    ],
+    "aseat": [3]
   },
   {
     "name": "Ice Cream Land",
@@ -81,7 +153,22 @@
     "latitude": 57.694785,
     "longitude": 11.994691,
     "type": ["restaurant"],
-    "img": "https://i.pinimg.com/originals/25/9b/0a/259b0a298bc745bd3a5dcf47511d8e49.png"
+    "img": "https://i.pinimg.com/originals/25/9b/0a/259b0a298bc745bd3a5dcf47511d8e49.png",
+    "timeslot" : [
+      { "slot": "Timeslot 1", "time": "10:00-10:30 AM", "seat":3},
+      { "slot": "Timeslot 2", "time": "10:30-11:00 AM" , "seat":3},
+      { "slot": "Timeslot 3", "time": "11:00-11:30 AM" , "seat":3},
+      { "slot": "Timeslot 4", "time": "11:30-12:00 AM", "seat":3 },
+      { "slot": "Timeslot 5", "time": "12:00-12:30 AM" , "seat":3},
+      { "slot": "Timeslot 6", "time": "12:30-1:00 PM" , "seat":3},
+      { "slot": "Timeslot 7", "time": "1:00-1:30 PM" , "seat":3},
+      { "slot": "Timeslot 8", "time": "1:30-2:00 PM", "seat":3 },
+      { "slot": "Timeslot 9", "time": "2:00-2:30 PM" , "seat":3},
+      { "slot": "Timeslot 10", "time": "2:30-3:00 PM" , "seat":3},
+      { "slot": "Timeslot 11", "time": "3:00-3:30 PM" , "seat":3},
+      { "slot": "Timeslot 12", "time": "3:30-4:00 PM" , "seat":3}
+    ],
+    "aseat": [3]
   },
   {
     "name": "Funnel Ride",

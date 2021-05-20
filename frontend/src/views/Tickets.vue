@@ -1,8 +1,6 @@
 <template>
   <div id="attractions" class="wrapper">
     <div class="pageTop">
-      <br />
-      <h2 class="title">Tickets & Prices</h2>
       <p>Here you can purchase tickets for entrance and other activities</p>
     </div>
     <b-tabs align="center" v-model="activeTab" >
