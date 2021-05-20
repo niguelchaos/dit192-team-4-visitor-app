@@ -8,7 +8,7 @@
     <li v-for="item in object.timeslot" :key="item.id" style="list-style-type: none;">
       <b-card class="slotcard">
             <h4 class="card-title" style="font-size: 1.5rem;">{{item.slot}}</h4>
-            <font-awesome-icon class="icon-card" style="color:pink;width: 20px; height: 20px;" :icon="['fas','clock']"></font-awesome-icon>{{item.time}}
+            <font-awesome-icon class="icon-card" :icon="['fas','clock']"></font-awesome-icon><p class= "time">{{item.time}} </p>
             <p class="text">Left Seat={{item.seat}}</p>
             <b-button v-b-modal.modal-1 class="btn btn-card bg-success mb-3" @click='sub(item)'>Choose</b-button>
             <span style="color:" class="align-left font-weight-bolder">
@@ -58,34 +58,29 @@ export default {
 .topcard{
   border-radius: 10px;
 }
-.testcard{
-border-radius: 10px;
-height: 9.5rem;}
 .slotcard{
 border-radius: 10px;
 height: 9.5rem;
+
 }
 .icon{
   margin-top:0%;
   margin-left: 0%;
 }
-.btn-test{
-  margin-left: 20%;
-  margin-right: 0%;
-  width: 20%;
-  margin-top:3%;
-  height:2rem;
- }
  .btn-card{
-   margin-left: 20%;
+   margin-left: 60%;
   margin-right: 0%;
-  width: 20%;
+  width: 35%;
   margin-top:3%;
   height:2rem;
  }
  .icon-card{
 margin-top:0%;
-margin-left: 0%;
+position: absolute;
+left: 5%;
+color:pink;
+width: 20px;
+height: 20px;
  }
  .align-middle{
   position: absolute;
@@ -96,13 +91,19 @@ margin-left: 0%;
  }
  .text{
 position: absolute;
-left: 14%;
+left: 8%;
 width: 35%;
-top: 62%;
+top: 45%;
 padding: 10px;
  }
  .modal-header {
     border-bottom: 0 none;
+}
+.time{
+position: absolute;
+left: 8%;
+top: 33%;
+padding: 10px;
 }
 
 .modal-footer {
