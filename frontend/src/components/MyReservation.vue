@@ -19,18 +19,6 @@ export default {
   props: ['activity', 'type'],
   data() {
     return {
-      dummyObj: {
-        name: 'dummy',
-        text: 'Reserved for 2-2:30 pm',
-        img:
-          'https://media-cdn.tripadvisor.com/media/photo-s/02/2a/4d/af/bakken.jpg'
-      },
-      dummyObj2: {
-        name: 'dummy2',
-        text: 'Reserved for 3-3:30 pm',
-        img:
-          'https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YW11c2VtZW50JTIwcGFya3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'
-      },
       reservations: []
 
     }
