@@ -44,12 +44,11 @@ export default {
       this.$emit('input', item.seat)
     },
     sub(item) {
-      console.log(item)
       if (item.seat > 0) {
         item.seat -= 1
+        this.sendReservation(item)
       // this.result -= 1
       }
-      this.sendReservation(item)
       this.emitResult(item)
     },
     sendReservation(item) {
