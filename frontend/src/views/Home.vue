@@ -29,7 +29,7 @@
         </b-col>
       </b-row>
       <b-row class="footer">
-        <b-col>
+        <b-col class="footer-col">
           <p>Address: Göteborgsvägen 1</p>
           <p>E-mail: contact@email.com</p>
           <p>Opening Times: 1pm - 10pm</p>
@@ -115,7 +115,12 @@ export default {
   .title {
     margin-bottom: 20px;
   }
-
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .footer {
     background: var(--color-green);
     color: white;
@@ -123,7 +128,6 @@ export default {
     padding-bottom: 20px;
     margin-top: 100px;
   }
-
   .map {
     margin-top: 50px;
   }
