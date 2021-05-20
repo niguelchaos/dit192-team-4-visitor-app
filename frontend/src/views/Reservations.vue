@@ -94,6 +94,7 @@
     <!-- Pagination -->
     <div class="page-bar-div overflow-auto mt-3">
       <b-pagination-nav
+        v-if="categories[0].state"
         v-model="currentPage"
         v-on:change="changePage($event)"
         :link-gen="linkGen"
@@ -116,15 +117,17 @@ export default {
     return {
       activities: [],
       attractions: [],
+      restaurants: [],
       categories: [
         { type: 'All', state: true },
         { type: 'My Reservations', state: false }
       ],
       prevCategory: null,
       currentCategory: null,
-      restaurants: [],
-      totalPages: 3,
 
+      pageSize: 6,
+      activityLimit: 6,
+      totalPages: 3,
       // TODO: Split filtering panel into a separate component
       filterSelected: null,
       filterOptions: [
@@ -149,6 +152,20 @@ export default {
   },
   beforeUpdate() {},
   updated() {},
+  watch: {
+    totalAttractions() {
+      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    },
+    // totalGames() {
+    //   this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    // },
+    totalRestaurants() {
+      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    },
+    totalActivities() {
+      this.getTotalPages() // only needed for beginning - dunno how else to do it
+    }
+  },
   methods: {
     changeCategory(filter, i) {
       if (this.prevCategory.type === this.categories[i].type) {
@@ -259,6 +276,11 @@ export default {
       }
     },
 
+    changePage(pageNum) {
+      this.currentPage = pageNum
+      this.updatePageNum(pageNum)
+    },
+
     // updates page number, calls attractions every time page is changed
     updatePageNum(pageNum) {
       this.currentPage = pageNum
@@ -268,7 +290,7 @@ export default {
         this.currentCategory = this.categories[0]
         this.prevCategory = this.categories[0]
       }
-
+      this.activities = []
       this.getActivities()
     },
 
@@ -277,7 +299,34 @@ export default {
         // vmodel already takes care of path additions, but this needed for correct path
         query: { currentPage: pageNum }
       }
+    },
+
+    // sets pagesize, needs updatepagenum first to get corrent totalactivities
+    getTotalPages() {
+      if (this.currentCategory.type.toLowerCase() === 'all') {
+        this.activityLimit = 2
+        this.pageSize = 6
+      } else {
+        this.activityLimit = 3
+        this.pageSize = 3
+      }
+
+      // switch (this.currentCategory.type.toLowerCase()) {
+      //   case 'all':
+      //     this.totalPages = Math.ceil(this.totalActivities / this.pageSize)
+      //     break
+      //   case 'attractions':
+      //     this.totalPages = Math.ceil(this.totalAttractions / this.pageSize)
+      //     break
+      //   case 'games':
+      //     this.totalPages = Math.ceil(this.totalGames / this.pageSize)
+      //     break
+      //   case 'restaurants':
+      //     this.totalPages = Math.ceil(this.totalRestaurants / this.pageSize)
+      //     break
+      // }
     }
+
   }
 }
 </script>
@@ -319,12 +368,6 @@ export default {
   padding: 0.5rem;
   font-size: 17px;
 }
-/* .pc-categorybuttons {
-  background-color: #ffffff;
-  border-radius: 40px;
-  padding: 1%;
-  font-size: 20px;
-} */
 
 .flt-active {
   background-color: #edadc7;
