@@ -72,7 +72,7 @@
 
     <div v-if="categories[1].state" class="card-main-div">
       <!-- scrollable container -->
-      <b-container class="card-main-div">
+      <b-container >
         <b-row>
           <b-col
             class="card-main-col"
@@ -123,6 +123,7 @@ export default {
       prevCategory: null,
       currentCategory: null,
       restaurants: [],
+      totalPages: 3,
 
       // TODO: Split filtering panel into a separate component
       filterSelected: null,

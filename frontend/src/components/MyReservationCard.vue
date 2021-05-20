@@ -6,17 +6,6 @@
       no-body
       v-b-toggle="'reservation-details-' + activity.name"
     >
-      <div v-if="activity.img">
-        <b-col class="card-img-col">
-          <b-card-img
-            :src="activity.img"
-            alt="Image"
-            height="100px"
-            width="150px"
-            class="card-image"
-          ></b-card-img>
-        </b-col>
-      </div>
 
       <b-col style="font-size: 0.75rem" no-gutters class="card-text-col">
         <b-card-title style="font-size: 1rem" class="card-title">

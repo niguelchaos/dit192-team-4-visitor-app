@@ -25,6 +25,7 @@
   </div>
 </template>
 <script>
+import { Api } from '@/Api'
 export default {
   name: 'activity-card-item',
   props: ['activity', 'type', 'value'],
@@ -48,7 +49,22 @@ export default {
         item.seat -= 1
       // this.result -= 1
       }
+      this.sendReservation(item)
       this.emitResult(item)
+    },
+    sendReservation(item) {
+      const token = localStorage.accessToken
+      const headers = { 'Authorization': 'Bearer ' + token }
+      Api.put('/auth/reservation', {
+        reservation:
+          [{
+            name: item.name,
+            slot: item.slot,
+            time: item.time
+          }]
+      },
+      { headers })
+        .then(res => console.log(res))
     }
   }
 
