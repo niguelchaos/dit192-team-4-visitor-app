@@ -93,7 +93,15 @@
     </div>
     <!-- Pagination -->
     <div class="page-bar-div overflow-auto mt-3">
-      <!-- on change updates when user clicks, linkgen updates path -->
+      <b-pagination-nav
+        v-model="currentPage"
+        v-on:change="changePage($event)"
+        :link-gen="linkGen"
+        :number-of-pages="totalPages"
+        align="center"
+        use-router
+        size="md"
+      ></b-pagination-nav>
     </div>
   </div>
 </template>

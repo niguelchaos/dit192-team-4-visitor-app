@@ -57,7 +57,7 @@ export default {
 <style scoped>
 .topcard{
   border-radius: 10px;
-}
+  }
 .slotcard{
 border-radius: 10px;
 height: 9.5rem;
@@ -92,7 +92,6 @@ height: 20px;
  .text{
 position: absolute;
 left: 8%;
-width: 35%;
 top: 45%;
 padding: 10px;
  }
