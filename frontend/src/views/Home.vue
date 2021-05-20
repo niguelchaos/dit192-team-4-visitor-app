@@ -30,9 +30,9 @@
       </b-row>
       <b-row class="footer">
         <b-col class="footer-col">
-          <p class="text-center">Address: Göteborgsvägen 1</p>
-          <p class="text-center">E-mail: contact@email.com</p>
-          <p class="text-center">Opening Times: 1pm - 10pm</p>
+          <p>Address: Göteborgsvägen 1</p>
+          <p>E-mail: contact@email.com</p>
+          <p>Opening Times: 1pm - 10pm</p>
           <a style="color:white;" href="/home/policies">Policies</a>
         </b-col>
       </b-row>
@@ -115,7 +115,12 @@ export default {
   .title {
     margin-bottom: 20px;
   }
-
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .footer {
     background: var(--color-green);
     color: white;

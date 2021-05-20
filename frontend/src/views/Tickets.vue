@@ -1,7 +1,7 @@
 <template>
   <div id="attractions" class="wrapper">
     <div class="pageTop">
-      <p>Here you can purchase tickets for entrance and other activities</p>
+      <p class="text-center">Here you can purchase tickets for entrance and other activities.</p>
     </div>
     <b-tabs align="center" v-model="activeTab" >
       <b-tab title="Buy Tickets" active>
@@ -56,6 +56,17 @@ export default {
 </script>
 
 <style>
+.pageTop {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .nav-tabs {
   border:none !important;
   background-color: white;
