@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-let activityTypes = ['arcade', 'attraction', 'bistro', 'cafe', 'dining', 'family', 'fast', 'game', 'kids', 'lucky', 'restaurant', 'water']
+let activityTypes = ['arcade', 'attraction','cafe', 'dining', 'family', 'fast', 'game','kids','restaurant', 'water']
 
 var ActivitySchema = new Schema({
   name: { type: String, required: true },

@@ -24,7 +24,7 @@
         </b-col>
         <b-col class="linkCol" cols=6>
           <b-link :to="{
-              name: type,
+              name: 'activity',
               params: { id: activity._id, activity: activity }
             }"
             id="goToActivity"
@@ -38,7 +38,7 @@
 <script>
 export default {
   name: 'PopupComponent',
-  props: ['title', 'description', 'status', 'queueTime', 'type', 'activity']
+  props: ['title', 'description', 'status', 'queueTime', 'activity']
 }
 </script>
 

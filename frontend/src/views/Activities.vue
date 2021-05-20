@@ -1,9 +1,5 @@
 <template>
   <div id="attractions" class="wrapper">
-    <div class="pageTop">
-      <br />
-      <h2 class="title">Activities</h2>
-    </div>
     <!-- Load attractions via API -->
     <!-- drop box -->
     <b-container>
@@ -261,7 +257,7 @@ export default {
 }
 
 .card-main-div {
-  margin: 0%;
+  margin-top: 1rem !important;
   padding: 0%;
   overflow-y: scroll;
   position: relative;

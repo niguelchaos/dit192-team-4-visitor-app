@@ -3,45 +3,56 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">
-            <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div>
-
-          <h1 class="title">Bundle Ticket</h1>
+          <div class="checkout_form">
+            <h1 class="title">Bundle Ticket</h1>
             <p>Combines multiple single ticket types:</p>
-            <p><strong>Big bundle:</strong> 2 large rides, 2 family rides, 2 water rides, 5 arcade games</p>
-            <p><strong>Small bundle:</strong> 1 large ride, 1 family ride, 1 water ride, 2 arcade games</p>
-            <p><strong>Arcade bundle:</strong> 10 arcade games</p>
-
-          <div>
-            <b-dropdown id="dropdown-1" text="Bundle type" class="btnBundle">
-            <b-dropdown-item>Big bundle</b-dropdown-item>
-            <b-dropdown-item>Small bundle</b-dropdown-item>
-            <b-dropdown-item>Arcade bundle</b-dropdown-item>
-            </b-dropdown>
-          </div>
-          <br />
-          <div>
-            <select> id="dropdown-1"
-              <option>Bundle type</option>
-              <option>Big Bundle</option>
-              <option>Small Bundle</option>
-              <option>Arcade Bundle</option>
-            </select>
+            <p align="left"><strong>Big bundle:</strong> 2 large rides, 2 family rides, 2 water rides, 5 arcade games</p>
+            <p align="left"><strong>Small bundle:</strong> 1 large ride, 1 family ride, 1 water ride, 2 arcade games</p>
+            <p align="left"><strong>Arcade bundle:</strong> 10 arcade games</p>
+            <b-form-select v-model="form" :options="options"></b-form-select>
             <br />
-            <select> id="dropdown-2"
-              <option>-Age-</option>
-              <option>0-2 years, Free</option>
-              <option>2-7 years, 180 SEK</option>
-              <option>8 years+ 220 SEK</option>
-            </select>
+            <br />
+            <b-form-group label="Select age group" v-slot="{ ariaDescribedby }">
+              <b-form-radio v-model="age" :aria-describedby="ariaDescribedby" name="some-radios" value="0-18 years">0-18 years (50% off)</b-form-radio>
+              <b-form-radio v-model="age" :aria-describedby="ariaDescribedby" name="some-radios" value="18+ years">above 18 years</b-form-radio>
+            </b-form-group>
+            <b-button
+              :disabled="!(age && form.price && form.subType)"
+              :to="{
+                name: 'book',
+                params: { ticket: { age: age, price: age == '18+ years' ? form.price : form.price * 0.5, type: ticketType + ' - ' + form.subType, amount: 1} }
+              }"
+              class="main_button"
+            >
+              Book
+            </b-button>
           </div>
-          <b-button pill to="/ticketprices/bundleticket/book" class="btnBK">Book</b-button>
         </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      age: '',
+      form: {
+        subType: '',
+        price: null
+      },
+      ticketType: 'Bundle ticket',
+      options: [
+        { value: { subType: '', price: null }, text: 'Please select bundle', disabled: true },
+        { value: { subType: 'Big bundle', price: 300 }, text: 'Big bundle, 300 SEK' },
+        { value: { subType: 'Small bundle', price: 200 }, text: 'Small bundle, 200 SEK' },
+        { value: { subType: 'Arcade bundle', price: 150 }, text: 'Arcade bundle, 150 SEK' }
+      ]
+    }
+  }
+}
+</script>
 
 <style>
 .btnBK {

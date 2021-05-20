@@ -65,4 +65,25 @@ export default {
 .card-link {
   color: #e28daf;
 }
+/* Set a style for all buttons */
+.btnr {
+  background-color: #4CAF50 !important;
+  color: white;
+  position: relative;
+  top: 40%;
+  left: 90%;
+  transform: translate(-80%, -80%);
+  -ms-transform: translate(-80%, -80%);
+  background-color: #555;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+   width: 30%;
+}
+
+/* Add a hover effect for buttons */
+.btnr:hover {
+  opacity: 0.8;
+}
 </style>

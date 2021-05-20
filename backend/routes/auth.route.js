@@ -10,7 +10,7 @@ router.delete('/auth/deregister/:id', authService.verifyToken, authService.autho
 router.put('/auth/reservation', authService.verifyToken, authController.addReservation);
 router.get('/auth/reservations', authService.verifyToken, authController.getReservations);
 router.put('/auth/deleteReservation', authService.verifyToken, authController.deleteReservation), 
-router.put('/auth/ticket', authController.addTicket);
-router.get('/auth/tickets', authController.getTickets);
-
+router.put('/auth/ticket', authService.verifyToken, authController.addTicket);
+router.get('/auth/tickets', authService.verifyToken, authController.getTickets);
+router.put('/auth/deleteTicket', authService.verifyToken, authController.deleteTicket);
 module.exports = router;

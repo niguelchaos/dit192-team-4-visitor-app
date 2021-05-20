@@ -46,7 +46,9 @@ exports.register = async function (req, res) {
     name: name,
     phone: phone,
     password: password,
-    role: userRole.USER
+    role: userRole.USER,
+    tickets: [],
+    reservations: []
   })
 
   user.save(function(error) {
@@ -74,7 +76,7 @@ exports.me = async function (req, res) {
   User.findById(req.userId, { password: 0 }, function (error, user) {
     if (error) return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ status: httpStatus.INTERNAL_SERVER_ERROR, message: `Server error: ${error.message}` })
     if (!user) return res.status(httpStatus.NOT_FOUND).send({ status: httpStatus.NOT_FOUND, message: `Auth: user not found (id: ${req.userId}).` })
-    res.status(httpStatus.OK).send({ status: httpStatus.OK, data: { id: user.id, phone: user.phone, tickets: user.tickets, reservations: user.reservations }, message: `Auth: user is authenticated (#: ${user.phone}).` })
+    res.status(httpStatus.OK).send({ status: httpStatus.OK, data: { id: user.id, phone: user.phone, name: user.name, tickets: user.tickets, reservations: user.reservations }, message: `Auth: user is authenticated (#: ${user.phone}).` })
   });
 }
 
@@ -88,13 +90,11 @@ exports.deregister = async function (req, res) {
 
 exports.addReservation = async function (req, res) {
   let reservation = req.body.reservation;
-  console.log(reservation, req.userId);
   User.findByIdAndUpdate(
     req.userId, 
     { $push: { reservations: reservation } },
     function (err, user) {
       if (err) { return next(err); }
-      // if (err) return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ status: httpStatus.INTERNAL_SERVER_ERROR, message: `Server error: ${err.message}` })
       if (user === null) {
           return res.status(404).json({ status: 404, message: 'User not found'});
       }
@@ -108,7 +108,7 @@ exports.getReservations = async function (req, res) {
   User.findById(id, function(err, user) {
       if (err) { return next(err); }
       if (user === null) {
-          return res.status(404).json({ status: 404, message: `User not found ${id}`});
+        return res.status(404).json({ status: 404, message: `User not found ${id}`});
       }
       res.status(200).json({ status: 200, data: user.reservations, message: 'Successfully retrieved the reservations.' });
   });
