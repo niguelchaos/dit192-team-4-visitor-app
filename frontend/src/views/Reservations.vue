@@ -4,7 +4,7 @@
     <!-- drop box -->
     <b-container>
       <div class="reservation-categories-div">
-        <b-button-group class="mobile-categorybuttons d-md-none" size="md">
+        <b-button-group class="categorybuttons" size="md">
           <button
             v-for="(button, index) in categories"
             :key="index"
@@ -21,7 +21,7 @@
         </b-button-group>
 
         <!-- for large screens -->
-        <b-button-group
+        <!-- <b-button-group
           class="pc-categorybuttons d-none d-md-inline-flex"
           size="lg"
         >
@@ -38,7 +38,7 @@
           >
             {{ button.type }}
           </button>
-        </b-button-group>
+        </b-button-group> -->
 
         <!-- <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="changeCategory(buttons, i)" :key="i"
           :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
@@ -304,18 +304,18 @@ export default {
   padding-bottom: 20px;
 }
 
-.mobile-categorybuttons {
+.categorybuttons {
   background-color: #f6fff3;
-  border-radius: 35px;
-  padding: 2%;
+  border-radius: 10rem;
+  padding: 0.5rem;
   font-size: 17px;
 }
-.pc-categorybuttons {
+/* .pc-categorybuttons {
   background-color: #ffffff;
   border-radius: 40px;
   padding: 1%;
   font-size: 20px;
-}
+} */
 
 .flt-active {
   background-color: #edadc7;
@@ -327,16 +327,23 @@ export default {
 
 .cat-active {
   background-color: #edadc7;
-  border-radius: 25px;
+  border-radius: 3rem;
   color: black;
   font-weight: bolder;
 }
 
 .cat-not-active {
   background-color: #f6fff3;
-  border-radius: 25px;
+  border-radius: 3rem;
   color: #2d3e4f;
   font-weight: normal;
+}
+.cat-button {
+  border: none;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 }
 
 .card-main-div {
