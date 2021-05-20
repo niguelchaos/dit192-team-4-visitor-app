@@ -3,7 +3,7 @@
     <div class="pageTop">
       <p class="text-center">Here you can purchase tickets for entrance and other activities.</p>
     </div>
-    <b-tabs align="center" v-model="activeTab" >
+    <b-tabs align="ticket-tabs center" v-model="activeTab" >
       <b-tab title="Buy Tickets" active>
         <b-button to= "/tickets/entrance" class="ticketButton">Entrance</b-button>
         <b-button to="/tickets/singleticket" class="ticketButton">Single Ticket</b-button>
@@ -12,8 +12,10 @@
         <b-button to="/tickets/fullpackage" class="ticketButton">Full Package</b-button>
       </b-tab>
       <b-tab title="My Tickets">
-        <span v-if="!tickets.length">You have no tickets.</span>
-        <ticket-card v-for="(t, i) in tickets" v-bind:key="i" :ticket="{name: t}"/>
+        <div class="my-ticket-main-div">
+          <span v-if="!tickets.length">You have no tickets.</span>
+          <ticket-card v-for="(t, i) in tickets" v-bind:key="i" :ticket="{name: t}"/>
+        </div>
       </b-tab>
     </b-tabs>
     <div class="footer">
@@ -65,8 +67,12 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  align-self: center;
+  padding: 1.5rem;
 }
-
+.my-ticket-main-div {
+  min-height: 25rem;
+}
 .nav-tabs {
   border:none !important;
   background-color: white;
