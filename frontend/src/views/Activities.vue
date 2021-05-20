@@ -20,7 +20,7 @@
     <!-- scrollable container -->
     <b-container class="card-main-div">
       <b-row>
-        <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
+        <b-col id="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
           <activity-card :activity="a"></activity-card>
           <!-- idk why this works -->
         </b-col>
@@ -264,9 +264,11 @@ export default {
   position: relative;
   flex: 1;
 }
-.card-main-col {
-  margin: 0%;
-  padding: 0%;
+#card-main-col {
+  margin: 0;
+  padding: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .page-bar-div {
   height: 55px;
