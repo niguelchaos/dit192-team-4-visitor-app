@@ -29,10 +29,10 @@
         </b-col>
       </b-row>
       <b-row class="footer">
-        <b-col>
-          <p>Address: Göteborgsvägen 1</p>
-          <p>E-mail: contact@email.com</p>
-          <p>Opening Times: 1pm - 10pm</p>
+        <b-col class="footer-col">
+          <p class="text-center">Address: Göteborgsvägen 1</p>
+          <p class="text-center">E-mail: contact@email.com</p>
+          <p class="text-center">Opening Times: 1pm - 10pm</p>
           <a style="color:white;" href="/home/policies">Policies</a>
         </b-col>
       </b-row>
@@ -123,7 +123,6 @@ export default {
     padding-bottom: 20px;
     margin-top: 100px;
   }
-
   .map {
     margin-top: 50px;
   }
