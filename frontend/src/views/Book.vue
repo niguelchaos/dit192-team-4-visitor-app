@@ -3,61 +3,127 @@
     <b-container>
       <b-row>
         <b-col xs="12" align-self="center">
-          <div class="logo">
-            <img class="logo_img" src="../assets/logo.png" alt="logo" />
+          <div class="activity_card">
+            <h5 class="title">Checkout</h5>
+            <p><b>Ticket: </b>{{ticket.type}}</p>
+            <p><b>Age: </b>{{ticket.age}}</p>
+            <p><b>Amount: </b>{{ticket.amount}} (á {{ticket.price}} SEK)</p>
+            <p><b>Total: </b>{{ticket.price * ticket.amount}} SEK</p>
+            <p>Please enter your credit card details below</p>
           </div>
+          <b-form @submit="onSubmit" class="checkout_form">
+            <b-form-group id="input-group-1" label="Cardholder's name" label-for="input-1">
+              <b-form-input
+                id="input-1"
+                class="checkout_input"
+                v-model="form.name"
+                placeholder="Enter name"
+                required
+              ></b-form-input>
+            </b-form-group>
 
-          <div class="col-50">
-            <h3>Booking</h3>
-          </div>
-          <br>
-          <div class="input-fields">
-            <div class="column-1">
-              <label for="cardholder">Cardholder's Name</label>
-              <input type="text" id="cardholder" />
-            </div>
-          </div>
-            <div class="column-2">
-              <label for="cardnumber">Card Number</label>
-              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" />
-            </div>
-          <div class="small-inputs">
-            <div>
-              <label for="date">Valid thru</label>
-              <input type="text" id="date" placeholder="MM / YY" />
-            </div>
-          </div>
-          <div class="column-3">
-            <div>
-              <label for="verification">CVV / CVC *</label>
-              <input type="password" id="verification"/>
-            </div>
-          </div>
-            <span class="info"> * CVV or CVC is the card security code, unique three digits number on the back of your card separate from its number.
-            </span>
-            <br />
-          <b-button pill to="/Book/Confirm Pay" class="btnCP">Confirm Pay</b-button>
+            <b-form-group id="input-group-2" label="Card number" label-for="input-2">
+              <b-form-input
+                id="input-2"
+                class="checkout_input"
+                v-model="form.number"
+                placeholder="1111-2222-3333-4444"
+                required
+              ></b-form-input>
+            </b-form-group>
+            <b-row>
+              <b-col>
+                <b-form-group id="input-group-3" label="Valid through" label-for="input-3">
+                  <b-form-input
+                    id="input-3"
+                    class="checkout_input"
+                    v-model="form.date"
+                    placeholder="MM/YY"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col>
+                <b-form-group id="input-group-4" label="CVV or CVC" label-for="input-4">
+                  <b-form-input
+                    id="input-4"
+                    class="checkout_input"
+                    v-model="form.code"
+                    placeholder="123"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-button
+              :disabled="!(form.name && form.number && form.date && form.code)"
+              :to="{
+                name: 'confirmation',
+                params: { id: 1723481342, details: form, ticket: ticket}
+              }"
+              class="main_button"
+            >
+              Complete purchase
+            </b-button>
+          </b-form>
+          <br />
         </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    ticket: {
+      type: Object,
+      required: false
+    }
+  },
+  data() {
+    return {
+      loading: false,
+      form: {
+        name: '',
+        number: '',
+        date: '',
+        code: ''
+      }
+    }
+  },
+  methods: {
+    onSubmit(event) {
+      event.preventDefault()
+    }
+  }
+}
+</script>
+
 <style>
-.btnCP {
-  background-color: #e28daf !important;
-  border: 10px;
-  color: #004e64;
-  padding: 10px;
-  margin: 20px;
-  width: 120px;
-  height: 36px;
-  font-family: Roboto;
-  font-style: normal;
-  left: -6px;
-  top: 11px;
-  font-size: 16px;
-  line-height: 15px;
-  text-align: center;
+.checkout_form{
+ width: 100%;
+  border-radius: 15px;
+  padding: 20px;
+  background: white;
+  margin-top: 15px;
+  text-align: left;
+  overflow: hidden;
+  border: none;
+}
+.checkout_input{
+  width: 100% !important;
+  border: 1px solid var(--color-pink) !important;
+}
+label{
+  margin-bottom: 0px !important;
+  font-size: 0.8rem !important;
+}
+.image {
+  width: 100%;
+}
+.main_button {
+  background: var(--color-green) !important;
+  width: 100%;
 }
 </style>

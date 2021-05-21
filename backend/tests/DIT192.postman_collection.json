@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5dca8b48-e10e-4987-9e43-6108bee32f8a",
+		"_postman_id": "feb0caf7-4f54-4b45-a94e-f4b4356fd03c",
 		"name": "DIT192",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -245,7 +245,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"The Loophole Plunge\",\n    \"description\": \"The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!\",\n    \"price\": 45,\n    \"status\": \"open\",\n    \"latitude\": 57.695886,\n    \"logitude\": 11.991146,\n    \"queueTime\": \"10 minutes\",\n    \"reservableSeats\": 3\n}",
+					"raw": "{\n    \"name\": \"The Loophole Plunge\",\n    \"description\": \"The first and only roller coaster to feature a loop-the-looping design. The loop will be so tight you won't believe your eyes when you reach the top!\",\n    \"price\": 45,\n    \"status\": \"open\",\n    \"latitude\": 57.695886,\n    \"logitude\": 11.991146,\n    \"queueTime\": \"10 minutes\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -366,54 +366,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\",\n    \"latitude\": \"Updated latitude\",\n    \"longitude\": \"Updated longitude\",\n    \"queueTime\": \"Updated queueTime\",\n    \"reservableSeats\": \"Updated reservableSeats\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/api/activities/{{activity_id}}",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"activities",
-						"{{activity_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Modify reservable seats",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// Test assertion examples",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Data is present in the body\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData).to.have.property(\"data\")",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\",\n    \"latitude\": \"Updated latitude\",\n    \"longitude\": \"Updated longitude\",\n    \"queueTime\": \"Updated queueTime\",\n    \"reservableSeats\": \"Updated reservableSeats\"\n}",
+					"raw": "{\n    \"name\": \"Updated Test\",\n    \"description\": \"Updated description\",\n    \"latitude\": \"Updated latitude\",\n    \"longitude\": \"Updated longitude\",\n    \"queueTime\": \"Updated queueTime\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

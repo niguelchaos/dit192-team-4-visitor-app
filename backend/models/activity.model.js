@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-let activityTypes = ['arcade', 'attraction', 'bistro', 'cafe', 'dining', 'family', 'fast', 'game', 'kids', 'lucky', 'restaurant', 'water']
+let activityTypes = ['arcade', 'attraction','cafe', 'dining', 'family', 'fast', 'game','kids','restaurant', 'water']
 
 var ActivitySchema = new Schema({
   name: { type: String, required: true },
@@ -13,7 +13,8 @@ var ActivitySchema = new Schema({
   image: { data: Buffer, contentType: String },
   latitude: { type: Number },
   longitude: { type: Number },
-  queueTime: { type: String }
+  queueTime: { type: String },
+  reservableSeats: { type: Number }
 });
 
 const Activity = mongoose.model("activities", ActivitySchema);

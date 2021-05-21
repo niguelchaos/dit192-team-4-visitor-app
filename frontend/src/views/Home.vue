@@ -4,9 +4,6 @@
       <b-row>
         <b-col xs="12" align-self="center">
           <Logo></Logo>
-          <!-- <div class="logo">
-            <img class="logo_img" src="../assets/logo.png" alt="logo" />
-          </div> -->
         </b-col>
       </b-row>
       <b-row>
@@ -27,15 +24,16 @@
           <div class="map">
             <h4>Map over the park</h4>
             <!-- <img class="map_img" src="../assets/Map.jpeg" alt="map" /> -->
-            <map-component :content="attractions" />
+            <map-component :content="activities" />
           </div>
         </b-col>
       </b-row>
       <b-row class="footer">
-        <b-col>
+        <b-col class="footer-col">
           <p>Address: Göteborgsvägen 1</p>
           <p>E-mail: contact@email.com</p>
           <p>Opening Times: 1pm - 10pm</p>
+          <a style="color:white;" href="/home/policies">Policies</a>
         </b-col>
       </b-row>
     </b-container>
@@ -54,12 +52,14 @@ export default {
   data() {
     return {
       message: '',
-      attractions: []
+      activities: []
     }
   },
   mounted() {
     this.getMessage()
     this.getAttractions()
+    this.getGames()
+    this.getRestaurants()
   },
   methods: {
     getMessage() {
@@ -72,11 +72,33 @@ export default {
         })
     },
     getAttractions() {
-      Api.get('/attractions')
+      Api.get('/activities', { params: { limit: 10000 } })
         .then(res => {
-          this.attractions = res.data.data || []
+          this.activities = res.data.data || []
         })
         // .bind(this)
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getGames() {
+      Api.get('/games')
+        .then(res => {
+          this.games = res.data.data || []
+          this.total = this.games.concat(this.attractions)
+        })
+        // .bind(this)
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getRestaurants() {
+      Api.get('/restaurants')
+        .then(res => {
+          this.restaurants = res.data.data || []
+          console.log(this.restaurants)
+          this.total = this.total.concat(this.restaurants)
+        })
         .catch(err => {
           console.log(err)
         })
@@ -87,15 +109,18 @@ export default {
 
 <style>
   .logo {
-    height: 100px;
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin-bottom: 1rem;
   }
 
   .title {
     margin-bottom: 20px;
   }
-
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .footer {
     background: var(--color-green);
     color: white;
@@ -103,7 +128,6 @@ export default {
     padding-bottom: 20px;
     margin-top: 100px;
   }
-
   .map {
     margin-top: 50px;
   }
@@ -112,5 +136,4 @@ export default {
     height: 500px;
     margin-top: 10px;
   }
-
 </style>

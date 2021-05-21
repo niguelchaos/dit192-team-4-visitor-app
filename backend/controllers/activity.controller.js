@@ -6,6 +6,24 @@ exports.getTypes = async function (req, res) {
     res.status(200).json({ status: 200, data: activityTypes, message: 'Successfully retrieved activity types.' });
 }
 
+exports.getCount = async function (req, res) {
+    if (!req.query.type) {
+        Activity.estimatedDocumentCount(function (err, count) {
+            if (err) { return res.status(500).json({ status: 500, data: err.message, message: 'Error.' }) }
+            else {
+                res.status(200).json({ status: 200, data: { count: count }, message: 'Successfully retrieved total count.' });
+            }
+        })
+    } else {
+        Activity.countDocuments({ type: req.query.type }, function (err, count) {
+            if (err) { return res.status(500).json({ status: 500, data: err.message, message: 'Error.' }) }
+            else {
+                res.status(200).json({ status: 200, data: { count: count }, message: 'Successfully retrieved count.' });
+            }
+        });
+    }
+}
+
 exports.getAll = async function (req, res, next) {
     var type = req.query.type ? req.query.type: activityTypes;
     var sortBy = req.query.sortBy ? req.query.sortBy: ['name', 'asc'];
@@ -27,13 +45,22 @@ exports.getAll = async function (req, res, next) {
 
     console.log(sortBy)
 
-    Activity.find({'type': { '$in': type}}, function(err, activities) {
+    var totalActivities = 0;
+
+    Activity.count({'type': { '$in': type}}, function(err, numOfActivities) {
         if (err) { return next(err); }
-        res.status(200).json({ status: 200, data: activities, message: 'Successfully retrieved the activities.' });
+        totalActivities = numOfActivities;
+
+        console.log("guh " + totalActivities);
+
+        Activity.find({'type': { '$in': type}}, function(err, activities) {
+            if (err) { return next(err); }
+            res.status(200).json({ status: 200, data: activities, totalActivities: totalActivities, message: 'Successfully retrieved the activities.' });
+        })
+        .sort([sortBy])
+        .skip(pageskip * limit)
+        .limit(limit);
     })
-    .sort([sortBy])
-    .skip(pageskip * limit)
-    .limit(limit);
 }
 
 // GET method
@@ -69,6 +96,24 @@ exports.remove = async function (req, res, next) {
     });
 }
 
+
+exports.updateSeats = async function (req, res) {
+    let seats = req.body.reservableSeats;
+    console.log(seats, req.params.id)
+    Activity.findByIdAndUpdate(
+      req.params.id, 
+      { reservableSeats: seats },
+      function (err, activity) {
+        if (err) { return next(err); }
+        if (activity === null) {
+            return res.status(404).json({ status: 404, message: 'Activity not found'});
+        }
+        res.status(200).json({ status: 200, data: activity.reservableSeats, message: 'Activity was added' });
+       }
+    )
+  }
+  
+
 // PUT method
 exports.update = async function (req, res, next) {
     let id = req.params.id;
@@ -81,7 +126,8 @@ exports.update = async function (req, res, next) {
         image: req.body.image,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
-        queueTime: req.body.queueTime
+        queueTime: req.body.queueTime,
+        reservableSeats: req.body.reservableSeats
     };
     var unsetParams = [];
     Object.keys(params).forEach(p => { if(params[p] === undefined) unsetParams.push(p)});

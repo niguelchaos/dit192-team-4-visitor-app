@@ -25,6 +25,12 @@ const userSchema = new Schema({
     trim: true,
     lowercase: true
   },
+  tickets: [String],
+  reservations: [{
+    name: String,
+    slot: String,
+    time: String
+  }]
 },
 {
   timestamps: true

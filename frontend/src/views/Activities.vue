@@ -1,14 +1,10 @@
 <template>
   <div id="attractions" class="wrapper">
-    <div class="pageTop">
-      <br />
-      <h2 class="title">Activities</h2>
-    </div>
     <!-- Load attractions via API -->
     <!-- drop box -->
     <b-container>
       <div class="filter-div">
-        <button class="btn-filter" v-for="(buttons, i) in activityTypes" v-on:click="filterCards(buttons, i)" :key="i"
+        <button class="btn-filter" v-for="(buttons, i) in activityTypes" v-on:click="changeCategory(buttons, i)" :key="i"
           :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
         {{ buttons.type }}
         </button>
@@ -16,7 +12,7 @@
 
       <div>
         <b-col>
-          <b-form-select style="border: 0px; border-radius: 15px" v-model="filterSelected" :options="filterOptions" v-on:change="changeFilter(filterSelected)"></b-form-select>
+          <b-form-select style="border: 0px; border-radius: 15px" v-model="filterSelected" :options="filterOptions" v-on:change="changeSortBy(filterSelected)"></b-form-select>
         </b-col>
       </div>
     </b-container>
@@ -24,7 +20,7 @@
     <!-- scrollable container -->
     <b-container class="card-main-div">
       <b-row>
-        <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
+        <b-col id="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
           <activity-card :activity="a"></activity-card>
           <!-- idk why this works -->
         </b-col>
@@ -55,6 +51,8 @@ export default {
     return {
       activityTypes: [],
       activities: [],
+      activityLimit: 6,
+      totalPages: 1,
 
       // TODO: Split filtering panel into a separate component
       filterOptions: [
@@ -71,63 +69,28 @@ export default {
       currentPage:
         this.$router.currentRoute.query.currentPage === undefined
           ? 1
-          : this.$router.currentRoute.query.currentPage,
-
-      // used to get number of pages
-      totalAttractions: 0,
-      totalGames: 0,
-      totalRestaurants: 0,
-      totalActivities: 0,
-      pageSize: 6,
-      activityLimit: 6,
-      totalPages: 3,
-      // used to cancel GET when same category clicked
-      prevFilter: null
+          : this.$router.currentRoute.query.currentPage
     }
   },
   beforeMount() {
     this.getActivityTypes()
+    this.getActivities(this.filterCategories, this.filterSelected)
   },
   mounted() {
-    // happens only once
-    // updatePageNum already executes getAttractions
-    this.getActivities(this.filterCategories, this.filterSelected)
-    //this.linkGen(this.currentPage)
-    
-    //this.updatePageNum(this.currentPage)
-  },
-  beforeUpdate() {},
-  updated() {},
-  watch: {
-    totalAttractions() {
-      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
-    },
-    totalGames() {
-      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
-    },
-    totalRestaurants() {
-      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
-    },
-    totalActivities() {
-      this.getTotalPages() // only needed for beginning - dunno how else to do it
-    }
+    this.linkGen(this.currentPage)
   },
   methods: {
-
-    filterCards(filter, i) {
+    changeCategory(filter, i) {
       let s = this.activityTypes[i].state
       for (const itm in this.activityTypes) {
         this.activityTypes[itm].state = false
         this.activityTypes[i].state = !s
       }
-
       this.filterCategories = filter.type
       this.getActivities(this.filterCategories, this.filterSelected)
     },
 
-    changeFilter(selected) {
-      console.log("changeFilter")
-      console.log(selected)
+    changeSortBy(selected) {
       this.getActivities(this.filterCategories, selected)
     },
 
@@ -148,13 +111,24 @@ export default {
 
     getActivities(type, sort) {
       var params = {
-          page: this.currentPage,
-          type: undefined,
-          sortBy: sort
+        page: this.currentPage,
+        limit: this.activityLimit,
+        type: undefined,
+        sortBy: sort
       }
       if (type !== 'all') {
         params.type = type
       }
+
+      Api.get('activities/count', { params: { type: params.type } })
+        .then(res => {
+          this.totalPages = Math.ceil(res.data.data.count / this.activityLimit)
+          if (this.totalPages < 1) { this.totalPages = 1 }
+        })
+        .catch(err => {
+          this.totalPages = 1
+          console.log(err)
+        })
 
       Api.get('activities', {
         params: params
@@ -169,13 +143,6 @@ export default {
         })
     },
 
-    populate(category, source) {
-      for (const i in source) {
-        this.activities.push({ type: category, data: source[i] })
-      }
-      console.log('activities:' + this.activities.length + ' == category: ' + category)
-    },
-
     // separated to let filtercards use GET without changing page
     changePage(pageNum) {
       this.currentPage = pageNum
@@ -188,34 +155,7 @@ export default {
         query: { currentPage: pageNum },
         path: './activities'
       }
-    },
-
-    // sets pagesize, needs updatepagenum first to get corrent totalactivities
-    getTotalPages() {
-      if (this.currentCategory.type.toLowerCase() === 'all') {
-        this.activityLimit = 2
-        this.pageSize = 6
-      } else {
-        this.activityLimit = 3
-        this.pageSize = 3
-      }
-
-      switch (this.currentCategory.type.toLowerCase()) {
-        case 'all':
-          this.totalPages = Math.ceil(this.totalActivities / this.pageSize)
-          break
-        case 'attractions':
-          this.totalPages = Math.ceil(this.totalAttractions / this.pageSize)
-          break
-        case 'games':
-          this.totalPages = Math.ceil(this.totalGames / this.pageSize)
-          break
-        case 'restaurants':
-          this.totalPages = Math.ceil(this.totalRestaurants / this.pageSize)
-          break
-      }
     }
-
   }
 }
 </script>
@@ -225,6 +165,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .btn-filter {
@@ -261,15 +202,17 @@ export default {
 }
 
 .card-main-div {
-  margin: 0%;
+  margin-top: 1rem !important;
   padding: 0%;
   overflow-y: scroll;
   position: relative;
   flex: 1;
 }
-.card-main-col {
-  margin: 0%;
-  padding: 0%;
+#card-main-col {
+  margin: 0;
+  padding: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .page-bar-div {
   height: 55px;

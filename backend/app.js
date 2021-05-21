@@ -10,9 +10,6 @@ var history = require('connect-history-api-fallback');
 const db_env = require('dotenv').config({ path: '../db/.env'});
 
 var camelsController = require('./controllers/controller');
-var attractionsRoutes = require('./routes/attraction.route');
-var restaurantsRoutes = require('./routes/restaurant.route');
-var gamesRoutes = require('./routes/game.route');
 var activitiesRoutes = require('./routes/activity.route');
 var authRoutes = require('./routes/auth.route');
 
@@ -46,10 +43,7 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to the EDA397/DIT192 backend ExpressJS project!'});
 });
 app.use('/api/camels', camelsController);
-app.use('/api', attractionsRoutes);
-app.use('/api', restaurantsRoutes);
 app.use('/api', activitiesRoutes);
-app.use('/api', gamesRoutes);
 app.use('/api', authRoutes);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)

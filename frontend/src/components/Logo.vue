@@ -15,8 +15,13 @@ export default {
 
 <style scoped>
 .logo {
-    height: 100px;
-    margin-bottom: 50px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  border-radius: 1rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  background: #FFFFFF;
+  /* min-width: 25rem; */
   }
 </style>

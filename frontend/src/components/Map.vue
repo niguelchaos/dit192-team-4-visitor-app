@@ -17,7 +17,7 @@
         <l-marker :lat-lng="[c.latitude, c.longitude]" >
         <l-popup>
           <!-- Popup component -->
-          <Popup :title="c.name" :description="c.description" :status="c.status" :queueTime="c.queueTime" :id="c.id" :activity="c" :type="'attractions'"></Popup>
+          <Popup :title="c.name" :description="c.description" :status="c.status" :queueTime="c.queueTime" :id="c.id" :activity='c'></Popup>
         </l-popup>
       </l-marker>
       </div>
