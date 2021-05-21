@@ -123,6 +123,7 @@ export default {
       Api.get('activities/count', { params: { type: params.type } })
         .then(res => {
           this.totalPages = Math.ceil(res.data.data.count / this.activityLimit)
+          if (this.totalPages < 1) { this.totalPages = 1 }
         })
         .catch(err => {
           this.totalPages = 1
