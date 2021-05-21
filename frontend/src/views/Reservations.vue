@@ -4,7 +4,7 @@
     <!-- drop box -->
     <b-container>
       <div class="reservation-categories-div">
-        <b-button-group class="mobile-categorybuttons d-md-none" size="md">
+        <b-button-group class="categorybuttons" size="md">
           <button
             v-for="(button, index) in categories"
             :key="index"
@@ -19,31 +19,6 @@
             {{ button.type }}
           </button>
         </b-button-group>
-
-        <!-- for large screens -->
-        <b-button-group
-          class="pc-categorybuttons d-none d-md-inline-flex"
-          size="lg"
-        >
-          <button
-            v-for="(button, index) in categories"
-            :key="index"
-            :pressed="button.state"
-            class="cat-button text-center text-nowrap"
-            v-on:click="changeCategory(button, index)"
-            :class="{
-              'cat-active': button.state,
-              'cat-not-active': !button.state,
-            }"
-          >
-            {{ button.type }}
-          </button>
-        </b-button-group>
-
-        <!-- <button class="btn-filter" v-for="(buttons, i) in categories" v-on:click="changeCategory(buttons, i)" :key="i"
-          :class="{'flt-active': buttons.state, 'flt-not-active': !buttons.state}">
-        {{ buttons.type }}
-        </button> -->
       </div>
 
       <div v-if="categories[0].state">
@@ -62,7 +37,7 @@
       <!-- scrollable container -->
       <b-container >
         <b-row>
-          <b-col class="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
+          <b-col id="card-main-col" v-for="a in activities" v-bind:key="a.id" sm="12" md="6" lg="4" xl="3" no-gutters>
             <activity-card :activity="a.data" :type="a.type"></activity-card>
             <!-- idk why this works -->
           </b-col>
@@ -72,11 +47,11 @@
 
     <div v-if="categories[1].state" class="card-main-div">
       <!-- scrollable container -->
-      <b-container class="card-main-div">
+      <b-container >
         <b-row>
           <b-col
             class="card-main-col"
-            v-for="a in activities"
+            v-for="a in reservations"
             v-bind:key="a.id"
             sm="12"
             md="6"
@@ -84,16 +59,15 @@
             xl="3"
             no-gutters
           >
-            <my-reservation :activity="a.data" :type="a.type"></my-reservation>
-            <!-- idk why this works -->
+          <my-reservation :activity="a"></my-reservation>
           </b-col>
-          <my-reservation></my-reservation>
         </b-row>
       </b-container>
     </div>
     <!-- Pagination -->
     <div class="page-bar-div overflow-auto mt-3">
       <b-pagination-nav
+        v-if="categories[0].state"
         v-model="currentPage"
         v-on:change="changePage($event)"
         :link-gen="linkGen"
@@ -109,21 +83,31 @@
 <script>
 import { Api } from '@/Api'
 import ActivityCard from '@/components/ReservationCard.vue'
-import MyReservation from '@/components/MyReservation.vue'
+import MyReservation from '@/components/MyReservationCard.vue'
 export default {
   components: { ActivityCard, MyReservation },
   data() {
     return {
       activities: [],
       attractions: [],
+      restaurants: [],
+      reservations: [],
       categories: [
         { type: 'All', state: true },
         { type: 'My Reservations', state: false }
       ],
       prevCategory: null,
       currentCategory: null,
-      restaurants: [],
 
+      pageSize: 6,
+      activityLimit: 3,
+
+      // used to get number of pages
+      totalAttractions: 0,
+      // totalGames: 0,
+      totalRestaurants: 0,
+      totalActivities: 0,
+      totalPages: 3,
       // TODO: Split filtering panel into a separate component
       filterSelected: null,
       filterOptions: [
@@ -148,6 +132,20 @@ export default {
   },
   beforeUpdate() {},
   updated() {},
+  watch: {
+    totalAttractions() {
+      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    },
+    // totalGames() {
+    //   this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    // },
+    totalRestaurants() {
+      this.totalActivities = this.totalAttractions + this.totalGames + this.totalRestaurants
+    },
+    totalActivities() {
+      this.getTotalPages() // only needed for beginning - dunno how else to do it
+    }
+  },
   methods: {
     changeCategory(filter, i) {
       if (this.prevCategory.type === this.categories[i].type) {
@@ -164,46 +162,55 @@ export default {
       this.activities = []
       this.currentCategory = filter
 
-      switch (filter.type.toLowerCase()) {
-        case 'all':
-          this.populate('attractions', this.attractions)
-          // this.populate('games', this.games)
-          this.populate('restaurants', this.restaurants)
-          break
-        case 'attractions':
-          this.populate('attractions', this.attractions)
-          break
-          // case 'games':
-          // this.populate('games', this.games)
-          // break
-        case 'restaurants':
-          this.populate('restaurants', this.restaurants)
-          break
-        case 'My Reservations':
-          this.populate('attractions', this.attractions)
-          this.populate('restaurants', this.restaurants)
-          break
+      if (filter.type === 'All') {
+        this.updatePageNum(this.currentPage)
+        this.getTotalPages()
       }
-      this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
+      console.log(filter.type)
+      // switch (filter.type.toLowerCase()) {
+      //   case 'all':
+      //     this.populate('attractions', this.attractions)
+      //     // this.populate('games', this.games)
+      //     this.populate('restaurants', this.restaurants)
+      //     break
+      //   case 'attractions':
+      //     this.populate('attractions', this.attractions)
+      //     break
+      //     // case 'games':
+      //     // this.populate('games', this.games)
+      //     // break
+      //   case 'restaurants':
+      //     this.populate('restaurants', this.restaurants)
+      //     break
+      // case 'My Reservations':
+      //   this.populate('attractions', this.attractions)
+      //   this.populate('restaurants', this.restaurants)
+      //   break
+      // }
+      // this.activities.sort((a, b) => a.data.name.localeCompare(b.data.name))
 
       this.prevCategory = this.currentCategory
     },
 
     getActivities() {
-      this.getAttractions()
+      this.getReservableActivities()
       // this.getGames()
-      this.getRestaurants()
+      // this.getRestaurants()
     },
 
-    getAttractions() {
+    getReservableActivities() {
       Api.get('activities', {
         params: {
-          page: this.currentPage
+          page: this.currentPage,
+          limit: this.pageSize,
+          type: 'attraction,restaurant'
         }
       })
         .then((res) => {
           this.attractions = res.data.data
+          this.totalActivities = res.data.totalActivities
           this.populate('attractions', this.attractions)
+
           this.activities.sort((a, b) =>
             a.data.name.localeCompare(b.data.name)
           )
@@ -214,48 +221,81 @@ export default {
         })
     },
 
-    getGames() {
-      Api.get('games', {
-        params: {
-          page: this.currentPage
-        }
-      })
-        .then((res) => {
-          this.games = res.data.data
-          this.populate('games', this.games)
-          this.activities.sort((a, b) =>
-            a.data.name.localeCompare(b.data.name)
-          )
-        })
-        .catch((err) => {
-          this.games = []
-          console.log(err)
-        })
-    },
+    // getAttractions() {
+    //   Api.get('activities', {
+    //     params: {
+    //       page: this.currentPage,
+    //       limit: this.pageSize,
+    //       type: 'attraction'
+    //     }
+    //   })
+    //     .then((res) => {
+    //       this.attractions = res.data.data
+    //       this.totalAttractions = res.data.totalAttractions
+    //       this.populate('attractions', this.attractions)
 
-    getRestaurants() {
-      Api.get('restaurants', {
-        params: {
-          page: this.currentPage
-        }
-      })
-        .then((res) => {
-          this.restaurants = res.data.data
-          this.populate('restaurants', this.restaurants)
-          this.activities.sort((a, b) =>
-            a.data.name.localeCompare(b.data.name)
-          )
-        })
-        .catch((err) => {
-          this.restaurants = []
-          console.log(err)
-        })
-    },
+    //       this.activities.sort((a, b) =>
+    //         a.data.name.localeCompare(b.data.name)
+    //       )
+    //     })
+    //     .catch((err) => {
+    //       this.attractions = []
+    //       console.log(err)
+    //     })
+    // },
+
+    // getGames() {
+    //   Api.get('games', {
+    //     params: {
+    //       page: this.currentPage,
+    //       limit: this.activityLimit
+    //     }
+    //   })
+    //     .then((res) => {
+    //       this.games = res.data.data
+    //       this.populate('games', this.games)
+    //       this.activities.sort((a, b) =>
+    //         a.data.name.localeCompare(b.data.name)
+    //       )
+    //     })
+    //     .catch((err) => {
+    //       this.games = []
+    //       console.log(err)
+    //     })
+    // },
+
+    // getRestaurants() {
+    //   Api.get('activities', {
+    //     params: {
+    //       page: this.currentPage,
+    //       limit: this.activityLimit,
+    //       type: 'restaurant'
+    //     }
+    //   })
+    //     .then((res) => {
+    //       this.restaurants = res.data.data
+    //       this.totalRestaurants = res.data.totalRestaurants
+    //       this.populate('restaurants', this.restaurants)
+
+    //       this.activities.sort((a, b) =>
+    //         a.data.name.localeCompare(b.data.name)
+    //       )
+    //     })
+    //     .catch((err) => {
+    //       this.restaurants = []
+    //       console.log(err)
+    //     })
+    // },
 
     populate(category, source) {
       for (const i in source) {
         this.activities.push({ type: category, data: source[i] })
       }
+    },
+
+    changePage(pageNum) {
+      this.currentPage = pageNum
+      this.updatePageNum(pageNum)
     },
 
     // updates page number, calls attractions every time page is changed
@@ -267,7 +307,7 @@ export default {
         this.currentCategory = this.categories[0]
         this.prevCategory = this.categories[0]
       }
-
+      this.activities = []
       this.getActivities()
     },
 
@@ -276,7 +316,24 @@ export default {
         // vmodel already takes care of path additions, but this needed for correct path
         query: { currentPage: pageNum }
       }
+    },
+
+    // sets pagesize, needs updatepagenum first to get corrent totalactivities
+    getTotalPages() {
+      this.activityLimit = 3
+      this.pageSize = 6
+      this.totalPages = Math.ceil(this.totalActivities / this.pageSize)
+      console.log(this.totalActivities)
     }
+
+  },
+  created() {
+    const token = localStorage.accessToken
+    const headers = { 'Authorization': 'Bearer ' + token }
+    Api.get('/auth/reservations', { headers })
+      .then(res => {
+        this.reservations = res.data.data
+      })
   }
 }
 </script>
@@ -312,17 +369,11 @@ export default {
   padding-bottom: 20px;
 }
 
-.mobile-categorybuttons {
+.categorybuttons {
   background-color: #f6fff3;
-  border-radius: 35px;
-  padding: 2%;
+  border-radius: 10rem;
+  padding: 0.5rem;
   font-size: 17px;
-}
-.pc-categorybuttons {
-  background-color: #ffffff;
-  border-radius: 40px;
-  padding: 1%;
-  font-size: 20px;
 }
 
 .flt-active {
@@ -335,16 +386,23 @@ export default {
 
 .cat-active {
   background-color: #edadc7;
-  border-radius: 25px;
+  border-radius: 3rem;
   color: black;
   font-weight: bolder;
 }
 
 .cat-not-active {
   background-color: #f6fff3;
-  border-radius: 25px;
+  border-radius: 3rem;
   color: #2d3e4f;
   font-weight: normal;
+}
+.cat-button {
+  border: none;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 }
 
 .card-main-div {
@@ -354,9 +412,11 @@ export default {
   position: relative;
   flex: 1;
 }
-.card-main-col {
-  margin: 0%;
-  padding: 0%;
+#card-main-col {
+  margin: 0;
+  padding: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .page-bar-div {
   height: 55px;

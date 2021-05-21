@@ -1,36 +1,36 @@
 <template>
-  <b-container class="card-main-div">
-    <b-row>
-      <b-col class="card-main-col" sm="12" md="6" lg="4" xl="3" no-gutters>
-        <activity-card :activity="dummyObj"></activity-card>
-      </b-col>
-      <b-col class="card-main-col" sm="12" md="6" lg="4" xl="3" no-gutters>
-        <activity-card :activity="dummyObj2"></activity-card> </b-col
-    ></b-row>
-  </b-container>
+  <div>
+    <!-- <b-container class="card-main-div"> -->
+      <b-row v-for="a in reservations" :key="a.id" id="card-main-col">
+        <b-col sm="12" md="6" lg="4" xl="3" no-gutters>
+          <activity-card :activity="a"></activity-card>
+        </b-col>
+      </b-row>
+   <!-- </b-container> -->
+  </div>
 </template>
 
 <script>
 import ActivityCard from '@/components/MyReservationCard.vue'
+import { Api } from '@/Api'
+
 export default {
   components: { ActivityCard },
   name: 'activity-card-item',
   props: ['activity', 'type'],
   data() {
     return {
-      dummyObj: {
-        name: 'dummy',
-        text: 'Reserved for 2-2:30 pm',
-        img:
-          'https://media-cdn.tripadvisor.com/media/photo-s/02/2a/4d/af/bakken.jpg'
-      },
-      dummyObj2: {
-        name: 'dummy2',
-        text: 'Reserved for 3-3:30 pm',
-        img:
-          'https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YW11c2VtZW50JTIwcGFya3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'
-      }
+      reservations: []
+
     }
+  },
+  created() {
+    const token = localStorage.accessToken
+    const headers = { 'Authorization': 'Bearer ' + token }
+    Api.get('/auth/reservations', { headers })
+      .then(res => {
+        this.reservations = res.data.data
+      })
   }
 }
 </script>
@@ -60,6 +60,12 @@ export default {
   padding-bottom: 1%;
   align-content: center;
 }
+#card-main-col {
+  margin: 1rem;
+  padding: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
 .card-queue-text {
   padding: 0;
 }
@@ -72,5 +78,18 @@ export default {
   width: 88px;
   right: 10%;
   background-color: #388659;
+}
+.card-main-div {
+  margin: 0%;
+  padding: 0%;
+  overflow-y: scroll;
+  position: relative;
+  flex: 1;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 }
 </style>

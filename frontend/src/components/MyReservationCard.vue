@@ -6,17 +6,6 @@
       no-body
       v-b-toggle="'reservation-details-' + activity.name"
     >
-      <div v-if="activity.img">
-        <b-col class="card-img-col">
-          <b-card-img
-            :src="activity.img"
-            alt="Image"
-            height="100px"
-            width="150px"
-            class="card-image"
-          ></b-card-img>
-        </b-col>
-      </div>
 
       <b-col style="font-size: 0.75rem" no-gutters class="card-text-col">
         <b-card-title style="font-size: 1rem" class="card-title">
@@ -26,7 +15,7 @@
         </b-card-title>
 
         <p class="card-queue-text card-text mt-3">
-          {{ activity.text }}
+          {{ activity.time }}
         </p>
       </b-col>
     </b-card>
@@ -80,5 +69,12 @@ export default {
   width: 88px;
   right: 10%;
   background-color: #388659;
+}
+.card-main-div {
+  margin-top: 1rem !important;
+  padding: 0%;
+  overflow-y: scroll;
+  position: relative;
+  flex: 1;
 }
 </style>

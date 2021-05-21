@@ -64,6 +64,7 @@ export default {
   border: 15px solid white;
   overflow: auto;
   height: calc(100vh - 140px); /* 70px is height of navbar */
+  min-width: 18rem;
 }
 #nav {
   padding: 30px;
