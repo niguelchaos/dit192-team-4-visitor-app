@@ -4,6 +4,7 @@ var ActivityController = require('../controllers/activity.controller');
 
 router.post('/activities', ActivityController.save);
 router.get('/activities/types', ActivityController.getTypes);
+router.get('/activities/count', ActivityController.getCount);
 router.get('/activities', ActivityController.getAll);
 router.get('/activities/:id', ActivityController.getOne);
 router.put('/activities/:id', ActivityController.update);

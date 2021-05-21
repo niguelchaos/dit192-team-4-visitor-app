@@ -6,6 +6,24 @@ exports.getTypes = async function (req, res) {
     res.status(200).json({ status: 200, data: activityTypes, message: 'Successfully retrieved activity types.' });
 }
 
+exports.getCount = async function (req, res) {
+    if (!req.query.type) {
+        Activity.estimatedDocumentCount(function (err, count) {
+            if (err) { return res.status(500).json({ status: 500, data: err.message, message: 'Error.' }) }
+            else {
+                res.status(200).json({ status: 200, data: { count: count }, message: 'Successfully retrieved total count.' });
+            }
+        })
+    } else {
+        Activity.countDocuments({ type: req.query.type }, function (err, count) {
+            if (err) { return res.status(500).json({ status: 500, data: err.message, message: 'Error.' }) }
+            else {
+                res.status(200).json({ status: 200, data: { count: count }, message: 'Successfully retrieved count.' });
+            }
+        });
+    }
+}
+
 exports.getAll = async function (req, res, next) {
     var type = req.query.type ? req.query.type: activityTypes;
     var sortBy = req.query.sortBy ? req.query.sortBy: ['name', 'asc'];
