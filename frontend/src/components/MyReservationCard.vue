@@ -7,17 +7,15 @@
       v-b-toggle="'reservation-details-' + activity.name"
     >
 
-      <b-col style="font-size: 0.75rem" no-gutters class="card-text-col">
-        <b-card-title style="font-size: 1rem" class="card-title">
+      <b-card-title style="font-size: 1rem" class="card-title">
           <span class="align-middle font-weight-bolder">{{
             activity.name
           }}</span>
         </b-card-title>
 
-        <p class="card-queue-text card-text mt-3">
+        <p class="card-text card-text mt-3">
           {{ activity.time }}
         </p>
-      </b-col>
     </b-card>
   </div>
 </template>
@@ -32,11 +30,13 @@ export default {
 
 <style scoped>
 .res-card {
-  width: 100%;
+  width: 200px;
   padding: 5%;
-  margin: 3%;
-  border-radius: 15px;
-  /* height: 190px; */
+  border-radius: 10px;
+  height:7rem;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
 }
 .card-img-col {
   margin: 0%;
@@ -53,12 +53,16 @@ export default {
   width: 130px;
 }
 .card-title {
-  padding-top: 15%;
-  padding-bottom: 1%;
+  position: absolute;
+  left: 7%;
   align-content: center;
+  margin-left:0%;
 }
-.card-queue-text {
-  padding: 0;
+.card-text {
+position: absolute;
+left: 8%;
+top: 20%;
+padding: 10px;
 }
 .card-link {
   color: #e28daf;
