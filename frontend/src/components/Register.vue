@@ -3,7 +3,7 @@
     <Logo />
     <div class="register-container">
       <img class="register-logo" src="../assets/user-circle.svg"/>
-      <h2>Register account</h2>
+      <h2>Register Account</h2>
       <div class="input-container">
         <input class="register-el register-input" type="text" placeholder="Full name" v-model="form.name" required>
         <input class="register-el register-input" type="text" placeholder="Phone number" v-model="form.phone" required>
@@ -63,8 +63,9 @@ export default {
   border-radius: 1rem;
   padding: 1.5rem 1.5rem 1.5rem 1.5rem;
   background: #FFFFFF;
-  min-width: 25rem;
+  min-width: 12rem;
   max-width: 30rem;
+  margin-bottom: 2rem;
 }
 
 .logo-pane {
