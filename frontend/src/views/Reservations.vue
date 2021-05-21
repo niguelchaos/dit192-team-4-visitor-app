@@ -51,7 +51,7 @@
         <b-row>
           <b-col
             class="card-main-col"
-            v-for="a in activities"
+            v-for="a in reservations"
             v-bind:key="a.id"
             sm="12"
             md="6"
@@ -59,10 +59,8 @@
             xl="3"
             no-gutters
           >
-            <my-reservation :activity="a.data" :type="a.type"></my-reservation>
-            <!-- idk why this works -->
+          <my-reservation :activity="a"></my-reservation>
           </b-col>
-          <my-reservation></my-reservation>
         </b-row>
       </b-container>
     </div>
@@ -85,7 +83,7 @@
 <script>
 import { Api } from '@/Api'
 import ActivityCard from '@/components/ReservationCard.vue'
-import MyReservation from '@/components/MyReservation.vue'
+import MyReservation from '@/components/MyReservationCard.vue'
 export default {
   components: { ActivityCard, MyReservation },
   data() {
@@ -93,6 +91,7 @@ export default {
       activities: [],
       attractions: [],
       restaurants: [],
+      reservations: [],
       categories: [
         { type: 'All', state: true },
         { type: 'My Reservations', state: false }
@@ -327,6 +326,14 @@ export default {
       console.log(this.totalActivities)
     }
 
+  },
+  created() {
+    const token = localStorage.accessToken
+    const headers = { 'Authorization': 'Bearer ' + token }
+    Api.get('/auth/reservations', { headers })
+      .then(res => {
+        this.reservations = res.data.data
+      })
   }
 }
 </script>

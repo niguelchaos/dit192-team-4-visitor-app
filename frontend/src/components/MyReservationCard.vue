@@ -70,4 +70,11 @@ export default {
   right: 10%;
   background-color: #388659;
 }
+.card-main-div {
+  margin-top: 1rem !important;
+  padding: 0%;
+  overflow-y: scroll;
+  position: relative;
+  flex: 1;
+}
 </style>

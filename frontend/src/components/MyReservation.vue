@@ -1,11 +1,13 @@
 <template>
-  <b-container class="wrapper">
-    <b-row v-for="a in reservations" :key="a.id">
-      <b-col class="card-main-col" sm="12" md="6" lg="4" xl="3" no-gutters>
-        <activity-card :activity="a"></activity-card>
-      </b-col>
-    </b-row>
-  </b-container>
+  <div>
+    <!-- <b-container class="card-main-div"> -->
+      <b-row v-for="a in reservations" :key="a.id" id="card-main-col">
+        <b-col sm="12" md="6" lg="4" xl="3" no-gutters>
+          <activity-card :activity="a"></activity-card>
+        </b-col>
+      </b-row>
+   <!-- </b-container> -->
+  </div>
 </template>
 
 <script>
@@ -58,6 +60,12 @@ export default {
   padding-bottom: 1%;
   align-content: center;
 }
+#card-main-col {
+  margin: 1rem;
+  padding: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
 .card-queue-text {
   padding: 0;
 }
@@ -82,6 +90,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  overflow: auto;
 }
 </style>
