@@ -13,7 +13,7 @@
           }}</span>
         </b-card-title>
 
-        <p class="card-queue-text card-text mt-3">
+        <p class="card-text card-text mt-3">
           {{ activity.time }}
         </p>
     </b-card>
@@ -58,7 +58,7 @@ export default {
   align-content: center;
   margin-left:0%;
 }
-.card-queue-text {
+.card-text {
 position: absolute;
 left: 8%;
 top: 20%;
