@@ -5,6 +5,7 @@ Fork of the Academic Project from DIT192, Agile Development Processes. This proj
 ## Requirements
 * [Backend Requirements](./backend/README.md#Requirements)
 * [Frontend Requirements](./frontend/README.md#Requirements)
+* [Database Requirements](./db/README.md#Requirements)
 
 ## Getting started
 
